@@ -1,4 +1,4 @@
-import styles from './page.module.css'
+import styles from './page.module.scss'
 import Logo from '@/components/Logo/Logo'
 
 const Home = () => {
