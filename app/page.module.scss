@@ -5,7 +5,7 @@
   width: 390px;
   height: inherit;
   background-color: var(--bg-color);
-  // overflow-x: hidden;
+  overflow-x: hidden;
 
   .bg {
     position: absolute;
@@ -86,10 +86,12 @@
     overflow: auto;
 
     &::-webkit-scrollbar {
-      // width: 0;
+      width: 0;
+      height: 0;
     }
 
     .inner {
+      position: relative;
       display: flex;
       padding: 0 10px;
       padding-top: 22px;
@@ -97,6 +99,25 @@
       gap: 10px;
 
       width: max-content;
+    }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        background-color: var(--color-bledny-grey);
+        border-radius: 50%;
+
+        transition: all 0.1s ease;
+
+        &.active {
+          background-color: var(--color-blue);
+        }
+      }
     }
 
     .card {
@@ -330,11 +351,13 @@
     'D D';
 
   .sign {
+    position: relative;
     background-color: var(--color-white);
     padding: 21px 15px 0 15px;
     border-radius: 20px;
 
     box-shadow: 0px 12px 120px rgba(132, 139, 147, 0.12);
+    overflow: hidden;
 
     .title {
       color: var(--color-grey);
@@ -371,14 +394,73 @@
       .title {
         color: var(--color-bledny-blue);
       }
+
+      .bg {
+        bottom: 0;
+        right: 0;
+        top: 0;
+        left: 0;
+
+        img {
+          position: absolute;
+          bottom: -23px;
+          right: -20px;
+        }
+      }
     }
 
     &.dynamic {
       grid-area: C;
+      background: radial-gradient(84% 84% at 75% 50%, rgba(240, 96, 0, 0.7) 0%, rgba(255, 132, 0, 0) 100%), #ff8400;
+      box-shadow: 0px 12px 120px rgba(255, 132, 0, 0.12);
+      color: var(--color-bledny-orange);
+
+      .title {
+        color: var(--color-bledny-orange);
+      }
+
+      .columns {
+        position: absolute;
+        height: 100%;
+        bottom: 0;
+        display: flex;
+        align-items: flex-end;
+        gap: 12px;
+
+        .column {
+          width: 16px;
+          background-color: #fc9730;
+          border-radius: 8px 8px 0 0;
+
+          &:first-of-type {
+            height: 47%;
+          }
+
+          &:nth-of-type(2) {
+            height: 23%;
+          }
+
+          &:nth-of-type(3) {
+            height: 35%;
+          }
+
+          &:last-of-type {
+            height: 41%;
+            background-color: var(--color-white);
+          }
+        }
+      }
     }
 
     &.income {
       grid-area: D;
     }
   }
+}
+
+.tags {
+  margin-top: 20px;
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
 }

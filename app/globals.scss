@@ -3,12 +3,14 @@
   --color-dark: #3d3d51;
   --color-white: #ffffff;
   --color-grey: #9797a2;
+  --color-bledny-grey: #cdcdd4;
   --color-blue: #007aff;
   --color-bledny-blue: #dae7fa;
   --color-green: #35cc5a;
   --color-bledny-green: #daffe3;
   --color-orange: #ff8400;
   --color-bledny-orange: #ffeee4;
+  --color-tag-blue: #2c88ea;
 }
 
 * {
@@ -28,7 +30,7 @@ html {
 
 body {
   font-size: 1.6rem;
-  /* line-height: 1.35; */
+  // line-height: 1.35;
   color: var(--color-dark);
   background-color: var(--color-white);
 }
@@ -46,6 +48,11 @@ h4 {
 h5 {
   font-weight: 500;
   font-size: 1.2rem;
+}
+
+h6 {
+  font-weight: 400;
+  font-size: 0.8rem;
 }
 
 button {

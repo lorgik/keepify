@@ -1,7 +1,52 @@
+'use client'
+
+import { useState } from 'react'
 import styles from './page.module.scss'
 import Logo from '@/components/Logo/Logo'
+import Image from 'next/image'
+import Tag from '@/entities/Tag/Tag'
+
+const expensesTags = [
+  {
+    name: 'Жилье',
+    color: '#2C88EA',
+  },
+  {
+    name: 'Транспорт',
+    color: '#E23235',
+  },
+  {
+    name: 'Кредиты',
+    color: '#3ADB7D',
+  },
+  {
+    name: 'Продукты',
+    color: '#F48712',
+  },
+  {
+    name: 'Одежда и обувь',
+    color: '#7951F5',
+  },
+]
+
+const incomeTags = [
+  {
+    name: 'Зар. плата',
+    color: '#007AFF',
+  },
+  {
+    name: 'Бизнес',
+    color: '#FF8400',
+  },
+  {
+    name: 'Инвестиции',
+    color: '#35CC5A',
+  },
+]
 
 const Home = () => {
+  const [activeCard, setActiveCard] = useState(0)
+
   return (
     <main className={styles.main}>
       <div className={styles.bg}>
@@ -12,7 +57,7 @@ const Home = () => {
       <Logo />
       <div className={styles.cards}>
         <div className={styles.inner}>
-          <div className={`${styles.card} ${styles.card1}`}>
+          <div className={`${styles.card} ${styles.card1} ${activeCard === 0 && styles.active}`}>
             <div className={styles.circle1}></div>
             <div className={styles.circle2}></div>
             <div className={styles.circle3}></div>
@@ -31,7 +76,7 @@ const Home = () => {
               <h5 className={styles.text}>3 143</h5>
             </div>
           </div>
-          <div className={`${styles.card} ${styles.card2}`}>
+          <div className={`${styles.card} ${styles.card2} ${activeCard === 1 && styles.active}`}>
             <div className={styles.circle1}></div>
             <div className={styles.circle2}></div>
             <div className={styles.circle3}></div>
@@ -79,6 +124,16 @@ const Home = () => {
             </div>
           </div>
         </div>
+        <div className={styles.dots}>
+          <button
+            className={`${styles.dot} ${activeCard === 0 && styles.active}`}
+            onClick={() => setActiveCard(0)}
+          ></button>
+          <button
+            className={`${styles.dot} ${activeCard === 1 && styles.active}`}
+            onClick={() => setActiveCard(1)}
+          ></button>
+        </div>
       </div>
       <div className={styles.analytics}>
         <h2 className={styles.title}>Аналитика</h2>
@@ -114,10 +169,19 @@ const Home = () => {
                 <span className={styles.currency}>₽</span>
               </h3>
             </div>
+            <div className={styles.tags}>
+              {expensesTags.map((t) => (
+                <Tag key={t.name} color={t.color}>
+                  {t.name}
+                </Tag>
+              ))}
+            </div>
           </div>
           <div className={`${styles.sign} ${styles.perDay}`}>
+            <div className={styles.bg}>
+              <Image src="/analytics-sign-blue-bg.png" alt="coins" width={143} height={88} />
+            </div>
             <div className={styles.top}>
-              <div className={styles.bg}></div>
               <h5 className={styles.title}>~Расход в день</h5>
               <h3 className={styles.check}>
                 <span className={styles.value}>1 265</span>
@@ -126,11 +190,16 @@ const Home = () => {
             </div>
           </div>
           <div className={`${styles.sign} ${styles.dynamic}`}>
+            <div className={styles.columns}>
+              <div className={styles.column}></div>
+              <div className={styles.column}></div>
+              <div className={styles.column}></div>
+              <div className={styles.column}></div>
+            </div>
             <div className={styles.top}>
               <h5 className={styles.title}>Динамика</h5>
               <h3 className={styles.check}>
                 <span className={styles.value}>+ 20%</span>
-                {/* <span className={styles.currency}>₽</span> */}
               </h3>
             </div>
           </div>
@@ -141,6 +210,13 @@ const Home = () => {
                 <span className={styles.value}>154 350</span>
                 <span className={styles.currency}>₽</span>
               </h3>
+            </div>
+            <div className={styles.tags}>
+              {incomeTags.map((t) => (
+                <Tag key={t.name} color={t.color}>
+                  {t.name}
+                </Tag>
+              ))}
             </div>
           </div>
         </div>
