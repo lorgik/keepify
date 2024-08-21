@@ -83,18 +83,19 @@
   .cards {
     position: relative;
     z-index: 2;
-    padding: 0 10px;
     overflow: auto;
 
     &::-webkit-scrollbar {
-      width: 0;
+      // width: 0;
     }
 
     .inner {
       display: flex;
+      padding: 0 10px;
       padding-top: 22px;
       padding-bottom: 12px;
       gap: 10px;
+
       width: max-content;
     }
 
