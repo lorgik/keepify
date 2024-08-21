@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <main className={styles.main}>
       <div className={styles.bg}>
-        <div className={styles.inner}></div>
+        <div className={styles.bottom}></div>
         <div className={styles.circle1}></div>
         <div className={styles.circle2}></div>
       </div>
@@ -104,6 +104,45 @@ const Home = () => {
               />
             </svg>
           </button>
+        </div>
+        <div className={styles.signs}>
+          <div className={`${styles.sign} ${styles.expenses} ${styles.big}`}>
+            <div className={styles.top}>
+              <h5 className={styles.title}>Расходы:</h5>
+              <h3 className={styles.check}>
+                <span className={styles.value}>151 234</span>
+                <span className={styles.currency}>₽</span>
+              </h3>
+            </div>
+          </div>
+          <div className={`${styles.sign} ${styles.perDay}`}>
+            <div className={styles.top}>
+              <div className={styles.bg}></div>
+              <h5 className={styles.title}>~Расход в день</h5>
+              <h3 className={styles.check}>
+                <span className={styles.value}>1 265</span>
+                <span className={styles.currency}>₽</span>
+              </h3>
+            </div>
+          </div>
+          <div className={`${styles.sign} ${styles.dynamic}`}>
+            <div className={styles.top}>
+              <h5 className={styles.title}>Динамика</h5>
+              <h3 className={styles.check}>
+                <span className={styles.value}>+ 20%</span>
+                {/* <span className={styles.currency}>₽</span> */}
+              </h3>
+            </div>
+          </div>
+          <div className={`${styles.sign} ${styles.income} ${styles.big}`}>
+            <div className={styles.top}>
+              <h5 className={styles.title}>Доходы:</h5>
+              <h3 className={styles.check}>
+                <span className={styles.value}>154 350</span>
+                <span className={styles.currency}>₽</span>
+              </h3>
+            </div>
+          </div>
         </div>
       </div>
     </main>

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Manrope } from 'next/font/google'
+import Wrapper from '@/components/Wrapper/Wrapper'
 import './globals.scss'
 
 const inter = Manrope({ subsets: ['latin', 'cyrillic'] })
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Wrapper>{children}</Wrapper>
+      </body>
     </html>
   )
 }

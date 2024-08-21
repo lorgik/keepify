@@ -1,19 +1,20 @@
 .main {
   position: relative;
   margin: 0 auto;
-  width: 390px;
+  // width: 390px;
   height: inherit;
   background-color: var(--bg-color);
-  overflow: hidden;
+  overflow-x: hidden;
 
-  & .bg {
+  .bg {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     width: 100%;
+    overflow: hidden;
 
-    & .inner {
+    .bottom {
       position: relative;
       overflow: hidden;
       background: radial-gradient(57.12% 57.12% at 50% 50%, #00c4ff 0%, #007aff 100%);
@@ -34,13 +35,13 @@
       }
     }
 
-    & .circle1,
+    .circle1,
     .circle2 {
       position: absolute;
       border-radius: 50%;
     }
 
-    & .circle1 {
+    .circle1 {
       width: 191px;
       height: 191px;
 
@@ -59,7 +60,7 @@
       transform: matrix(-0.97, -0.26, -0.26, 0.97, 0, 0);
     }
 
-    & .circle2 {
+    .circle2 {
       width: 197px;
       height: 197px;
 
@@ -78,40 +79,35 @@
     }
   }
 
-  & .cards {
+  .cards {
     width: max-content;
     position: relative;
     z-index: 2;
+    padding: 0 10px;
 
-    & .inner {
+    .inner {
       display: flex;
-      padding-left: 10px;
-      padding-right: 10px;
       padding-top: 22px;
       padding-bottom: 12px;
       gap: 10px;
-      overflow-x: auto;
+      overflow-x: scroll;
 
       &::-webkit-scrollbar {
         width: 0;
       }
     }
 
-    & .card {
+    .card {
       position: relative;
       display: block;
       width: 230px;
-      height: 150px;
+      aspect-ratio: 2.3 / 1.5;
       overflow: hidden;
-
-      color: var(--color-white);
-      background: radial-gradient(93% 93% at 67.83% 64.67%, rgba(140, 0, 255, 0.7) 0%, rgba(0, 122, 255, 0) 100%),
-        #007aff;
-      /* box-shadow: 0px 12px 120px rgba(0, 122, 255, 0.12); */
       border-radius: 20px;
       flex-grow: 1;
+      color: var(--color-white);
 
-      & .circle1,
+      .circle1,
       .circle2,
       .circle3 {
         position: absolute;
@@ -119,15 +115,19 @@
       }
 
       &.card1 {
-        & .extra {
+        background: radial-gradient(93% 93% at 67.83% 64.67%, rgba(140, 0, 255, 0.7) 0%, rgba(0, 122, 255, 0) 100%),
+          #007aff;
+        // box-shadow: 0px 12px 120px rgba(0, 122, 255, 0.12);
+
+        .extra {
           background-color: var(--color-bledny-green);
 
-          & .text {
+          .text {
             color: var(--color-green);
           }
         }
 
-        & .circle1 {
+        .circle1 {
           width: 129px;
           height: 129px;
           left: -39px;
@@ -143,28 +143,48 @@
             #007aff;
         }
 
-        & .info {
-          & .title {
+        .info {
+          .title {
             color: var(--color-bledny-blue);
           }
         }
 
-        & .circle2 {
+        .circle2 {
           width: 197px;
           height: 197px;
           left: -17px;
           top: 88px;
 
-          background-image: url('../public/blue-card-circle-2.png');
+          // background-image: url('../public/blue-card-circle-2.png');
+
+          background: radial-gradient(
+                118.81% 118.81% at 8.48% 84.53%,
+                rgba(140, 0, 255, 0) 0%,
+                rgba(140, 0, 255, 0.732414) 51.92%,
+                #00fffb 78.38%,
+                #00fffb 100%
+              )
+              /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+            #007aff;
         }
 
-        & .circle3 {
+        .circle3 {
           width: 197px;
           height: 197px;
           left: 145px;
           top: -52px;
 
-          background-image: url('../public/blue-card-circle-3.png');
+          // background-image: url('../public/blue-card-circle-3.png');
+
+          background: radial-gradient(
+                81.24% 81.24% at 97.1% 21.31%,
+                rgba(140, 0, 255, 0) 0%,
+                rgba(0, 122, 255, 0.732414) 51.92%,
+                #3ccbff 78.38%,
+                #00fffb 100%
+              )
+              /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+            #007aff;
         }
       }
 
@@ -173,15 +193,15 @@
           #ff8400;
         /* box-shadow: 0px 12px 120px rgba(255, 132, 0, 0.12); */
 
-        & .extra {
+        .extra {
           background-color: var(--color-bledny-orange);
 
-          & .text {
+          .text {
             color: var(--color-orange);
           }
         }
 
-        & .circle1 {
+        .circle1 {
           width: 78px;
           height: 78px;
           right: 9px;
@@ -192,13 +212,13 @@
             #f06000;
         }
 
-        & .info {
-          & .title {
+        .info {
+          .title {
             color: var(--color-bledny-orange);
           }
         }
 
-        & .circle2 {
+        .circle2 {
           width: 136px;
           height: 136px;
           left: -40px;
@@ -215,7 +235,7 @@
             #ff9c32;
         }
 
-        & .circle3 {
+        .circle3 {
           width: 219px;
           height: 219px;
           left: 20px;
@@ -227,15 +247,15 @@
         }
       }
 
-      & .info {
+      .info {
         position: relative;
-        height: inherit;
+        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         padding: 15px;
 
-        & .check {
+        .check {
           margin-top: 5px;
           display: flex;
           align-items: center;
@@ -243,7 +263,7 @@
         }
       }
 
-      & .extra {
+      .extra {
         position: absolute;
         top: 15px;
         right: 15px;
@@ -253,24 +273,27 @@
         padding: 2px 4px;
         border-radius: 5px;
 
-        & .text {
+        .text {
           font-weight: 700;
         }
       }
     }
   }
 
-  & .analytics {
+  .analytics {
+    padding: 0 10px;
     padding-top: 30px;
+    padding-bottom: 100px;
+
     position: relative;
     z-index: 1;
     background-color: var(--bg-color);
 
-    & .title {
+    > .title {
       text-align: center;
     }
 
-    & .month {
+    .month {
       margin-top: 10px;
       display: flex;
       justify-content: center;
@@ -278,11 +301,11 @@
       gap: 7px;
       padding: 6px 10px;
 
-      & .title {
+      .title {
         color: var(--color-blue);
       }
 
-      & .btn {
+      .btn {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -290,6 +313,71 @@
         padding: 4.5px 5.5px;
         border-radius: 5px;
       }
+    }
+  }
+}
+
+.signs {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 2.3fr 1.3fr;
+  grid-template-rows: 1.2fr 1.5fr 1.5fr;
+  gap: 10px 10px;
+  grid-template-areas:
+    'A B'
+    'A C'
+    'D D';
+
+  .sign {
+    background-color: var(--color-white);
+    padding: 21px 15px 0 15px;
+    border-radius: 20px;
+
+    box-shadow: 0px 12px 120px rgba(132, 139, 147, 0.12);
+
+    .title {
+      color: var(--color-grey);
+    }
+
+    &.big {
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    &:not(.big) {
+      .check {
+        margin-top: 4px;
+      }
+    }
+
+    &.expenses {
+      grid-area: A;
+
+      aspect-ratio: 2.3 / 2.8;
+    }
+
+    &.perDay {
+      grid-area: B;
+
+      background: radial-gradient(81.67% 81.67% at 40.77% 96.25%, rgba(140, 0, 255, 0.7) 0%, rgba(0, 122, 255, 0) 100%),
+        radial-gradient(130.38% 153.02% at 88.46% 60%, rgba(0, 255, 251, 0.7) 0%, rgba(0, 122, 255, 0) 100%), #007aff;
+      box-shadow: 0px 12px 120px rgba(0, 122, 255, 0.12);
+      color: var(--color-bledny-blue);
+
+      .title {
+        color: var(--color-bledny-blue);
+      }
+    }
+
+    &.dynamic {
+      grid-area: C;
+    }
+
+    &.income {
+      grid-area: D;
     }
   }
 }

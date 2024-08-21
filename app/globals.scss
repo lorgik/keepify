@@ -2,6 +2,7 @@
   --bg-color: #efeff4;
   --color-dark: #3d3d51;
   --color-white: #ffffff;
+  --color-grey: #9797a2;
   --color-blue: #007aff;
   --color-bledny-blue: #dae7fa;
   --color-green: #35cc5a;
@@ -29,7 +30,7 @@ body {
   font-size: 1.6rem;
   /* line-height: 1.35; */
   color: var(--color-dark);
-  background-color: var(--bg-color);
+  background-color: var(--color-white);
 }
 
 h2 {
