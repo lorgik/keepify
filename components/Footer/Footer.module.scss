@@ -64,6 +64,17 @@
       padding: 18px;
       border-radius: 50%;
       box-shadow: 0px 10px 25px rgba(0, 122, 255, 0.3);
+      mask-composite: subtract;
+
+      svg {
+        transition: all 0.25s ease;
+      }
+
+      &.active {
+        svg {
+          transform: rotate(45deg);
+        }
+      }
     }
   }
 }

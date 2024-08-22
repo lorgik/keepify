@@ -3,7 +3,12 @@ import { usePathname } from 'next/navigation'
 
 import styles from './Footer.module.scss'
 
-const Footer = () => {
+type Props = {
+  isPopupOpen: boolean
+  togglePopup: () => void
+}
+
+const Footer = ({ isPopupOpen, togglePopup }: Props) => {
   const pathname = usePathname()
 
   return (
@@ -39,7 +44,7 @@ const Footer = () => {
             <h6 className={styles.name}>Операции</h6>
           </Link>
         </div>
-        <button className={styles.btn}>
+        <button className={`${styles.btn} ${isPopupOpen && styles.active}`} onClick={togglePopup}>
           <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               fill-rule="evenodd"
