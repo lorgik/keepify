@@ -136,7 +136,7 @@ const Wrapper = ({ children }: Props) => {
                 <h4>Категория:</h4>
                 <div className={styles.icon}>{currentCategory && <Image src={''} alt="" width={45} height={45} />}</div>
               </button>
-              <button className={`${styles.btn} ${styles.add}`}>
+              <button className={`${styles.btn} ${styles.add} ${currentOperation === 'Доход' && styles.income}`}>
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     fill-rule="evenodd"
