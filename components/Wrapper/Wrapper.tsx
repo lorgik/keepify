@@ -8,9 +8,21 @@ type Props = {
   children: React.ReactNode
 }
 
+// interface MessageJSON {
+//   eventType: string;
+//   eventData: any;
+// }
+
 const Wrapper = ({ children }: Props) => {
   useEffect(() => {
-    window.Telegram?.WebApp?.disableVerticalSwipes()
+    const data = JSON.stringify({
+      eventType: 'web_app_setup_swipe_behavior',
+      eventData: {
+        allow_vertical_swipe: false,
+      },
+    })
+
+    window.parent.postMessage(data, 'https://web.telegram.org')
   }, [])
 
   return (
