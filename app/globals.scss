@@ -33,6 +33,12 @@ body {
   // line-height: 1.35;
   color: var(--color-dark);
   background-color: var(--color-white);
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
 }
 
 h2 {
