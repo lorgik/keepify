@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Manrope } from 'next/font/google'
 import Wrapper from '@/components/Wrapper/Wrapper'
 import './globals.scss'
-import Head from 'next/head'
 import Script from 'next/script'
 
 const inter = Manrope({ subsets: ['latin', 'cyrillic'] })
@@ -19,10 +18,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <Script src="https://telegram.org/js/telegram-web-app.js"></Script>
-      </Head>
       <body className={inter.className}>
+        <Script src="https://telegram.org/js/telegram-web-app.js"></Script>
         <Wrapper>{children}</Wrapper>
       </body>
     </html>
