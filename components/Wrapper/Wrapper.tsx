@@ -10,7 +10,7 @@ type Props = {
 
 const Wrapper = ({ children }: Props) => {
   useEffect(() => {
-    // window.Telegram.WebApp.disableVerticalSwipes()
+    window.Telegram?.WebApp?.disableVerticalSwipes()
   }, [])
 
   return (

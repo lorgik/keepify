@@ -23,7 +23,6 @@ export default function RootLayout({
       </Head>
       <body className={inter.className}>
         <Wrapper>{children}</Wrapper>
-        <script>window.Telegram.WebApp.disableVerticalSwipes()</script>
       </body>
     </html>
   )
