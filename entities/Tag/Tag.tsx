@@ -1,4 +1,4 @@
-import styles from './Tag.module.css'
+import styles from './Tag.module.scss'
 
 type Props = {
   children: React.ReactNode

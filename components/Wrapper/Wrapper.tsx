@@ -1,8 +1,7 @@
 'use client'
 
-import { useEffect } from 'react'
 import Footer from '../Footer/Footer'
-import styles from './Wrapper.module.css'
+import styles from './Wrapper.module.scss'
 
 type Props = {
   children: React.ReactNode
