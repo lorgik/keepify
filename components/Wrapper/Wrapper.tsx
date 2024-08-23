@@ -3,11 +3,48 @@
 import { createContext, useEffect, useState } from 'react'
 import Footer from '../Footer/Footer'
 import styles from './Wrapper.module.scss'
-import { expensesCategories, incomeCategories } from '@/app/page'
 
 type Props = {
   children: React.ReactNode
 }
+
+const expensesCategories = [
+  {
+    name: 'Жилье',
+    color: '#2C88EA',
+  },
+  {
+    name: 'Транспорт',
+    color: '#E23235',
+  },
+  {
+    name: 'Кредиты',
+    color: '#3ADB7D',
+  },
+  {
+    name: 'Продукты',
+    color: '#F48712',
+  },
+  {
+    name: 'Одежда и обувь',
+    color: '#7951F5',
+  },
+]
+
+const incomeCategories = [
+  {
+    name: 'Зар. плата',
+    color: '#007AFF',
+  },
+  {
+    name: 'Бизнес',
+    color: '#FF8400',
+  },
+  {
+    name: 'Инвестиции',
+    color: '#35CC5A',
+  },
+]
 
 // interface MessageJSON {
 //   eventType: string;
@@ -172,7 +209,7 @@ const Wrapper = ({ children }: Props) => {
         </div>
       )}
 
-      <WrapperContext.Provider value={{ setIsPopupOpen }}>
+      <WrapperContext.Provider value={{ setIsPopupOpen, expensesCategories, incomeCategories }}>
         <div className={styles.content}>{children}</div>
       </WrapperContext.Provider>
 

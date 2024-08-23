@@ -7,48 +7,10 @@ import Image from 'next/image'
 import Tag from '@/entities/Tag/Tag'
 import { WrapperContext } from '@/components/Wrapper/Wrapper'
 
-export const expensesCategories = [
-  {
-    name: 'Жилье',
-    color: '#2C88EA',
-  },
-  {
-    name: 'Транспорт',
-    color: '#E23235',
-  },
-  {
-    name: 'Кредиты',
-    color: '#3ADB7D',
-  },
-  {
-    name: 'Продукты',
-    color: '#F48712',
-  },
-  {
-    name: 'Одежда и обувь',
-    color: '#7951F5',
-  },
-]
-
-export const incomeCategories = [
-  {
-    name: 'Зар. плата',
-    color: '#007AFF',
-  },
-  {
-    name: 'Бизнес',
-    color: '#FF8400',
-  },
-  {
-    name: 'Инвестиции',
-    color: '#35CC5A',
-  },
-]
-
 const Home = () => {
   const [activeCard, setActiveCard] = useState(0)
 
-  const { setIsPopupOpen } = useContext(WrapperContext)
+  const { setIsPopupOpen, expensesCategories, incomeCategories } = useContext(WrapperContext)
 
   useEffect(() => {
     setIsPopupOpen(false)
@@ -180,7 +142,7 @@ const Home = () => {
               </h3>
             </div>
             <div className={styles.tags}>
-              {expensesCategories.map((t) => (
+              {expensesCategories.map((t: any) => (
                 <Tag key={t.name} color={t.color}>
                   {t.name}
                 </Tag>
@@ -222,7 +184,7 @@ const Home = () => {
               </h3>
             </div>
             <div className={styles.tags}>
-              {incomeCategories.map((t) => (
+              {incomeCategories.map((t: any) => (
                 <Tag key={t.name} color={t.color}>
                   {t.name}
                 </Tag>
