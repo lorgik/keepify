@@ -1,9 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import Footer from '../Footer/Footer'
 import styles from './Wrapper.module.scss'
-import Image from 'next/image'
+import { expensesCategories, incomeCategories } from '@/app/page'
 
 type Props = {
   children: React.ReactNode
@@ -14,22 +14,25 @@ type Props = {
 //   eventData: any;
 // }
 
+export const WrapperContext = createContext<any>(null)
+
 const Wrapper = ({ children }: Props) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
+  const [isCategorySelect, setIsCategorySelect] = useState(false)
   const [currentOperation, setCurrentOperation] = useState('Расход')
   const [value, setValue] = useState('0')
   const [currentCategory, setCurrentCategory] = useState('')
 
-  // useEffect(() => {
-  //   const data = JSON.stringify({
-  //     eventType: 'web_app_setup_swipe_behavior',
-  //     eventData: {
-  //       allow_vertical_swipe: false,
-  //     },
-  //   })
+  useEffect(() => {
+    const data = JSON.stringify({
+      eventType: 'web_app_setup_swipe_behavior',
+      eventData: {
+        allow_vertical_swipe: false,
+      },
+    })
 
-  //   window.parent.postMessage(data, 'https://web.telegram.org')
-  // }, [])
+    window.parent.postMessage(data, 'https://web.telegram.org')
+  }, [])
 
   function calculate(action: any) {
     if (typeof action === 'number') {
@@ -132,9 +135,26 @@ const Wrapper = ({ children }: Props) => {
               </button>
             </div>
             <div className={styles.btns}>
-              <button className={`${styles.btn} ${styles.category}`}>
+              <button className={`${styles.btn} ${styles.category}`} onClick={() => setIsCategorySelect(true)}>
                 <h4>Категория:</h4>
-                <div className={styles.icon}>{currentCategory && <Image src={''} alt="" width={45} height={45} />}</div>
+                <div
+                  className={styles.icon}
+                  style={{
+                    backgroundColor:
+                      currentOperation === 'Расход'
+                        ? expensesCategories.find((c) => c.name === currentCategory)?.color
+                        : incomeCategories.find((c) => c.name === currentCategory)?.color,
+                  }}
+                >
+                  {currentCategory && (
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M10.8564 14H11.9127C12.4473 14 12.8864 13.5864 12.95 13.0645L14 2.57727H10.8182V0H9.56455V2.57727H6.40182L6.59273 4.06636C7.68091 4.36545 8.69909 4.90636 9.31 5.50455C10.2264 6.40818 10.8564 7.34364 10.8564 8.87091V14ZM0 13.3636V12.7273H9.56455V13.3636C9.56455 13.7073 9.27818 14 8.90909 14H0.636364C0.286364 14 0 13.7073 0 13.3636ZM9.56455 8.90909C9.56455 3.81818 0 3.81818 0 8.90909H9.56455ZM0 10.1818H9.54545V11.4545H0V10.1818Z"
+                        fill="white"
+                      />
+                    </svg>
+                  )}
+                </div>
               </button>
               <button className={`${styles.btn} ${styles.add} ${currentOperation === 'Доход' && styles.income}`}>
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -151,8 +171,98 @@ const Wrapper = ({ children }: Props) => {
           </div>
         </div>
       )}
-      <div className={styles.content}>{children}</div>
+
+      <WrapperContext.Provider value={{ setIsPopupOpen }}>
+        <div className={styles.content}>{children}</div>
+      </WrapperContext.Provider>
+
       <Footer isPopupOpen={isPopupOpen} togglePopup={togglePopup} />
+
+      {isCategorySelect && currentOperation === 'Расход' && (
+        <div className={styles.popup}>
+          <div className={`${styles.inner} ${styles.categories}`}>
+            <h3>Выберите категорию</h3>
+            <div className={styles.list}>
+              {expensesCategories.map((c) => (
+                <div
+                  className={`${styles.item} ${currentCategory === c.name && styles.active}`}
+                  key={c.name}
+                  onClick={() => {
+                    setCurrentCategory(c.name)
+                    setIsCategorySelect(false)
+                  }}
+                >
+                  <div className={styles.category}>
+                    <div className={styles.icon} style={{ backgroundColor: c.color }}>
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M11.8564 14H12.9127C13.4473 14 13.8864 13.5864 13.95 13.0645L15 2.57727H11.8182V0H10.5645V2.57727H7.40182L7.59273 4.06636C8.68091 4.36545 9.69909 4.90636 10.31 5.50455C11.2264 6.40818 11.8564 7.34364 11.8564 8.87091V14ZM1 13.3636V12.7273H10.5645V13.3636C10.5645 13.7073 10.2782 14 9.90909 14H1.63636C1.28636 14 1 13.7073 1 13.3636ZM10.5645 8.90909C10.5645 3.81818 1 3.81818 1 8.90909H10.5645ZM1 10.1818H10.5455V11.4545H1V10.1818Z"
+                          fill="white"
+                        />
+                      </svg>
+                    </div>
+                    <h5 className={styles.name}>{c.name}</h5>
+                  </div>
+                  <div className={styles.check}>
+                    <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect y="0.5" width="28" height="28" rx="14" fill="#35CC5A" />
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M19.6827 10.8291C20.1058 11.2678 20.1058 11.9792 19.6827 12.418L13.171 19.1709C12.9678 19.3816 12.6923 19.5 12.4049 19.5C12.1176 19.5 11.842 19.3816 11.6389 19.1709L8.31732 15.7263C7.89423 15.2875 7.89423 14.5762 8.31732 14.1374C8.74041 13.6986 9.42638 13.6986 9.84947 14.1374L12.4049 16.7875L18.1505 10.8291C18.5736 10.3903 19.2596 10.3903 19.6827 10.8291Z"
+                        fill="#DAFFE3"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isCategorySelect && currentOperation === 'Доход' && (
+        <div className={styles.popup}>
+          <div className={`${styles.inner} ${styles.categories}`}>
+            <h3>Выберите категорию</h3>
+            <div className={styles.list}>
+              {incomeCategories.map((c) => (
+                <div
+                  className={`${styles.item} ${currentCategory === c.name && styles.active}`}
+                  key={c.name}
+                  onClick={() => {
+                    setCurrentCategory(c.name)
+                    setIsCategorySelect(false)
+                  }}
+                >
+                  <div className={styles.category}>
+                    <div className={styles.icon} style={{ backgroundColor: c.color }}>
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M11.8564 14H12.9127C13.4473 14 13.8864 13.5864 13.95 13.0645L15 2.57727H11.8182V0H10.5645V2.57727H7.40182L7.59273 4.06636C8.68091 4.36545 9.69909 4.90636 10.31 5.50455C11.2264 6.40818 11.8564 7.34364 11.8564 8.87091V14ZM1 13.3636V12.7273H10.5645V13.3636C10.5645 13.7073 10.2782 14 9.90909 14H1.63636C1.28636 14 1 13.7073 1 13.3636ZM10.5645 8.90909C10.5645 3.81818 1 3.81818 1 8.90909H10.5645ZM1 10.1818H10.5455V11.4545H1V10.1818Z"
+                          fill="white"
+                        />
+                      </svg>
+                    </div>
+                    <h5 className={styles.name}>{c.name}</h5>
+                  </div>
+                  <div className={styles.check}>
+                    <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect y="0.5" width="28" height="28" rx="14" fill="#35CC5A" />
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M19.6827 10.8291C20.1058 11.2678 20.1058 11.9792 19.6827 12.418L13.171 19.1709C12.9678 19.3816 12.6923 19.5 12.4049 19.5C12.1176 19.5 11.842 19.3816 11.6389 19.1709L8.31732 15.7263C7.89423 15.2875 7.89423 14.5762 8.31732 14.1374C8.74041 13.6986 9.42638 13.6986 9.84947 14.1374L12.4049 16.7875L18.1505 10.8291C18.5736 10.3903 19.2596 10.3903 19.6827 10.8291Z"
+                        fill="#DAFFE3"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

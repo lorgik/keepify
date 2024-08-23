@@ -1,12 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styles from './page.module.scss'
 import Logo from '@/components/Logo/Logo'
 import Image from 'next/image'
 import Tag from '@/entities/Tag/Tag'
+import { WrapperContext } from '@/components/Wrapper/Wrapper'
 
-const expensesTags = [
+export const expensesCategories = [
   {
     name: 'Жилье',
     color: '#2C88EA',
@@ -29,7 +30,7 @@ const expensesTags = [
   },
 ]
 
-const incomeTags = [
+export const incomeCategories = [
   {
     name: 'Зар. плата',
     color: '#007AFF',
@@ -46,6 +47,12 @@ const incomeTags = [
 
 const Home = () => {
   const [activeCard, setActiveCard] = useState(0)
+
+  const { setIsPopupOpen } = useContext(WrapperContext)
+
+  useEffect(() => {
+    setIsPopupOpen(false)
+  }, [])
 
   return (
     <>
@@ -173,7 +180,7 @@ const Home = () => {
               </h3>
             </div>
             <div className={styles.tags}>
-              {expensesTags.map((t) => (
+              {expensesCategories.map((t) => (
                 <Tag key={t.name} color={t.color}>
                   {t.name}
                 </Tag>
@@ -215,7 +222,7 @@ const Home = () => {
               </h3>
             </div>
             <div className={styles.tags}>
-              {incomeTags.map((t) => (
+              {incomeCategories.map((t) => (
                 <Tag key={t.name} color={t.color}>
                   {t.name}
                 </Tag>

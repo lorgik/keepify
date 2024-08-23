@@ -30,6 +30,7 @@
   flex-direction: column;
   gap: 20px;
   padding: 0 10px;
+  padding-bottom: 120px;
 
   .head {
     display: flex;
@@ -99,4 +100,8 @@
 
 .check {
   font-weight: 700;
+
+  .value {
+    margin-right: 3px;
+  }
 }
