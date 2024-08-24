@@ -61,9 +61,9 @@ function Profile() {
   return (
     <>
       <div className={styles.bg}>
-        <div className={styles.bottom}></div>
         <div className={styles.circle1}></div>
         <div className={styles.circle2}></div>
+        <div className={styles.bottom}></div>
       </div>
       <Logo />
       <div className={styles.info}>

@@ -19,9 +19,9 @@ const Home = () => {
   return (
     <>
       <div className={styles.bg}>
-        <div className={styles.bottom}></div>
         <div className={styles.circle1}></div>
         <div className={styles.circle2}></div>
+        <div className={styles.bottom}></div>
       </div>
       <Logo />
       <div className={styles.slider}>
@@ -150,9 +150,7 @@ const Home = () => {
             </div>
           </div>
           <div className={`${styles.sign} ${styles.perDay}`}>
-            <div className={styles.bg}>
-              <Image src="/analytics-sign-blue-bg.png" alt="coins" width={143} height={88} />
-            </div>
+            <Image src="/analytics-sign-blue-bg.png" alt="coins" width={143} height={88} />
             <div className={styles.top}>
               <h5 className={styles.title}>~Расход в день</h5>
               <h3 className={styles.check}>

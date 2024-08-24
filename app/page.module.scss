@@ -4,18 +4,17 @@
   left: 0;
   right: 0;
   width: 100%;
+  background: radial-gradient(57.12% 57.12% at 50% 50%, #00c4ff 0%, #007aff 100%);
   overflow: hidden;
 
   .bottom {
     position: relative;
     overflow: hidden;
-    background: radial-gradient(57.12% 57.12% at 50% 50%, #00c4ff 0%, #007aff 100%);
     width: 100%;
     aspect-ratio: 3.9 / 2.6;
 
     &::before {
       position: absolute;
-      z-index: 1;
       content: '';
       background-color: var(--bg-color);
       border-radius: 40px 0 0 0;
@@ -72,9 +71,6 @@
 }
 
 .slider {
-  position: relative;
-  z-index: 1;
-
   .dots {
     display: flex;
     justify-content: center;
@@ -98,7 +94,7 @@
 .cards {
   position: relative;
   z-index: 2;
-  overflow: auto;
+  overflow: hidden;
 
   &::-webkit-scrollbar {
     width: 0;
@@ -391,11 +387,10 @@
         color: var(--color-bledny-blue);
       }
 
-      .bg {
-        bottom: 0;
-        right: 0;
-        top: 0;
-        left: 0;
+      > img {
+        position: absolute;
+        bottom: -23px;
+        right: -20px;
 
         img {
           position: absolute;
