@@ -18,7 +18,6 @@ const initializeTelegramSDK = async () => {
     console.log('Инициализация окружения Telegram')
     const [miniApp] = initMiniApp()
     await miniApp.ready()
-    miniApp.setBgColor('#efeff4')
   } catch (error) {
     // В случае ошибки инициализируем фейковое окружение
     console.error('Ошибка при инициализации Telegram:', error)
@@ -82,7 +81,8 @@ export default function RootLayout({
       <body className={inter.className}>
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive"></Script>
         <Script id="tg-script" strategy="beforeInteractive">
-          Telegram.WebApp.expand();
+          Telegram.WebApp.expand(); Telegram.WebApp.setBackgroundColor('#efeff4');
+          Telegram.WebApp.setHeaderColor("#efeff4");
         </Script>
         <Wrapper>{children}</Wrapper>
       </body>
