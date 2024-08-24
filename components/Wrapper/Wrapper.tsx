@@ -214,7 +214,9 @@ const Wrapper = ({ children }: Props) => {
         <div className={styles.content}>{children}</div>
       </WrapperContext.Provider>
 
-      <Footer isPopupOpen={isPopupOpen} togglePopup={togglePopup} />
+      <div className={styles.noScroll}>
+        <Footer isPopupOpen={isPopupOpen} togglePopup={togglePopup} />
+      </div>
 
       {isCategorySelect && currentOperation === 'Расход' && (
         <div className={styles.popup}>

@@ -6,6 +6,15 @@
   // width: 100%;
   height: inherit;
   background-color: var(--bg-color);
+
+  .content {
+    overflow-y: scroll;
+  }
+
+  .noScroll {
+    position: relative;
+    overflow-y: hidden;
+  }
 }
 
 .popup {
