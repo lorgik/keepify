@@ -154,8 +154,6 @@
   padding: 30px 15px 20px 15px;
   color: var(--color-white);
 
-  aspect-ratio: 3.7 / 2.16;
-
   border-radius: 20px;
   overflow: hidden;
 
@@ -164,6 +162,7 @@
   }
 
   .bg {
+    position: absolute;
     bottom: 0;
     background: radial-gradient(67.82% 67.82% at 69.19% 41.44%, rgba(240, 96, 0, 0.7) 0%, rgba(255, 132, 0, 0) 100%),
       #ff8400;
