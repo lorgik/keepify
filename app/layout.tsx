@@ -18,7 +18,7 @@ const initializeTelegramSDK = async () => {
     console.log('Инициализация окружения Telegram')
     const [miniApp] = initMiniApp()
     await miniApp.ready()
-    miniApp.setHeaderColor('#fcb69f')
+    miniApp.setBgColor('#efeff4')
   } catch (error) {
     // В случае ошибки инициализируем фейковое окружение
     console.error('Ошибка при инициализации Telegram:', error)
