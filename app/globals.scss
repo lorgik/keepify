@@ -33,12 +33,12 @@ body {
   font-size: 1.6rem;
   // line-height: 1.35;
   color: var(--color-dark);
-  // background-color: var(--color-white);
   background-color: var(--bg-color);
+  // background-color: var(--color-white);
 
-  // &.hidden {
-  overflow-y: hidden;
-  // }
+  &.hidden {
+    overflow-y: hidden;
+  }
 
   &::-webkit-scrollbar {
     width: 0;
