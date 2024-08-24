@@ -81,7 +81,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive"></Script>
         <Script id="tg-script" strategy="beforeInteractive">
-          Telegram.WebApp.expand(); Telegram.WebApp.setBackgroundColor('#efeff4');
+          Telegram.WebApp.expand(); Telegram.WebApp.setBackgroundColor("#efeff4");
           Telegram.WebApp.setHeaderColor("#efeff4");
         </Script>
         <Wrapper>{children}</Wrapper>
