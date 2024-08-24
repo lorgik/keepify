@@ -3,6 +3,7 @@
 import { createContext, useEffect, useState } from 'react'
 import Footer from '../Footer/Footer'
 import styles from './Wrapper.module.scss'
+import { formatNumber } from '@/utils/formatting'
 
 type Props = {
   children: React.ReactNode
@@ -80,8 +81,8 @@ const Wrapper = ({ children }: Props) => {
       }
     }
 
-    if (action === ',' && value.indexOf(',') === -1) {
-      setValue((prev) => prev + ',')
+    if (action === '.' && value.indexOf('.') === -1) {
+      setValue((prev) => prev + '.')
     }
 
     if (action === 'erase') {
@@ -123,7 +124,7 @@ const Wrapper = ({ children }: Props) => {
             </div>
             <h1 className={styles.sum}>
               <span className={styles.sign}>{currentOperation === 'Расход' ? '-' : '+'}</span>
-              <span className={styles.number}>{value}</span>
+              <span className={styles.number}>{formatNumber(Number(value))}</span>
               <span className={styles.currency}>₽</span>
             </h1>
             <div className={styles.terminal}>
@@ -154,7 +155,7 @@ const Wrapper = ({ children }: Props) => {
               <button className={styles.btn} onClick={() => calculate(9)}>
                 <h3>9</h3>
               </button>
-              <button className={styles.btn} onClick={() => calculate(',')}>
+              <button className={styles.btn} onClick={() => calculate('.')}>
                 <h3>,</h3>
               </button>
               <button className={styles.btn} onClick={() => calculate(0)}>

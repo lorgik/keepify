@@ -3,6 +3,7 @@
 import { useContext, useEffect } from 'react'
 import styles from './page.module.scss'
 import { WrapperContext } from '@/components/Wrapper/Wrapper'
+import { formatNumber } from '@/utils/formatting'
 
 const days = [
   {
@@ -124,7 +125,9 @@ function Operations() {
                   </svg>
                 </div>
                 <h5 className={styles.check}>
-                  <span className={styles.value}>{d.categories.reduce((acc, curr) => acc + curr.value, 0)}</span>
+                  <span className={styles.value}>
+                    {formatNumber(d.categories.reduce((acc, curr) => acc + curr.value, 0))}
+                  </span>
                   <span className={styles.currenct}>₽</span>
                 </h5>
               </div>
@@ -144,7 +147,7 @@ function Operations() {
                     <h5 className={styles.name}>{c.name}</h5>
                   </div>
                   <h5 className={styles.check}>
-                    <span className={styles.value}>{c.value}</span>
+                    <span className={styles.value}>{formatNumber(c.value)}</span>
                     <span className={styles.currenct}>₽</span>
                   </h5>
                 </div>

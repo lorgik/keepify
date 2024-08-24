@@ -80,6 +80,7 @@
   align-items: center;
 
   img {
+    -webkit-appearance: none;
     outline: 5px solid var(--bg-color);
     border-radius: 50%;
   }
@@ -233,6 +234,10 @@
         align-items: flex-start;
         gap: 10px;
 
+        .title {
+          text-wrap: balance;
+        }
+
         > * {
           font-weight: 700;
         }
@@ -307,10 +312,23 @@
           border-radius: 5px;
           width: max-content;
           padding: 2px 4px;
+
+          &.lesion {
+            color: var(--color-red);
+            background-color: var(--color-bledny-red);
+
+            svg {
+              transform: rotate(180deg);
+
+              path {
+                fill: var(--color-red);
+              }
+            }
+          }
         }
       }
 
-      .reward {
+      .bonus {
         display: flex;
         align-items: center;
         gap: 2px;
