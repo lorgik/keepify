@@ -142,9 +142,9 @@ const Home = () => {
               </h3>
             </div>
             <div className={styles.tags}>
-              {expensesCategories.map((t: any) => (
-                <Tag key={t.name} color={t.color}>
-                  {t.name}
+              {expensesCategories.map((c: any) => (
+                <Tag key={c.name} color={c.color}>
+                  {c.name}
                 </Tag>
               ))}
             </div>
@@ -190,7 +190,7 @@ const Home = () => {
             </div>
             <div className={styles.bar}>
               {incomeCategories.map((c: any) => (
-                <div className={styles.scale} style={{ width: Math.round(c) }}></div>
+                <div className={styles.scale} style={{ width: Math.round(c) }} key={c.name}></div>
               ))}
             </div>
           </div>
