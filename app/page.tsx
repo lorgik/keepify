@@ -150,7 +150,7 @@ const Home = () => {
             </div>
           </div>
           <div className={`${styles.sign} ${styles.perDay}`}>
-            <Image src="/analytics-sign-blue-bg.png" alt="coins" width={143} height={88} />
+            <Image src="/analytics-sign-blue-bg.png" alt="coins" width={143} height={88} priority />
             <div className={styles.top}>
               <h5 className={styles.title}>~Расход в день</h5>
               <h3 className={styles.check}>
