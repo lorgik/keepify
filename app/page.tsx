@@ -182,10 +182,15 @@ const Home = () => {
               </h3>
             </div>
             <div className={styles.tags}>
-              {incomeCategories.map((t: any) => (
-                <Tag key={t.name} color={t.color}>
-                  {t.name}
+              {incomeCategories.map((c: any) => (
+                <Tag key={c.name} color={c.color}>
+                  {c.name}
                 </Tag>
+              ))}
+            </div>
+            <div className={styles.bar}>
+              {incomeCategories.map((c: any) => (
+                <div className={styles.scale} style={{ width: Math.round(c) }}></div>
               ))}
             </div>
           </div>
