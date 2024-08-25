@@ -82,6 +82,7 @@
   img {
     outline: 5px solid var(--bg-color);
     border-radius: 50%;
+    -webkit-border-radius: 50%;
   }
 
   .bio {

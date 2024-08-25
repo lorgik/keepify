@@ -149,8 +149,8 @@
         top: -86px;
 
         background: radial-gradient(
-            127.68% 127.68% at 41.47% 116.66%,
-            #00fffb 0%,
+            100% 100% at 41.47% 100%,
+            #01ccfd 0%,
             #0048ff 51.92%,
             rgba(140, 0, 255, 0.73) 78.38%,
             #8c00ff 100%
@@ -170,14 +170,12 @@
         left: -17px;
         top: 88px;
 
-        // background-image: url('../public/blue-card-circle-2.png');
-
         background: radial-gradient(
-              118.81% 118.81% at 8.48% 84.53%,
+              70.81% 70.81% at 12.94% 84.52%,
               rgba(140, 0, 255, 0) 0%,
-              rgba(140, 0, 255, 0.732414) 51.92%,
-              #00fffb 78.38%,
-              #00fffb 100%
+              rgba(140, 0, 255, 0.732414) 35.89%,
+              #5a3ffe 70.24%,
+              #2ba5fd 100%
             )
             /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
           #007aff;
@@ -189,14 +187,12 @@
         left: 145px;
         top: -52px;
 
-        // background-image: url('../public/blue-card-circle-3.png');
-
         background: radial-gradient(
-              81.24% 81.24% at 97.1% 21.31%,
+              71.07% 71.07% at 85.03% 13.45%,
               rgba(140, 0, 255, 0) 0%,
               rgba(0, 122, 255, 0.732414) 51.92%,
-              #3ccbff 78.38%,
-              #00fffb 100%
+              #2ab2ff 78.38%,
+              #19eafd 100%
             )
             /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
           #007aff;
