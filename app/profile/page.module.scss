@@ -216,10 +216,11 @@
 
   .top {
     display: flex;
-    gap: 70px;
+    justify-content: space-between;
 
     .description {
       color: var(--color-grey);
+      max-width: 185px;
     }
   }
 
@@ -276,10 +277,11 @@
 
   .top {
     display: flex;
-    gap: 83px;
+    justify-content: space-between;
 
     .description {
       color: var(--color-grey);
+      max-width: 185px;
     }
   }
 

@@ -6,6 +6,8 @@
   background-color: var(--color-orange);
   display: flex;
 
+  box-shadow: inset 0px 2px 2px rgba(61, 61, 81, 0.24);
+
   transition: all 0.15s ease;
 
   &.active {
