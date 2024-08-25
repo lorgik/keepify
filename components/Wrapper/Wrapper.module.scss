@@ -165,10 +165,20 @@
   margin-top: 30px;
   display: flex;
   flex-direction: column;
+  gap: 10px;
   background-color: var(--color-white);
   width: 100%;
   padding: 5px;
   border-radius: 20px;
+  max-height: 375px;
+
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
 
   .item {
     position: relative;
@@ -181,18 +191,8 @@
 
     transition: all 0.1s ease;
 
-    &:active {
-      background-color: var(--bg-color);
-    }
-
-    &:not(:first-of-type) {
-      margin-top: 5px;
-    }
-
     &:not(:last-of-type) {
-      margin-bottom: 5px;
-
-      &::after {
+      &::before {
         position: absolute;
         content: '';
         bottom: -5px;
@@ -200,7 +200,12 @@
         right: 10px;
         height: 1px;
         background-color: var(--bg-color);
+        border-radius: 1px;
       }
+    }
+
+    &:active {
+      background-color: var(--bg-color);
     }
 
     .check {
@@ -232,6 +237,19 @@
   top: 23%;
 
   animation: showUpCategory 0.25s ease;
+
+  .btn {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: var(--color-blue);
+    color: var(--color-white);
+    border-radius: 20px;
+    padding: 21.5px;
+    width: 100%;
+  }
 }
 
 @keyframes showUpCategory {
