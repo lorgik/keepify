@@ -65,7 +65,7 @@
   .list {
     display: flex;
     flex-direction: column-reverse;
-    gap: 30px;
+    // gap: 30px;
     margin-top: 10px;
     background-color: var(--color-white);
     padding: 15px;
@@ -79,6 +79,7 @@
       align-items: center;
 
       &:not(:first-of-type) {
+        margin-bottom: 30px;
         &::before {
           position: absolute;
           content: '';
