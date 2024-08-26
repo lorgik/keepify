@@ -1,6 +1,11 @@
 import styles from './Logo.module.scss'
 
-const Logo = ({ width, height }: { width: number | string; height: number | string }) => {
+type Props = {
+  width: number
+  height: number
+}
+
+const Logo = ({ width, height }: Props) => {
   return (
     <svg
       className={styles.logo}
