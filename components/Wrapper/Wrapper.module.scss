@@ -2,7 +2,7 @@
   position: relative;
   margin: 0 auto;
   padding-top: 25px;
-  max-width: 390px;
+  // max-width: 390px;
   // max-width: 1000px;
   // width: 100%;
   height: inherit;
@@ -140,6 +140,10 @@
         border: 1px solid var(--bg-color);
         width: 45px;
         height: 45px;
+
+        &.active {
+          border: none;
+        }
       }
     }
 
@@ -279,8 +283,4 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  &.active {
-    border: none;
-  }
 }

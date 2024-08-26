@@ -167,7 +167,7 @@ const Wrapper = ({ children }: Props) => {
               <button className={`${styles.btn} ${styles.category}`} onClick={() => setIsCategorySelect(true)}>
                 <h4>Категория:</h4>
                 <div
-                  className={styles.icon}
+                  className={`${styles.icon} ${currentCategory && styles.active}`}
                   style={{
                     backgroundColor: categories.find((c) => c.name === currentCategory)?.color,
                   }}
@@ -192,7 +192,7 @@ const Wrapper = ({ children }: Props) => {
                         value: currentOperation === 'Расход' ? -Number(value) : Number(value),
                       })
                     )
-                    setIsPopupOpen(false)
+                    togglePopup()
                     setValue('0')
                     setCurrentCategory('')
                   }
