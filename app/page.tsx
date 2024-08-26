@@ -148,6 +148,8 @@ const Home = () => {
                 </Tag>
               ))}
             </div>
+            {/* <div className={styles.pie} style={{background: `conic-gradient(${expensesCategories.map(c => c.)})`}}></div> */}
+            <div className={styles.pie}></div>
           </div>
           <div className={`${styles.sign} ${styles.perDay}`}>
             <Image src="/analytics-sign-blue-bg.png" alt="coins" width={143} height={88} priority />

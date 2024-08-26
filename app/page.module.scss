@@ -376,6 +376,40 @@
         max-height: 63px;
         overflow: hidden;
       }
+
+      .pie {
+        position: absolute;
+        bottom: -105px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: conic-gradient(
+          var(--color-green) 0% 12.5%,
+          var(--color-blue) 12.5% 25%,
+          var(--color-orange) 25% 37.5%,
+          var(--color-red) 37.5% 50%,
+          transparent 50% 100%
+        );
+        border-radius: 50%;
+        width: 210px;
+        height: 210px;
+
+        transform: rotate(-90deg);
+
+        &::before {
+          position: absolute;
+          content: '';
+          bottom: 42px;
+          right: 42px;
+          background-color: var(--color-white);
+          width: 126px;
+          height: 126px;
+          border-radius: 50%;
+        }
+      }
     }
 
     &.perDay {
