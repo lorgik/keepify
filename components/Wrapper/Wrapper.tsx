@@ -6,6 +6,8 @@ import styles from './Wrapper.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/lib/store'
 import { addOperation } from '@/lib/features/operations/operationsSlice'
+import { formatNumber } from '@/utils/formatting'
+import { useOutsideClick } from '@/hooks/useOutsideClick'
 
 type Props = {
   children: React.ReactNode
@@ -25,6 +27,19 @@ const Wrapper = ({ children }: Props) => {
 
   const expensesCategories = categories.filter((c) => !c.income)
   const incomeCategories = categories.filter((c) => c.income)
+
+  const ref = useOutsideClick(closePopup)
+  const categoriesRef = useOutsideClick(closeCategories)
+
+  function closePopup() {
+    if (isCategorySelect) {
+      setIsPopupOpen(false)
+    }
+  }
+
+  function closeCategories() {
+    setIsCategorySelect(false)
+  }
 
   useEffect(() => {
     if (isPopupOpen) {
@@ -52,14 +67,6 @@ const Wrapper = ({ children }: Props) => {
     }
   }
 
-  function getColor(category: string) {
-    for (let i = 0; i < expensesCategories.length; i++) {
-      if (expensesCategories[i].name === category) {
-        return expensesCategories[i].color
-      }
-    }
-  }
-
   function togglePopup() {
     setIsPopupOpen((prev) => !prev)
   }
@@ -68,7 +75,7 @@ const Wrapper = ({ children }: Props) => {
     <div className={styles.wrapper}>
       {isPopupOpen && (
         <div className={styles.popup}>
-          <div className={styles.inner}>
+          <div className={styles.inner} ref={ref}>
             <h2 className={styles.title}>Новая операция</h2>
             <div className={styles.tabs}>
               <button
@@ -92,7 +99,7 @@ const Wrapper = ({ children }: Props) => {
             </div>
             <h1 className={styles.sum}>
               <span className={styles.sign}>{currentOperation === 'Расход' ? '-' : '+'}</span>
-              <span className={styles.number}>{value}</span>
+              <span className={styles.number}>{formatNumber(Number(value.replace(',', '.')))}</span>
               <span className={styles.currency}>₽</span>
             </h1>
             <div className={styles.terminal}>
@@ -198,7 +205,7 @@ const Wrapper = ({ children }: Props) => {
 
       {isCategorySelect && currentOperation === 'Расход' && (
         <div className={styles.popup}>
-          <div className={`${styles.inner} ${styles.categories}`}>
+          <div className={`${styles.inner} ${styles.categories}`} ref={categoriesRef}>
             <h3>Выберите категорию</h3>
             <div className={styles.list}>
               {expensesCategories.map((c) => (
@@ -252,7 +259,7 @@ const Wrapper = ({ children }: Props) => {
 
       {isCategorySelect && currentOperation === 'Доход' && (
         <div className={styles.popup}>
-          <div className={`${styles.inner} ${styles.categories}`}>
+          <div className={`${styles.inner} ${styles.categories}`} ref={categoriesRef}>
             <h3>Выберите категорию</h3>
             <div className={styles.list}>
               {incomeCategories.map((c) => (

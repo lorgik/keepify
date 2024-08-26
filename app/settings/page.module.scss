@@ -67,7 +67,7 @@
   flex-direction: column;
   gap: 20px;
   margin: 0 10px;
-  margin-bottom: 120px;
+  margin-bottom: var(--spacing-bottom);
 
   .list {
     display: flex;

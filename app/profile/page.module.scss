@@ -80,8 +80,8 @@
   align-items: center;
 
   img {
-    box-shadow: 0 0 0 5px var(--bg-color);
     border-radius: 50%;
+    box-shadow: 0 0 0 5px var(--bg-color);
   }
 
   .bio {
@@ -268,7 +268,7 @@
 
 .friends {
   margin: 0 10px;
-  margin-bottom: 120px;
+  margin-bottom: var(--spacing-bottom);
   padding: 30px 15px;
   border-radius: 20px;
   background-color: var(--color-white);

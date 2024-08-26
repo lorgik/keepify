@@ -294,7 +294,7 @@
 .analytics {
   padding: 0 10px;
   padding-top: 30px;
-  padding-bottom: 120px;
+  padding-bottom: var(--spacing-bottom);
 
   position: relative;
   z-index: 1;
