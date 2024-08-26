@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from 'react'
 import styles from './page.module.scss'
 import Image from 'next/image'
 import { formatNumber } from '@/utils/formatting'
+import { useOutsideClick } from '@/hooks/useOutsideClick'
 
 const tasks = [
   {
@@ -53,11 +54,24 @@ const friends = [
 
 function Profile() {
   const [isShowBanner, setIsShowBanner] = useState(true)
+  const [isTaskOpen, setIsTaskOpen] = useState(false)
+  const [isTaskOpenClosing, setIsTaskOpenClosing] = useState(false)
   const { setIsPopupOpen } = useContext(WrapperContext)
+
+  const taskRef = useOutsideClick(closeTask)
 
   useEffect(() => {
     setIsPopupOpen(false)
   }, [])
+
+  function closeTask() {
+    setIsTaskOpenClosing(true)
+
+    setTimeout(() => {
+      setIsTaskOpen(false)
+      setIsTaskOpenClosing(false)
+    }, 150)
+  }
 
   return (
     <>
@@ -190,7 +204,7 @@ function Profile() {
           </div>
           <div className={styles.list}>
             {tasks.map((t) => (
-              <div className={styles.task} key={t.title}>
+              <div className={styles.task} key={t.title} onClick={() => setIsTaskOpen(true)}>
                 <div className={styles.basic}>
                   <Image src={`/tasks-${t.imageName}-icon.png`} alt={'icon'} width={44} height={44} priority />
                   <h5>
@@ -269,6 +283,53 @@ function Profile() {
           </div>
         </div>
       </div>
+
+      {isTaskOpen && (
+        <div className={`${styles.popup} ${isTaskOpenClosing && styles.closing}`}>
+          <div className={`${styles.inner} ${styles.categories}`} ref={taskRef}>
+            <Image src={'/tasks-tg-icon.png'} alt={'tg'} width={104} height={104} />
+            <h3>Подпишитесь на telegram канал Keepify</h3>
+            <h5>У нас очень классный и полезный телеграм канал. Подписывайся и получай коины!</h5>
+            <span className={styles.reward}>
+              <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M2.1319 7C2.1319 9.41244 4.08756 11.3681 6.5 11.3681C8.91244 11.3681 10.8681 9.41244 10.8681 7C10.8681 4.58756 8.91244 2.6319 6.5 2.6319C4.08756 2.6319 2.1319 4.58756 2.1319 7ZM7.33363 5.55506L6.89429 4.84844C6.71262 4.55626 6.28738 4.55626 6.10571 4.84844L5.66637 5.55506C5.60245 5.65786 5.50091 5.73164 5.38339 5.76066L4.57559 5.96014C4.24157 6.04263 4.11016 6.44706 4.3319 6.71012L4.86818 7.34632C4.9462 7.43888 4.98498 7.55824 4.97627 7.67898L4.91636 8.50889C4.89159 8.85205 5.23562 9.102 5.55433 8.9724L6.32511 8.65897C6.43724 8.61338 6.56276 8.61338 6.67489 8.65897L7.44567 8.9724C7.76438 9.102 8.10841 8.85205 8.08364 8.50889L8.02373 7.67898C8.01502 7.55824 8.0538 7.43888 8.13182 7.34632L8.66809 6.71012C8.88984 6.44706 8.75843 6.04263 8.42441 5.96014L7.61661 5.76066C7.49909 5.73164 7.39755 5.65786 7.33363 5.55506Z"
+                  fill="white"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M13 7C13 10.5899 10.0899 13.5 6.5 13.5C2.91015 13.5 0 10.5899 0 7C0 3.41015 2.91015 0.5 6.5 0.5C10.0899 0.5 13 3.41015 13 7ZM11.6071 7C11.6071 9.8206 9.3206 12.1071 6.5 12.1071C3.6794 12.1071 1.39286 9.8206 1.39286 7C1.39286 4.1794 3.6794 1.89286 6.5 1.89286C9.3206 1.89286 11.6071 4.1794 11.6071 7Z"
+                  fill="white"
+                />
+              </svg>
+              <h4>+ {formatNumber(2500)}</h4>
+            </span>
+            <button className={styles.btn}>
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M18.847 3.00256C18.847 3.00256 20.7085 2.27663 20.5528 4.03948C20.5015 4.76542 20.0363 7.30644 19.674 10.0545L18.433 18.1955C18.433 18.1955 18.3295 19.3881 17.3985 19.5956C16.4679 19.8026 15.0716 18.8697 14.8129 18.6622C14.6059 18.5065 10.9345 16.1729 9.64171 15.0325C9.27946 14.7211 8.86546 14.0991 9.69346 13.3732L15.1234 8.18762C15.7439 7.56471 16.3644 6.11283 13.7788 7.87617L6.53863 12.802C6.53863 12.802 5.7111 13.3209 4.16004 12.8542L0.798209 11.8168C0.798209 11.8168 -0.442832 11.0391 1.67748 10.2615C6.84913 7.82442 13.2105 5.3361 18.847 3.00256Z"
+                  fill="#007AFF"
+                />
+              </svg>
+              <h4>Подписаться</h4>
+            </button>
+            <button className={styles.btn}>
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M11 22C17.0752 22 22 17.0752 22 11C22 4.92485 17.0752 0 11 0C4.92485 0 0 4.92485 0 11C0 17.0752 4.92485 22 11 22ZM17.0186 8.21858C17.3049 7.93212 17.3049 7.46788 17.0186 7.18142C16.7321 6.89505 16.2679 6.89505 15.9814 7.18142L9.9 13.2629L6.75191 10.1148C6.46545 9.82839 6.00121 9.82839 5.71475 10.1148C5.42839 10.4012 5.42839 10.8655 5.71475 11.1519L9.38142 14.8186C9.66788 15.1049 10.1321 15.1049 10.4186 14.8186L17.0186 8.21858Z"
+                  fill="#DAE7FA"
+                />
+              </svg>
+              <h4>Проверить</h4>
+            </button>
+          </div>
+        </div>
+      )}
     </>
   )
 }

@@ -16,8 +16,6 @@ const Home = () => {
     setIsPopupOpen(false)
   }, [])
 
-  console.log(new Date())
-
   return (
     <>
       <div className={styles.bg}>

@@ -249,21 +249,21 @@
         > * {
           font-weight: 700;
         }
-
-        .reward {
-          margin-top: 4px;
-          display: flex;
-          align-items: center;
-          gap: 2px;
-          color: var(--color-white);
-          background-color: var(--color-orange);
-          border-radius: 20px;
-          width: max-content;
-          padding: 3px 8px;
-        }
       }
     }
   }
+}
+
+.reward {
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--color-white);
+  background-color: var(--color-orange);
+  border-radius: 20px;
+  width: max-content;
+  padding: 3px 8px;
 }
 
 .friends {
@@ -344,5 +344,103 @@
         font-weight: 700;
       }
     }
+  }
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  max-width: inherit;
+  background: rgba(61, 61, 81, 0.4);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+
+  &.closing {
+    background: transparent;
+    .inner {
+      animation: hideDown 0.25s ease;
+    }
+  }
+
+  .inner {
+    padding: 0 10px;
+    padding-top: 47px;
+    padding-bottom: 30px;
+    position: relative;
+    top: 0;
+    background-color: var(--bg-color);
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    animation: showUp 0.25s ease;
+
+    h3,
+    h5 {
+      max-width: 270px;
+      text-align: center;
+    }
+
+    h3 {
+      margin-top: 30px;
+    }
+
+    h5 {
+      margin-top: 10px;
+      color: var(--color-grey);
+    }
+
+    .reward {
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 180px;
+      height: 62px;
+      border-radius: 20px;
+
+      &:first-of-type {
+        margin-top: 15px;
+        color: var(--color-blue);
+        background-color: var(--color-bledny-blue);
+      }
+
+      &:last-of-type {
+        margin-top: 30px;
+        color: var(--color-white);
+        background-color: var(--color-blue);
+      }
+    }
+  }
+}
+
+@keyframes showUp {
+  from {
+    top: 100%;
+  }
+  to {
+    top: 0;
+  }
+}
+
+@keyframes hideDown {
+  from {
+    top: 0;
+  }
+  to {
+    top: 100%;
   }
 }
