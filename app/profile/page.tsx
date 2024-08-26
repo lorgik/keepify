@@ -66,7 +66,7 @@ function Profile() {
         <div className={styles.circle2}></div>
         <div className={styles.bottom}></div>
       </div>
-      <Logo />
+      <Logo width={84} height={43} />
       <div className={styles.info}>
         <Image src={'/avatar.png'} alt={'avatar'} width={105} height={105} priority />
         <div className={styles.bio}>
