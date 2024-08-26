@@ -1,11 +1,11 @@
 import styles from './Logo.module.scss'
 
-const Logo = () => {
+const Logo = ({ width, height }: { width: number | string; height: number | string }) => {
   return (
     <svg
       className={styles.logo}
-      width="84"
-      height="43"
+      width={width}
+      height={height}
       viewBox="0 0 84 43"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

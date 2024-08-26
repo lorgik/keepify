@@ -8,6 +8,7 @@ import { RootState } from '@/lib/store'
 import { addOperation } from '@/lib/features/operations/operationsSlice'
 import { formatNumber } from '@/utils/formatting'
 import { useOutsideClick } from '@/hooks/useOutsideClick'
+import Loader from '../Loader/Loader'
 
 type Props = {
   children: React.ReactNode
@@ -16,6 +17,7 @@ type Props = {
 export const WrapperContext = createContext<any>(null)
 
 const Wrapper = ({ children }: Props) => {
+  const [isLoading, setIsLoading] = useState(true)
   const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [isPopupClosing, setIsPopupClosing] = useState(false)
   const [isCategorySelect, setIsCategorySelect] = useState(false)
@@ -34,6 +36,12 @@ const Wrapper = ({ children }: Props) => {
   const categoriesRef = useOutsideClick(closeCategories)
 
   useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 3000)
+  }, [])
+
+  useEffect(() => {
     if (isPopupOpen) {
       document.body.style.overflow = 'hidden'
     } else {
@@ -44,6 +52,19 @@ const Wrapper = ({ children }: Props) => {
   function closePopup() {
     if (isCategorySelect) {
       setIsPopupOpen(false)
+    }
+  }
+
+  function togglePopup() {
+    if (isPopupOpen) {
+      setIsPopupClosing(true)
+
+      setTimeout(() => {
+        setIsPopupOpen(false)
+        setIsPopupClosing(false)
+      }, 150)
+    } else {
+      setIsPopupOpen(true)
     }
   }
 
@@ -71,19 +92,6 @@ const Wrapper = ({ children }: Props) => {
 
     if (action === 'erase') {
       setValue((prev) => prev.slice(0, -1))
-    }
-  }
-
-  function togglePopup() {
-    if (isPopupOpen) {
-      setIsPopupClosing(true)
-
-      setTimeout(() => {
-        setIsPopupOpen(false)
-        setIsPopupClosing(false)
-      }, 150)
-    } else {
-      setIsPopupOpen(true)
     }
   }
 
@@ -326,6 +334,8 @@ const Wrapper = ({ children }: Props) => {
           </div>
         </div>
       )}
+
+      {isLoading && <Loader />}
     </div>
   )
 }

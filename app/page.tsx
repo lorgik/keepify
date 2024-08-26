@@ -25,7 +25,7 @@ const Home = () => {
         <div className={styles.circle2}></div>
         <div className={styles.bottom}></div>
       </div>
-      <Logo />
+      <Logo width={84} height={43} />
       <div className={styles.slider}>
         <div className={styles.cards}>
           <div className={styles.inner}>

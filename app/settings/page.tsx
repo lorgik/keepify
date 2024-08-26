@@ -1,12 +1,13 @@
 'use client'
 
 import { WrapperContext } from '@/components/Wrapper/Wrapper'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styles from './page.module.scss'
 import Image from 'next/image'
 import Switch from '@/components/Switch/Switch'
 
 function Settings() {
+  const [isShowBanner, setIsShowBanner] = useState(true)
   const { setIsPopupOpen } = useContext(WrapperContext)
 
   useEffect(() => {
@@ -18,38 +19,40 @@ function Settings() {
       <h2 className={styles.title}>Настройки</h2>
 
       <div className={styles.settings}>
-        <div className={styles.banner}>
-          <div className={styles.bg}>
-            <Image
-              className={styles.logo}
-              src={'/keepy-logo-bg.png'}
-              alt="keepy logo"
-              width={290}
-              height={303}
-              priority
-            />
-            <Image className={styles.tg} src={'/keepy-tg-bg.png'} alt="keepy tg" width={416} height={416} priority />
-          </div>
-          <h3 className={styles.title}>Подпишись на Keepify в Telegram</h3>
-          <h5 className={styles.text}>И разблокируй премиум функции приложения</h5>
-          <button className={styles.btn}>
-            <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g clip-path="url(#clip0_191_1829)">
-                <path
-                  d="M19.347 3.00256C19.347 3.00256 21.2086 2.27663 21.0528 4.03948C21.0016 4.76542 20.5363 7.30644 20.174 10.0545L18.933 18.1955C18.933 18.1955 18.8295 19.3881 17.8985 19.5956C16.9679 19.8026 15.5717 18.8697 15.3129 18.6622C15.1059 18.5065 11.4345 16.1729 10.1417 15.0325C9.77949 14.7211 9.36549 14.0991 10.1935 13.3732L15.6234 8.18762C16.2439 7.56471 16.8644 6.11283 14.2789 7.87617L7.03866 12.802C7.03866 12.802 6.21113 13.3209 4.66007 12.8542L1.29824 11.8168C1.29824 11.8168 0.0571982 11.0391 2.17751 10.2615C7.34916 7.82442 13.7106 5.3361 19.347 3.00256Z"
-                  fill="#007AFF"
-                />
-              </g>
-              <defs>
-                <clipPath id="clip0_191_1829">
-                  <rect width="22" height="22" fill="white" transform="translate(0.5)" />
-                </clipPath>
-              </defs>
-            </svg>
+        {isShowBanner && (
+          <div className={styles.banner}>
+            <div className={styles.bg}>
+              <Image
+                className={styles.logo}
+                src={'/keepy-logo-bg.png'}
+                alt="keepy logo"
+                width={290}
+                height={303}
+                priority
+              />
+              <Image className={styles.tg} src={'/keepy-tg-bg.png'} alt="keepy tg" width={416} height={416} priority />
+            </div>
+            <h3 className={styles.title}>Подпишись на Keepify в Telegram</h3>
+            <h5 className={styles.text}>И разблокируй премиум функции приложения</h5>
+            <button className={styles.btn} onClick={() => setIsShowBanner(false)}>
+              <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_191_1829)">
+                  <path
+                    d="M19.347 3.00256C19.347 3.00256 21.2086 2.27663 21.0528 4.03948C21.0016 4.76542 20.5363 7.30644 20.174 10.0545L18.933 18.1955C18.933 18.1955 18.8295 19.3881 17.8985 19.5956C16.9679 19.8026 15.5717 18.8697 15.3129 18.6622C15.1059 18.5065 11.4345 16.1729 10.1417 15.0325C9.77949 14.7211 9.36549 14.0991 10.1935 13.3732L15.6234 8.18762C16.2439 7.56471 16.8644 6.11283 14.2789 7.87617L7.03866 12.802C7.03866 12.802 6.21113 13.3209 4.66007 12.8542L1.29824 11.8168C1.29824 11.8168 0.0571982 11.0391 2.17751 10.2615C7.34916 7.82442 13.7106 5.3361 19.347 3.00256Z"
+                    fill="#007AFF"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_191_1829">
+                    <rect width="22" height="22" fill="white" transform="translate(0.5)" />
+                  </clipPath>
+                </defs>
+              </svg>
 
-            <h4>Подписаться</h4>
-          </button>
-        </div>
+              <h4>Подписаться</h4>
+            </button>
+          </div>
+        )}
 
         <div className={styles.list}>
           <div className={styles.item}>
