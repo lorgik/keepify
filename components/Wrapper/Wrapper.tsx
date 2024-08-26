@@ -37,7 +37,7 @@ const Wrapper = ({ children }: Props) => {
 
   useEffect(() => {
     setTimeout(() => {
-      // setIsLoading(false)
+      setIsLoading(false)
     }, 3000)
   }, [])
 
