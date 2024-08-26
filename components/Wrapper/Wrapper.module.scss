@@ -24,6 +24,13 @@
   align-items: center;
   justify-content: flex-end;
 
+  &.closing {
+    background: transparent;
+    .inner {
+      animation: hideDown 0.25s ease;
+    }
+  }
+
   .inner {
     padding: 0 10px;
     padding-top: 47px;
@@ -169,6 +176,15 @@
   }
 }
 
+@keyframes hideDown {
+  from {
+    top: 0;
+  }
+  to {
+    top: 100%;
+  }
+}
+
 .list {
   margin-top: 30px;
   display: flex;
@@ -242,10 +258,7 @@
 }
 
 .inner.categories {
-  top: 0;
   padding-bottom: 8px;
-
-  animation: showUpCategory 0.25s ease;
 
   .btn {
     margin-top: 10px;
@@ -259,15 +272,6 @@
     border-radius: 20px;
     padding: 21.5px;
     width: 100%;
-  }
-}
-
-@keyframes showUpCategory {
-  from {
-    top: 100%;
-  }
-  to {
-    top: 0;
   }
 }
 

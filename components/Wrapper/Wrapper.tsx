@@ -17,7 +17,9 @@ export const WrapperContext = createContext<any>(null)
 
 const Wrapper = ({ children }: Props) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
+  const [isPopupClosing, setIsPopupClosing] = useState(false)
   const [isCategorySelect, setIsCategorySelect] = useState(false)
+  const [isCategorySelectClosing, setIsCategorySelectClosing] = useState(false)
   const [value, setValue] = useState('0')
   const [currentOperation, setCurrentOperation] = useState('Расход')
   const [currentCategory, setCurrentCategory] = useState('')
@@ -31,16 +33,6 @@ const Wrapper = ({ children }: Props) => {
   const ref = useOutsideClick(closePopup)
   const categoriesRef = useOutsideClick(closeCategories)
 
-  function closePopup() {
-    if (isCategorySelect) {
-      setIsPopupOpen(false)
-    }
-  }
-
-  function closeCategories() {
-    setIsCategorySelect(false)
-  }
-
   useEffect(() => {
     if (isPopupOpen) {
       document.body.style.overflow = 'hidden'
@@ -48,6 +40,21 @@ const Wrapper = ({ children }: Props) => {
       document.body.style.overflow = 'auto'
     }
   }, [isPopupOpen])
+
+  function closePopup() {
+    if (isCategorySelect) {
+      setIsPopupOpen(false)
+    }
+  }
+
+  function closeCategories() {
+    setIsCategorySelectClosing(true)
+
+    setTimeout(() => {
+      setIsCategorySelect(false)
+      setIsCategorySelectClosing(false)
+    }, 150)
+  }
 
   function calculate(action: any) {
     if (typeof action === 'number') {
@@ -68,13 +75,22 @@ const Wrapper = ({ children }: Props) => {
   }
 
   function togglePopup() {
-    setIsPopupOpen((prev) => !prev)
+    if (isPopupOpen) {
+      setIsPopupClosing(true)
+
+      setTimeout(() => {
+        setIsPopupOpen(false)
+        setIsPopupClosing(false)
+      }, 150)
+    } else {
+      setIsPopupOpen(true)
+    }
   }
 
   return (
     <div className={styles.wrapper}>
       {isPopupOpen && (
-        <div className={styles.popup}>
+        <div className={`${styles.popup} ${isPopupClosing && styles.closing}`}>
           <div className={styles.inner} ref={ref}>
             <h2 className={styles.title}>Новая операция</h2>
             <div className={styles.tabs}>
@@ -204,7 +220,7 @@ const Wrapper = ({ children }: Props) => {
       <Footer isPopupOpen={isPopupOpen} togglePopup={togglePopup} />
 
       {isCategorySelect && currentOperation === 'Расход' && (
-        <div className={styles.popup}>
+        <div className={`${styles.popup} ${isCategorySelectClosing && styles.closing}`}>
           <div className={`${styles.inner} ${styles.categories}`} ref={categoriesRef}>
             <h3>Выберите категорию</h3>
             <div className={styles.list}>
@@ -214,7 +230,7 @@ const Wrapper = ({ children }: Props) => {
                   key={c.name}
                   onClick={() => {
                     setCurrentCategory(c.name)
-                    setIsCategorySelect(false)
+                    closeCategories()
                   }}
                 >
                   <div className={styles.category}>
@@ -258,7 +274,7 @@ const Wrapper = ({ children }: Props) => {
       )}
 
       {isCategorySelect && currentOperation === 'Доход' && (
-        <div className={styles.popup}>
+        <div className={`${styles.popup} ${isCategorySelectClosing && styles.closing}`}>
           <div className={`${styles.inner} ${styles.categories}`} ref={categoriesRef}>
             <h3>Выберите категорию</h3>
             <div className={styles.list}>
@@ -268,7 +284,7 @@ const Wrapper = ({ children }: Props) => {
                   key={c.name}
                   onClick={() => {
                     setCurrentCategory(c.name)
-                    setIsCategorySelect(false)
+                    closeCategories()
                   }}
                 >
                   <div className={styles.category}>
