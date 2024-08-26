@@ -7,7 +7,7 @@ const Loader = () => {
   return (
     <div className={styles.loader}>
       <div className={styles.bg}>
-        <Image src={'/loader-bg.png'} alt={'coins'} width={390} height={943} />
+        <Image src={'/loader-bg.png'} alt={'coins'} width={390} height={722} />
         <div className={styles.shape}></div>
       </div>
       <div className={styles.top}>

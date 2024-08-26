@@ -37,7 +37,7 @@ const Wrapper = ({ children }: Props) => {
 
   useEffect(() => {
     setTimeout(() => {
-      setIsLoading(false)
+      // setIsLoading(false)
     }, 3000)
   }, [])
 
@@ -93,6 +93,10 @@ const Wrapper = ({ children }: Props) => {
     if (action === 'erase') {
       setValue((prev) => prev.slice(0, -1))
     }
+  }
+
+  if (isLoading) {
+    return <Loader />
   }
 
   return (
@@ -334,8 +338,6 @@ const Wrapper = ({ children }: Props) => {
           </div>
         </div>
       )}
-
-      {isLoading && <Loader />}
     </div>
   )
 }
