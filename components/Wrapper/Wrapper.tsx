@@ -3,58 +3,13 @@
 import { createContext, useEffect, useState } from 'react'
 import Footer from '../Footer/Footer'
 import styles from './Wrapper.module.scss'
-import { formatNumber } from '@/utils/formatting'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@/lib/store'
+import { addOperation } from '@/lib/features/operations/operationsSlice'
 
 type Props = {
   children: React.ReactNode
 }
-
-const expensesCategories = [
-  {
-    name: 'Фастфуд',
-    color: '#36C6C9',
-  },
-  {
-    name: 'Жилье',
-    color: '#2C88EA',
-  },
-  {
-    name: 'Транспорт',
-    color: '#E23235',
-  },
-  {
-    name: 'Кредиты',
-    color: '#3ADB7D',
-  },
-  {
-    name: 'Продукты',
-    color: '#F48712',
-  },
-  {
-    name: 'Одежда и обувь',
-    color: '#7951F5',
-  },
-]
-
-const incomeCategories = [
-  {
-    name: 'Зар. плата',
-    color: '#007AFF',
-  },
-  {
-    name: 'Бизнес',
-    color: '#FF8400',
-  },
-  {
-    name: 'Инвестиции',
-    color: '#35CC5A',
-  },
-]
-
-// interface MessageJSON {
-//   eventType: string;
-//   eventData: any;
-// }
 
 export const WrapperContext = createContext<any>(null)
 
@@ -64,6 +19,20 @@ const Wrapper = ({ children }: Props) => {
   const [value, setValue] = useState('0')
   const [currentOperation, setCurrentOperation] = useState('Расход')
   const [currentCategory, setCurrentCategory] = useState('')
+
+  const categories = useSelector((state: RootState) => state.categories)
+  const dispatch = useDispatch()
+
+  const expensesCategories = categories.filter((c) => !c.income)
+  const incomeCategories = categories.filter((c) => c.income)
+
+  useEffect(() => {
+    if (isPopupOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+  }, [isPopupOpen])
 
   function calculate(action: any) {
     if (typeof action === 'number') {
@@ -83,13 +52,13 @@ const Wrapper = ({ children }: Props) => {
     }
   }
 
-  useEffect(() => {
-    if (isPopupOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'auto'
+  function getColor(category: string) {
+    for (let i = 0; i < expensesCategories.length; i++) {
+      if (expensesCategories[i].name === category) {
+        return expensesCategories[i].color
+      }
     }
-  }, [isPopupOpen])
+  }
 
   function togglePopup() {
     setIsPopupOpen((prev) => !prev)
@@ -104,13 +73,19 @@ const Wrapper = ({ children }: Props) => {
             <div className={styles.tabs}>
               <button
                 className={`${styles.tab} ${currentOperation === 'Доход' && styles.income}`}
-                onClick={() => setCurrentOperation('Доход')}
+                onClick={() => {
+                  setCurrentOperation('Доход')
+                  setCurrentCategory('')
+                }}
               >
                 <h5>Доход</h5>
               </button>
               <button
                 className={`${styles.tab} ${currentOperation === 'Расход' && styles.expense}`}
-                onClick={() => setCurrentOperation('Расход')}
+                onClick={() => {
+                  setCurrentOperation('Расход')
+                  setCurrentCategory('')
+                }}
               >
                 <h5>Расход</h5>
               </button>
@@ -171,10 +146,7 @@ const Wrapper = ({ children }: Props) => {
                 <div
                   className={styles.icon}
                   style={{
-                    backgroundColor:
-                      currentOperation === 'Расход'
-                        ? expensesCategories.find((c) => c.name === currentCategory)?.color
-                        : incomeCategories.find((c) => c.name === currentCategory)?.color,
+                    backgroundColor: categories.find((c) => c.name === currentCategory)?.color,
                   }}
                 >
                   {currentCategory && (
@@ -187,7 +159,22 @@ const Wrapper = ({ children }: Props) => {
                   )}
                 </div>
               </button>
-              <button className={`${styles.btn} ${styles.add} ${currentOperation === 'Доход' && styles.income}`}>
+              <button
+                className={`${styles.btn} ${styles.add} ${currentOperation === 'Доход' && styles.income}`}
+                onClick={() => {
+                  if (value !== '0' && value !== '' && currentCategory !== '') {
+                    dispatch(
+                      addOperation({
+                        category: currentCategory,
+                        value: currentOperation === 'Расход' ? -Number(value) : Number(value),
+                      })
+                    )
+                    setIsPopupOpen(false)
+                    setValue('0')
+                    setCurrentCategory('')
+                  }
+                }}
+              >
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     fill-rule="evenodd"

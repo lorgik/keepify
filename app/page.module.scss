@@ -369,6 +369,11 @@
       grid-area: A;
 
       aspect-ratio: 2.3 / 2.8;
+
+      .tags {
+        max-height: 63px;
+        overflow: hidden;
+      }
     }
 
     &.perDay {
@@ -454,4 +459,34 @@
   display: flex;
   gap: 3px;
   flex-wrap: wrap;
+}
+
+.bar {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  overflow: hidden;
+
+  .scale {
+    position: relative;
+    height: 16px;
+    border-radius: 0 8px 8px 0;
+
+    &:not(:last-of-type) {
+      &:before {
+        position: absolute;
+        content: '';
+        right: -8px;
+        background-color: inherit;
+        width: 16px;
+        height: 16px;
+        border-radius: 0 8px 8px 0;
+      }
+    }
+
+    &:first-of-type {
+      flex-grow: 1;
+    }
+  }
 }

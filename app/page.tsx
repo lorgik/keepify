@@ -16,6 +16,8 @@ const Home = () => {
     setIsPopupOpen(false)
   }, [])
 
+  console.log(new Date())
+
   return (
     <>
       <div className={styles.bg}>
@@ -189,8 +191,16 @@ const Home = () => {
               ))}
             </div>
             <div className={styles.bar}>
-              {incomeCategories.map((c: any) => (
-                <div className={styles.scale} style={{ width: Math.round(c) }} key={c.name}></div>
+              {incomeCategories.map((c: any, index: number) => (
+                <div
+                  className={styles.scale}
+                  style={{
+                    width: Math.round(Math.random() * 100) + '%',
+                    backgroundColor: c.color,
+                    zIndex: incomeCategories.length - index,
+                  }}
+                  key={c.name}
+                ></div>
               ))}
             </div>
           </div>
