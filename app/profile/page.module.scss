@@ -80,9 +80,8 @@
   align-items: center;
 
   img {
-    outline: 5px solid var(--bg-color);
+    box-shadow: 0 0 0 5px var(--bg-color);
     border-radius: 50%;
-    -webkit-border-radius: 50%;
   }
 
   .bio {
