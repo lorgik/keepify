@@ -17,10 +17,10 @@ const Loader = () => {
   return (
     <div className={styles.loader}>
       <div className={styles.bg}>
-        {/* <Image src={'/loader-bg.png'} alt={'coins'} width={390} height={530} priority /> */}
-        <div className={styles.lottie}>
+        <Image src={'/loader-bg.png'} alt={'coins'} width={390} height={530} priority />
+        {/* <div className={styles.lottie}>
           <Lottie options={defaultOptions} height={390} width={530} />
-        </div>
+        </div> */}
         <div className={styles.shape}></div>
       </div>
       <div className={styles.top}>
