@@ -13,10 +13,26 @@
 
   .bg {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     top: 0;
+    left: 0;
+    right: 0;
     bottom: 0;
+    height: 100%;
 
-    & .shape {
+    img {
+      position: absolute;
+      bottom: 0;
+    }
+
+    .lottie {
+      position: absolute;
+      bottom: 0;
+    }
+
+    .shape {
       position: absolute;
       left: 0;
       right: 0;

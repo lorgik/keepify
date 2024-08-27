@@ -139,7 +139,7 @@ const Home = () => {
                 <h5 className={styles.title}>Баланс</h5>
                 <h2 className={styles.check}>
                   <span className={styles.currency}>₽</span>
-                  <span className={styles.value}>100 564</span>
+                  <span className={styles.value}>{formatNumber(getIncomeValue() - getExpensesValue())}</span>
                 </h2>
               </div>
               <div className={styles.extra}>
@@ -303,7 +303,7 @@ const Home = () => {
                 <div
                   className={styles.scale}
                   style={{
-                    width: Math.round(getIncomeValue() / 100) + '%',
+                    width: Math.round((getIncomeValue() / c.value) * 100) + '%',
                     backgroundColor: getColor(categories, c.name),
                     zIndex: incomeCategories.length - index,
                   }}

@@ -1,13 +1,26 @@
+'use client'
 import Link from 'next/link'
 import Logo from '../Logo/Logo'
 import styles from './Loader.module.scss'
 import Image from 'next/image'
+import animation from '@/animation/coin-animation.json'
+import Lottie from 'react-lottie'
 
 const Loader = () => {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animation,
+    renderer: 'svg',
+  }
+
   return (
     <div className={styles.loader}>
       <div className={styles.bg}>
-        <Image src={'/loader-bg.png'} alt={'coins'} width={390} height={722} priority />
+        {/* <Image src={'/loader-bg.png'} alt={'coins'} width={390} height={530} priority /> */}
+        <div className={styles.lottie}>
+          <Lottie options={defaultOptions} height={390} width={530} />
+        </div>
         <div className={styles.shape}></div>
       </div>
       <div className={styles.top}>

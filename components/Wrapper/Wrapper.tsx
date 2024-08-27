@@ -38,7 +38,7 @@ const Wrapper = ({ children }: Props) => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false)
-    }, 3000)
+    }, 5000)
   }, [])
 
   useEffect(() => {
@@ -95,9 +95,9 @@ const Wrapper = ({ children }: Props) => {
     }
   }
 
-  // if (isLoading) {
-  //   return <Loader />
-  // }
+  if (isLoading) {
+    return <Loader />
+  }
 
   return (
     <div className={styles.wrapper}>
