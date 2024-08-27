@@ -1,4 +1,5 @@
 'use client'
+
 import { createContext, useContext, useEffect, useState } from 'react'
 
 const supportedThemes = {
@@ -28,22 +29,20 @@ export const useTheme = () => {
   return context
 }
 
-export const getTheme = (): Themes => {
-  let theme = window.localStorage.getItem(StorageKey)
-
-  if (!theme) {
-    window.localStorage.setItem(StorageKey, 'light')
-    theme = 'light'
-  }
-
-  return theme as Themes
-}
-
 const Theme = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useState<Themes>(getTheme)
+  const [theme, setTheme] = useState<Themes>('light')
 
   useEffect(() => {
-    window.localStorage.setItem(StorageKey, theme)
+    const theme = localStorage.getItem(StorageKey)
+
+    if (!theme) {
+      localStorage.setItem(StorageKey, 'light')
+      setTheme('light')
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem(StorageKey, theme)
     document.documentElement.setAttribute('data-theme', theme)
   }, [theme])
 
