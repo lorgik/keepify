@@ -26,7 +26,6 @@ const getTheme = (): Themes => {
     localStorage.setItem(StorageKey, 'light')
     theme = 'light'
   }
-
   return theme as Themes
 }
 
@@ -41,7 +40,16 @@ export const useTheme = () => {
 }
 
 const Theme = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useState<Themes>(getTheme)
+  const [theme, setTheme] = useState<Themes>(localStorage.getItem(StorageKey) as Themes)
+
+  useEffect(() => {
+    let theme = localStorage.getItem(StorageKey)
+
+    if (!theme) {
+      localStorage.setItem(StorageKey, 'light')
+      theme = 'light'
+    }
+  }, [])
 
   useEffect(() => {
     localStorage.setItem(StorageKey, theme)
