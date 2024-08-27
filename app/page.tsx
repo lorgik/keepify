@@ -6,15 +6,119 @@ import Logo from '@/components/Logo/Logo'
 import Image from 'next/image'
 import Tag from '@/entities/Tag/Tag'
 import { WrapperContext } from '@/components/Wrapper/Wrapper'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/lib/store'
+import { getColor } from '@/utils/coloring'
+import { Operation } from '@/lib/features/operations/operationsSlice'
+import { formatNumber } from '@/utils/formatting'
 
 const Home = () => {
   const [activeCard, setActiveCard] = useState(0)
+  const [conicGradient, setConicGradient] = useState('')
+  const operations = useSelector((state: RootState) => state.operations)
+  const categories = useSelector((state: RootState) => state.categories)
 
-  const { setIsPopupOpen, expensesCategories, incomeCategories } = useContext(WrapperContext)
+  const { setIsPopupOpen } = useContext(WrapperContext)
 
   useEffect(() => {
     setIsPopupOpen(false)
   }, [])
+
+  useEffect(() => {
+    setConicGradient(getConicGradient())
+    console.log(getConicGradient())
+  }, [operations])
+
+  const expensesOperations = operations.filter((o) => o.value < 0)
+  const incomeOperations = operations.filter((o) => o.value > 0)
+
+  const expensesCategories = expensesOperations.reduce((acc: any, curr: Operation) => {
+    if (
+      acc.findIndex((o: any) => {
+        return o.name === curr.category
+      }) === -1
+    ) {
+      acc.push({ name: curr.category, value: curr.value })
+    } else {
+      let findedIndex = acc.findIndex((o: any) => o.name === curr.category)
+
+      acc.splice(findedIndex, 1, {
+        name: curr.category,
+        value: curr.value + acc[findedIndex].value,
+      })
+    }
+    return acc
+  }, [])
+
+  const incomeCategories = incomeOperations.reduce((acc: any, curr: Operation) => {
+    if (
+      acc.findIndex((o: any) => {
+        return o.name === curr.category
+      }) === -1
+    ) {
+      acc.push({ name: curr.category, value: curr.value })
+    } else {
+      let findedIndex = acc.findIndex((o: any) => o.name === curr.category)
+
+      acc.splice(findedIndex, 1, {
+        name: curr.category,
+        value: curr.value + acc[findedIndex].value,
+      })
+    }
+    return acc
+  }, [])
+
+  function getExpensesValue() {
+    const value = expensesCategories.reduce((acc: number, curr: any) => acc + curr.value, 0)
+    return Math.abs(value)
+  }
+
+  function getIncomeValue() {
+    const value = incomeCategories.reduce((acc: number, curr: any) => acc + curr.value, 0)
+    return value
+  }
+
+  function getConicGradient() {
+    const maxValue = Math.abs(
+      expensesCategories.reduce((acc: number, curr: any) => {
+        return acc + curr.value
+      }, 0)
+    )
+
+    const expensesCategoriesWithPercent = expensesCategories.reduce((acc: any, curr: any) => {
+      return [
+        ...acc,
+        {
+          name: curr.name,
+          value: curr.value,
+          percent: Math.round(Math.abs((curr.value / maxValue) * 50)),
+        },
+      ]
+    }, [])
+
+    function getText() {
+      let currPercent = 0
+
+      const text = expensesCategoriesWithPercent.map((c: any, index: number) => {
+        let text
+        if (index === expensesCategoriesWithPercent.length - 1) {
+          text = `${getColor(categories, c.name)} ${currPercent}% 50%`
+        } else {
+          text = `${getColor(categories, c.name)} ${currPercent}% ${c.percent + currPercent}%`
+        }
+        currPercent = currPercent + c.percent
+        return text
+      })
+
+      return text
+    }
+
+    return `conic-gradient(${getText()}, transparent 50% 100%)`
+  }
+
+  function getRandomProcent() {
+    return Math.round(Math.random() * 100)
+  }
 
   return (
     <>
@@ -137,26 +241,30 @@ const Home = () => {
             <div className={styles.top}>
               <h5 className={styles.title}>Расходы:</h5>
               <h3 className={styles.check}>
-                <span className={styles.value}>151 234</span>
+                <span className={styles.value}>{formatNumber(getExpensesValue())} </span>
                 <span className={styles.currency}>₽</span>
               </h3>
             </div>
             <div className={styles.tags}>
               {expensesCategories.map((c: any) => (
-                <Tag key={c.name} color={c.color}>
+                <Tag key={c.name} color={getColor(categories, c.name)}>
                   {c.name}
                 </Tag>
               ))}
             </div>
-            {/* <div className={styles.pie} style={{background: `conic-gradient(${expensesCategories.map(c => c.)})`}}></div> */}
-            <div className={styles.pie}></div>
+            <div
+              className={styles.pie}
+              style={{
+                background: conicGradient && conicGradient,
+              }}
+            ></div>
           </div>
           <div className={`${styles.sign} ${styles.perDay}`}>
             <Image src="/analytics-sign-blue-bg.png" alt="coins" width={143} height={88} priority />
             <div className={styles.top}>
               <h5 className={styles.title}>~В день</h5>
               <h3 className={styles.check}>
-                <span className={styles.value}>1 265</span>
+                <span className={styles.value}>{Math.round(getExpensesValue() / 30)} </span>
                 <span className={styles.currency}>₽</span>
               </h3>
             </div>
@@ -179,13 +287,13 @@ const Home = () => {
             <div className={styles.top}>
               <h5 className={styles.title}>Доходы:</h5>
               <h3 className={styles.check}>
-                <span className={styles.value}>154 350</span>
+                <span className={styles.value}>{formatNumber(getIncomeValue())} </span>
                 <span className={styles.currency}>₽</span>
               </h3>
             </div>
             <div className={styles.tags}>
               {incomeCategories.map((c: any) => (
-                <Tag key={c.name} color={c.color}>
+                <Tag key={c.name} color={getColor(categories, c.name)}>
                   {c.name}
                 </Tag>
               ))}
@@ -195,8 +303,8 @@ const Home = () => {
                 <div
                   className={styles.scale}
                   style={{
-                    width: Math.round(Math.random() * 100) + '%',
-                    backgroundColor: c.color,
+                    width: Math.round(getIncomeValue() / 100) + '%',
+                    backgroundColor: getColor(categories, c.name),
                     zIndex: incomeCategories.length - index,
                   }}
                   key={c.name}

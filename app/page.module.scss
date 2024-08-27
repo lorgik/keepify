@@ -386,13 +386,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: conic-gradient(
-          var(--color-green) 0% 12.5%,
-          var(--color-blue) 12.5% 25%,
-          var(--color-orange) 25% 37.5%,
-          var(--color-red) 37.5% 50%,
-          transparent 50% 100%
-        );
+        background: var(--bg-color);
         border-radius: 50%;
         width: 210px;
         height: 210px;

@@ -40,7 +40,7 @@ const initialState: Category[] = [
   },
   {
     id: 5,
-    name: 'Кредиты',
+    name: 'Кредит',
     color: '#3ADB7D',
     income: false,
   },

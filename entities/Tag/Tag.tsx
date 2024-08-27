@@ -2,7 +2,7 @@ import styles from './Tag.module.scss'
 
 type Props = {
   children: React.ReactNode
-  color: string
+  color: string | undefined
 }
 
 const Tag = ({ children, color }: Props) => {
