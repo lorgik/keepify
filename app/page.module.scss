@@ -118,7 +118,6 @@
   .card {
     --color-white: #ffffff;
     --color-bledny-blue: #dae7fa;
-    --color-bledny-orange: #ffeee4;
 
     position: relative;
     display: block;
@@ -231,6 +230,8 @@
 
       .info {
         .title {
+          --color-bledny-orange: #ffeee4;
+
           color: var(--color-bledny-orange);
         }
       }
@@ -411,6 +412,7 @@
     }
 
     &.perDay {
+      --color-bledny-blue: #dae7fa;
       grid-area: B;
 
       background: radial-gradient(81.67% 81.67% at 40.77% 96.25%, rgba(140, 0, 255, 0.7) 0%, rgba(0, 122, 255, 0) 100%),
@@ -436,6 +438,7 @@
     }
 
     &.dynamic {
+      --color-bledny-orange: #ffeee4;
       grid-area: C;
       background: radial-gradient(84% 84% at 75% 50%, rgba(240, 96, 0, 0.7) 0%, rgba(255, 132, 0, 0) 100%), #ff8400;
       box-shadow: 0px 12px 120px rgba(255, 132, 0, 0.12);
@@ -475,6 +478,7 @@
           }
 
           &:last-of-type {
+            --color-white: #ffffff;
             height: 41%;
             background-color: var(--color-white);
           }
@@ -522,5 +526,107 @@
     &:first-of-type {
       flex-grow: 1;
     }
+  }
+}
+
+html[data-theme='dark'] {
+  .bg {
+    background: radial-gradient(57.12% 57.12% at 50% 50%, #7b00ff 0%, #061d37 100%);
+
+    .circle1 {
+      background: radial-gradient(
+            118.81% 118.81% at 8.48% 84.53%,
+            rgba(140, 0, 255, 0) 0%,
+            rgba(140, 0, 255, 0.732414) 51.92%,
+            #ff2f00 78.38%,
+            #ffae00 100%
+          )
+          /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+        #061d37;
+    }
+
+    .circle2 {
+      background: radial-gradient(
+            108.51% 108.51% at 41.82% 97.49%,
+            rgba(140, 0, 255, 0) 0%,
+            rgba(140, 0, 255, 0.732414) 51.92%,
+            #ff2f00 78.38%,
+            #ffae00 100%
+          )
+          /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+        #061d37;
+    }
+  }
+
+  .card.card1 {
+    background: radial-gradient(93% 93% at 67.83% 64.67%, rgba(140, 0, 255, 0.7) 0%, rgba(6, 29, 55, 0) 100%), #061d37;
+
+    .circle1 {
+      background: radial-gradient(
+          100% 100% at 41.47% 100%,
+          rgba(140, 0, 255, 0) 0%,
+          rgba(140, 0, 255, 0.732414) 51.92%,
+          #ff2f00 85.96%,
+          #f87209 100%
+        ),
+        #061d37;
+    }
+
+    .circle2 {
+      background: radial-gradient(
+            70.56% 70.56% at 14.72% 84.26%,
+            rgba(140, 0, 255, 0) 0%,
+            rgba(140, 0, 255, 0.732414) 69.65%,
+            #c82050 100%
+          )
+          /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+        #061d37;
+    }
+
+    .circle3 {
+      background: radial-gradient(
+            70.3% 70.3% at 82.23% 11.17%,
+            rgba(140, 0, 255, 0) 0%,
+            rgba(140, 0, 255, 0.732414) 51.92%,
+            #ee2b1a 78.38%,
+            #ff7a01 100%
+          )
+          /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+        #061d37;
+    }
+  }
+
+  .card.card2 {
+    background: radial-gradient(93% 93% at 67.83% 64.67%, rgba(125, 50, 0, 0.7) 0%, rgba(89, 46, 0, 0) 100%), #592e00;
+
+    .circle1 {
+      background: radial-gradient(100% 100% at 50% 0%, #fe6531 0%, #e64415 37.5%, #5e0031 100%), #f06000;
+    }
+
+    .circle2 {
+      background: radial-gradient(
+            71.32% 71.32% at 84.56% 12.5%,
+            #f16d3c 1.07%,
+            rgba(214, 70, 33, 0.8) 35.72%,
+            rgba(50, 1, 69, 0.75) 76.03%
+          )
+          /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+        #3a1700;
+    }
+
+    .circle3 {
+      background: radial-gradient(71.46% 71.46% at 14.16% 85.39%, #f5af80 0%, #cc4a2d 37.99%, #390047 100%)
+          /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+        #3a1700;
+    }
+  }
+
+  .sign.perDay {
+    background: radial-gradient(81.67% 81.67% at 40.77% 96.25%, rgba(123, 0, 255, 0.7) 0%, rgba(6, 29, 55, 0) 100%),
+      radial-gradient(130.38% 153.02% at 88.46% 60%, rgba(123, 0, 255, 0.7) 0%, rgba(6, 29, 55, 0) 100%), #061d37;
+  }
+
+  .sign.dynamic {
+    background: radial-gradient(84% 84% at 75% 50%, rgba(125, 50, 0, 0.7) 0%, rgba(89, 46, 0, 0) 100%), #592e00;
   }
 }

@@ -11,7 +11,7 @@ function Settings() {
   const [isShowBanner, setIsShowBanner] = useState(true)
   const { setIsPopupOpen } = useContext(WrapperContext)
 
-  const { setTheme, theme } = useTheme()
+  const { theme, setTheme } = useTheme()
   const [darkMode, setDarkMode] = useState(theme === 'dark')
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function Settings() {
   }, [])
 
   function toggleDarkMode() {
-    if (darkMode === false) {
+    if (theme === 'light') {
       setTheme('dark')
     } else {
       setTheme('light')

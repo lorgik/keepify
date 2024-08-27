@@ -55,6 +55,7 @@
       border-radius: 6px;
 
       .tab {
+        --color-white: #ffffff;
         padding: 6px 17.5px;
         transition: all 0.1s ease;
 
@@ -108,6 +109,10 @@
         &:active {
           background-color: var(--bg-color);
         }
+
+        svg path {
+          fill: var(--color-dark);
+        }
       }
     }
   }
@@ -148,6 +153,8 @@
     }
 
     &.add {
+      --color-white: #ffffff;
+      --color-bledny-blue: #dae7fa;
       background-color: var(--color-orange);
       color: var(--color-white);
       justify-content: center;
@@ -265,6 +272,7 @@
   padding-bottom: 8px;
 
   .btn {
+    --color-white: #ffffff;
     margin-top: 10px;
     margin-bottom: 8px;
     display: flex;

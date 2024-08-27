@@ -19,6 +19,17 @@ const ThemeContext = createContext<
 
 const StorageKey = 'features-color-theme'
 
+const getTheme = (): Themes => {
+  let theme = localStorage.getItem(StorageKey)
+
+  if (!theme) {
+    localStorage.setItem(StorageKey, 'light')
+    theme = 'light'
+  }
+
+  return theme as Themes
+}
+
 export const useTheme = () => {
   const context = useContext(ThemeContext)
 
@@ -30,21 +41,10 @@ export const useTheme = () => {
 }
 
 const Theme = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useState<Themes>('light')
-
-  useEffect(() => {
-    const theme = localStorage.getItem(StorageKey)
-
-    if (!theme) {
-      localStorage.setItem(StorageKey, 'light')
-      setTheme('light')
-    }
-  }, [])
+  const [theme, setTheme] = useState<Themes>(getTheme)
 
   useEffect(() => {
     localStorage.setItem(StorageKey, theme)
-    console.log(theme)
-
     document.documentElement.setAttribute('data-theme', theme)
   }, [theme])
 

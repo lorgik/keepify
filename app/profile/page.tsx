@@ -161,7 +161,7 @@ function Profile() {
       <div className={styles.content}>
         {isShowBanner && (
           <div className={styles.banner}>
-            <div className={styles.bg}>
+            <div className={styles.back}>
               <Image
                 className={styles.coin}
                 src={'/keepy-coin-bg.png'}
