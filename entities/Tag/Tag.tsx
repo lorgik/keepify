@@ -7,7 +7,7 @@ type Props = {
 
 const Tag = ({ children, color }: Props) => {
   return (
-    <h6 className={styles.tag} style={{ backgroundColor: color }}>
+    <h6 className={styles.tag} style={{ backgroundColor: color, color: '#ffffff' }}>
       {children}
     </h6>
   )

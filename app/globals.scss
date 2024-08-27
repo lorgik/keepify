@@ -13,6 +13,18 @@
   --color-red: #ea2124;
   --color-bledny-red: #ffe7e8;
 
+  // [data-theme='light'] {
+  //   --color-dark: var(--bg-color);
+  //   --bg-color: #1d1d25;
+  //   --color-white: #343440;
+  // }
+
+  // @media (prefers-color-scheme: dark) {
+  //   --color-dark: var(--bg-color);
+  //   --bg-color: #1d1d25;
+  //   --color-white: #343440;
+  // }
+
   --spacing-bottom: 116px;
 }
 
@@ -30,6 +42,15 @@ body {
 
 html {
   font-size: 10px;
+
+  &[data-theme='dark'] {
+    --color-dark: #efeff4;
+    --bg-color: #1d1d25;
+    --color-white: #343440;
+    --color-bledny-blue: #00254d;
+    --color-bledny-orange: #4d2800;
+    --color-bledny-red: #460a0b;
+  }
 }
 
 body {
@@ -38,6 +59,8 @@ body {
   color: var(--color-dark);
   background-color: var(--bg-color);
   // background-color: var(--color-white);
+
+  transition: color 0.15s ease, background-color 0.15s ease;
 
   &.hidden {
     overflow-y: hidden;

@@ -10,6 +10,9 @@
   border-radius: 20px;
   overflow: hidden;
 
+  --color-white: #ffffff;
+  --color-bledny-blue: #dae7fa;
+
   > *:not(.bg) {
     position: relative;
   }
@@ -39,6 +42,7 @@
 
   .title {
     text-align: left;
+    color: var(--color-white);
     max-width: 65%;
   }
 
@@ -101,6 +105,23 @@
         display: flex;
         align-items: center;
         gap: 10px;
+
+        .icon {
+          padding: 5px;
+          border-radius: 10px;
+
+          &.blue {
+            background-color: var(--color-bledny-blue);
+          }
+
+          &.orange {
+            background-color: var(--color-bledny-orange);
+          }
+
+          &.red {
+            background-color: var(--color-bledny-red);
+          }
+        }
       }
 
       .arrow {

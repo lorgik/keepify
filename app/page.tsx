@@ -241,7 +241,7 @@ const Home = () => {
             <div className={styles.top}>
               <h5 className={styles.title}>Расходы:</h5>
               <h3 className={styles.check}>
-                <span className={styles.value}>{formatNumber(getExpensesValue())} </span>
+                <span className={styles.value}>{formatNumber(Math.round(getExpensesValue()))} </span>
                 <span className={styles.currency}>₽</span>
               </h3>
             </div>
@@ -287,7 +287,7 @@ const Home = () => {
             <div className={styles.top}>
               <h5 className={styles.title}>Доходы:</h5>
               <h3 className={styles.check}>
-                <span className={styles.value}>{formatNumber(getIncomeValue())} </span>
+                <span className={styles.value}>{formatNumber(Math.round(getIncomeValue()))} </span>
                 <span className={styles.currency}>₽</span>
               </h3>
             </div>
