@@ -43,6 +43,8 @@ const Theme = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     localStorage.setItem(StorageKey, theme)
+    console.log(theme)
+
     document.documentElement.setAttribute('data-theme', theme)
   }, [theme])
 

@@ -125,6 +125,7 @@
   gap: 4px;
 
   .feature {
+    --color-white: #ffffff;
     border-radius: 20px;
     padding: 7px 8px;
     color: var(--color-white);
@@ -156,6 +157,9 @@
 }
 
 .banner {
+  --color-white: #ffffff;
+  --color-bledny-orange: #ffeee4;
+
   position: relative;
   margin: 0 10px;
   padding: 30px 15px 20px 15px;
@@ -250,11 +254,16 @@
           font-weight: 700;
         }
       }
+
+      > svg path {
+        fill: var(--color-bledny-grey);
+      }
     }
   }
 }
 
 .reward {
+  --color-white: #ffffff;
   margin-top: 4px;
   display: flex;
   align-items: center;
