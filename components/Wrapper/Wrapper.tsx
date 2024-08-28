@@ -16,6 +16,12 @@ type Props = {
   children: React.ReactNode
 }
 
+declare global {
+  interface Window {
+    Telegram: any
+  }
+}
+
 export const WrapperContext = createContext<any>(null)
 
 const Wrapper = ({ children }: Props) => {
@@ -100,6 +106,34 @@ const Wrapper = ({ children }: Props) => {
     }
   }
 
+  useEffect(() => {
+    if (window.Telegram) {
+      const tg = window.Telegram.WebApp
+      tg.expand()
+      tg.disableVerticalSwipes()
+
+      if (document.documentElement.getAttribute('data-theme') === 'dark') {
+        tg.setBackgroundColor('#1D1D25')
+        tg.setHeaderColor('#1D1D25')
+      } else {
+        tg.setBackgroundColor('#efeff4')
+        tg.setHeaderColor('#efeff4')
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    const tg = window.Telegram.WebApp
+
+    if (document.documentElement.getAttribute('data-theme') === 'dark') {
+      tg.setBackgroundColor('#1D1D25')
+      tg.setHeaderColor('#1D1D25')
+    } else {
+      tg.setBackgroundColor('#efeff4')
+      tg.setHeaderColor('#efeff4')
+    }
+  }, [theme])
+
   // if (isLoading) {
   //   return <Loader />
   // }
@@ -110,17 +144,6 @@ const Wrapper = ({ children }: Props) => {
 
   return (
     <>
-      <Script id="tg-script" strategy="beforeInteractive">
-        Telegram.WebApp.expand() Telegram.WebApp.disableVerticalSwipes()
-        {/* if (document.documentElement.getAttribute('data-theme') === 'dark') {
-    Telegram.WebApp.setBackgroundColor('#1D1D25')
-    Telegram.WebApp.setHeaderColor('#1D1D25')
-  } else {
-    Telegram.WebApp.setBackgroundColor('#efeff4')
-    Telegram.WebApp.setHeaderColor('#efeff4')
-  } */}
-      </Script>
-
       <div className={styles.wrapper}>
         {isPopupOpen && (
           <div className={`${styles.popup} ${isPopupClosing && styles.closing}`}>
