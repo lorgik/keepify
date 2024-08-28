@@ -11,6 +11,7 @@ import { useOutsideClick } from '@/hooks/useOutsideClick'
 import Loader from '../Loader/Loader'
 import { useTheme } from '@/hooks/useTheme'
 import Script from 'next/script'
+import { usePopupOpen } from '@/hooks/useScrollBlock'
 
 type Props = {
   children: React.ReactNode
@@ -26,7 +27,7 @@ export const WrapperContext = createContext<any>(null)
 
 const Wrapper = ({ children }: Props) => {
   const [isLoading, setIsLoading] = useState(true)
-  const [isPopupOpen, setIsPopupOpen] = useState(false)
+  const { isPopupOpen, setIsPopupOpen } = usePopupOpen(false)
   const [isPopupClosing, setIsPopupClosing] = useState(false)
   const [isCategorySelect, setIsCategorySelect] = useState(false)
   const [isCategorySelectClosing, setIsCategorySelectClosing] = useState(false)
@@ -51,14 +52,6 @@ const Wrapper = ({ children }: Props) => {
     }, 3000)
     setIsMounted(true)
   }, [])
-
-  useEffect(() => {
-    if (isPopupOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'auto'
-    }
-  }, [isPopupOpen])
 
   function closePopup() {
     if (isCategorySelect) {
@@ -88,21 +81,33 @@ const Wrapper = ({ children }: Props) => {
     }, 150)
   }
 
-  function calculate(action: any) {
-    if (typeof action === 'number') {
-      if (value === '0') {
-        setValue(String(action))
-      } else {
-        setValue((prev) => prev + action)
-      }
+  function getNumberDecimalPlaces(num: any): number {
+    if (num.includes(',')) {
+      return num.split(',').pop().length
     }
 
+    return 0
+  }
+
+  function calculate(action: number | string) {
     if (action === ',' && value.indexOf(',') === -1) {
       setValue((prev) => prev + ',')
     }
 
     if (action === 'erase') {
       setValue((prev) => prev.slice(0, -1))
+    }
+
+    if (getNumberDecimalPlaces(value) > 1) {
+      return
+    }
+
+    if (typeof action === 'number') {
+      if (value === '0') {
+        setValue(String(action))
+      } else {
+        setValue((prev) => prev + action)
+      }
     }
   }
 
@@ -241,7 +246,10 @@ const Wrapper = ({ children }: Props) => {
                       dispatch(
                         addOperation({
                           category: currentCategory,
-                          value: currentOperation === 'Расход' ? -Number(value) : Number(value),
+                          value:
+                            currentOperation === 'Расход'
+                              ? -Number(value.replace(',', '.'))
+                              : Number(value.replace(',', '.')),
                         })
                       )
                       togglePopup()

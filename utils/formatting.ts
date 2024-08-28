@@ -9,5 +9,5 @@ export function formatNumberWithSign(num: number) {
     return `- ${formatNumber(Math.abs(num))}`
   }
 
-  return formatNumber(num)
+  return formatNumber(Number(num))
 }

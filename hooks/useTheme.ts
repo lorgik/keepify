@@ -11,9 +11,6 @@ export const useTheme = () => {
     const isDarkTheme = window?.matchMedia('(prefers-color-scheme: dark)').matches
     const defaultTheme = isDarkTheme ? 'dark' : 'light'
 
-    console.log(isDarkTheme)
-    console.log(theme)
-
     const localTheme = localStorage.getItem(themeKey)
 
     if (localTheme) {
