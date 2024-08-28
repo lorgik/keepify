@@ -227,7 +227,7 @@ const Wrapper = ({ children }: Props) => {
         </div>
       )}
 
-      <WrapperContext.Provider value={{ setIsPopupOpen, expensesCategories, incomeCategories, setTheme, theme }}>
+      <WrapperContext.Provider value={{ setIsPopupOpen, expensesCategories, incomeCategories, theme, setTheme }}>
         <div className={styles.content}>{children}</div>
       </WrapperContext.Provider>
 

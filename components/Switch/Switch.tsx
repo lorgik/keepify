@@ -9,8 +9,8 @@ type Props = {
 const Switch = ({ isChecked, handleToggle }: Props) => {
   const [checked, setChecked] = useState(isChecked)
 
-  function handleSwitch() {
-    setChecked((prev) => !prev)
+  function handleSwitch(e: React.ChangeEvent<HTMLInputElement>) {
+    setChecked(e.target.checked)
     handleToggle()
   }
 

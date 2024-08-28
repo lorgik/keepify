@@ -1,3 +1,5 @@
+'use client'
+
 import { useLayoutEffect, useState } from 'react'
 
 const isDarkTheme = window?.matchMedia('(prefers-color-scheme: dark)').matches
@@ -15,13 +17,13 @@ if (typeof window !== 'undefined') {
 export const useTheme = () => {
   const [theme, setTheme] = useState(getTheme || defaultTheme)
 
-  // useLayoutEffect(() => {
-  //   const theme = localStorage.getItem(themeKey)
+  useLayoutEffect(() => {
+    const theme = localStorage.getItem(themeKey)
 
-  //   if (theme) {
-  //     setTheme(theme)
-  //   }
-  // }, [])
+    if (theme) {
+      setTheme(theme)
+    }
+  }, [])
 
   useLayoutEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)

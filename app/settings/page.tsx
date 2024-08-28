@@ -8,7 +8,7 @@ import Switch from '@/components/Switch/Switch'
 
 function Settings() {
   const [isShowBanner, setIsShowBanner] = useState(true)
-  const { setIsPopupOpen, setTheme, theme } = useContext(WrapperContext)
+  const { setIsPopupOpen, theme, setTheme } = useContext(WrapperContext)
 
   useEffect(() => {
     setIsPopupOpen(false)
