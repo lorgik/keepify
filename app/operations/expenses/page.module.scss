@@ -39,11 +39,35 @@
   padding-top: 30px;
 
   &.expenses {
-    // max-height: 563px;
+    position: relative;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    .shape {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0px;
+      height: 139px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 80%);
+
+      cursor: pointer;
+    }
+
+    &.bounded {
+      max-height: 563px;
+
+      .shape {
+        display: flex;
+      }
+    }
   }
 
   .name {
@@ -137,5 +161,39 @@
 
   .percent {
     font-weight: 700;
+  }
+}
+
+.sign.dynamic {
+  .columns {
+    margin: 0 30px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 2px;
+    height: 289px;
+
+    .column {
+      background-color: var(--color-orange);
+      width: 8px;
+      border-radius: 17px;
+    }
+  }
+
+  .bottom {
+    margin-top: 30px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+
+    h5 {
+      font-size: 1rem;
+      color: var(--color-grey);
+    }
+
+    .check {
+      margin-top: 10px;
+    }
   }
 }
