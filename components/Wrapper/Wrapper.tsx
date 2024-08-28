@@ -27,6 +27,7 @@ const Wrapper = ({ children }: Props) => {
   const [currentOperation, setCurrentOperation] = useState('Расход')
   const [currentCategory, setCurrentCategory] = useState('')
   const { theme, setTheme } = useTheme()
+  const [isMounted, setIsMounted] = useState(false)
 
   const categories = useSelector((state: RootState) => state.categories)
   const dispatch = useDispatch()
@@ -41,6 +42,7 @@ const Wrapper = ({ children }: Props) => {
     setTimeout(() => {
       setIsLoading(false)
     }, 3000)
+    setIsMounted(true)
   }, [])
 
   useEffect(() => {
@@ -100,6 +102,10 @@ const Wrapper = ({ children }: Props) => {
   // if (isLoading) {
   //   return <Loader />
   // }
+
+  if (!isMounted) {
+    return
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -169,8 +175,8 @@ const Wrapper = ({ children }: Props) => {
               <button className={styles.btn} onClick={() => calculate('erase')}>
                 <svg width="22" height="15" viewBox="0 0 22 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M7.65022 0C7.04153 0 6.45777 0.237052 6.02736 0.659009L0.67221 5.90901C-0.224069 6.78769 -0.22407 8.21231 0.672208 9.09099L6.02736 14.341C6.45777 14.7629 7.04153 15 7.65022 15H19.7049C20.9725 15 22 13.9926 22 12.75V2.25C22 1.00736 20.9725 0 19.7049 0H7.65022ZM16.2581 4.69373C16.5216 4.43541 16.9488 4.43544 17.2123 4.69373C17.4757 4.95202 17.4758 5.37083 17.2123 5.62915L15.3039 7.5L17.2123 9.37085C17.4757 9.62914 17.4758 10.0479 17.2123 10.3063C16.9488 10.5646 16.5216 10.5646 16.2581 10.3063L14.3498 8.43542L12.4415 10.3063C12.178 10.5646 11.7508 10.5646 11.4873 10.3063C11.2238 10.048 11.2238 9.62917 11.4873 9.37085L13.3956 7.5L11.4873 5.62915C11.2238 5.37086 11.2238 4.95205 11.4873 4.69373C11.7508 4.43541 12.178 4.43544 12.4415 4.69373L14.3498 6.56458L16.2581 4.69373Z"
                     fill="#3D3D51"
                   />
@@ -214,8 +220,8 @@ const Wrapper = ({ children }: Props) => {
               >
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M11 22C17.0752 22 22 17.0752 22 11C22 4.92485 17.0752 0 11 0C4.92485 0 0 4.92485 0 11C0 17.0752 4.92485 22 11 22ZM17.0186 8.21858C17.3049 7.93212 17.3049 7.46788 17.0186 7.18142C16.7321 6.89505 16.2679 6.89505 15.9814 7.18142L9.9 13.2629L6.75191 10.1148C6.46545 9.82839 6.00121 9.82839 5.71475 10.1148C5.42839 10.4012 5.42839 10.8655 5.71475 11.1519L9.38142 14.8186C9.66788 15.1049 10.1321 15.1049 10.4186 14.8186L17.0186 8.21858Z"
                     fill="#FFEEE4"
                   />
@@ -262,8 +268,8 @@ const Wrapper = ({ children }: Props) => {
                     <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <rect y="0.5" width="28" height="28" rx="14" fill="#35CC5A" />
                       <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M19.6827 10.8291C20.1058 11.2678 20.1058 11.9792 19.6827 12.418L13.171 19.1709C12.9678 19.3816 12.6923 19.5 12.4049 19.5C12.1176 19.5 11.842 19.3816 11.6389 19.1709L8.31732 15.7263C7.89423 15.2875 7.89423 14.5762 8.31732 14.1374C8.74041 13.6986 9.42638 13.6986 9.84947 14.1374L12.4049 16.7875L18.1505 10.8291C18.5736 10.3903 19.2596 10.3903 19.6827 10.8291Z"
                         fill="#DAFFE3"
                       />
@@ -275,8 +281,8 @@ const Wrapper = ({ children }: Props) => {
             <button className={styles.btn}>
               <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM11 5.78952C11.4111 5.78952 11.7444 6.12278 11.7444 6.53388V10.2556H15.4662C15.8773 10.2556 16.2105 10.5889 16.2105 11C16.2105 11.4111 15.8773 11.7443 15.4662 11.7443H11.7444V15.4662C11.7444 15.8773 11.4111 16.2105 11 16.2105C10.5889 16.2105 10.2557 15.8773 10.2557 15.4662V11.7443H6.53388C6.12278 11.7443 5.78952 11.4111 5.78952 11C5.78952 10.5889 6.12278 10.2556 6.53388 10.2556H10.2557L10.2557 6.53388C10.2557 6.12278 10.5889 5.78952 11 5.78952Z"
                   fill="#DAE7FA"
                 />
@@ -316,8 +322,8 @@ const Wrapper = ({ children }: Props) => {
                     <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <rect y="0.5" width="28" height="28" rx="14" fill="#35CC5A" />
                       <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M19.6827 10.8291C20.1058 11.2678 20.1058 11.9792 19.6827 12.418L13.171 19.1709C12.9678 19.3816 12.6923 19.5 12.4049 19.5C12.1176 19.5 11.842 19.3816 11.6389 19.1709L8.31732 15.7263C7.89423 15.2875 7.89423 14.5762 8.31732 14.1374C8.74041 13.6986 9.42638 13.6986 9.84947 14.1374L12.4049 16.7875L18.1505 10.8291C18.5736 10.3903 19.2596 10.3903 19.6827 10.8291Z"
                         fill="#DAFFE3"
                       />
@@ -329,8 +335,8 @@ const Wrapper = ({ children }: Props) => {
             <button className={styles.btn}>
               <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM11 5.78952C11.4111 5.78952 11.7444 6.12278 11.7444 6.53388V10.2556H15.4662C15.8773 10.2556 16.2105 10.5889 16.2105 11C16.2105 11.4111 15.8773 11.7443 15.4662 11.7443H11.7444V15.4662C11.7444 15.8773 11.4111 16.2105 11 16.2105C10.5889 16.2105 10.2557 15.8773 10.2557 15.4662V11.7443H6.53388C6.12278 11.7443 5.78952 11.4111 5.78952 11C5.78952 10.5889 6.12278 10.2556 6.53388 10.2556H10.2557L10.2557 6.53388C10.2557 6.12278 10.5889 5.78952 11 5.78952Z"
                   fill="#DAE7FA"
                 />
