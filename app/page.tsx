@@ -26,7 +26,6 @@ const Home = () => {
 
   useEffect(() => {
     setConicGradient(getConicGradient())
-    console.log(getConicGradient())
   }, [operations])
 
   const expensesOperations = operations.filter((o) => o.value < 0)
@@ -174,7 +173,7 @@ const Home = () => {
                       </defs>
                     </svg>
                   </span>
-                  <span className={styles.value}>3 400</span>
+                  <span className={styles.value}>{formatNumber(3400)}</span>
                 </h2>
               </div>
               <div className={styles.extra}>
@@ -303,7 +302,7 @@ const Home = () => {
                 <div
                   className={styles.scale}
                   style={{
-                    width: Math.round((getIncomeValue() / c.value) * 100) + '%',
+                    width: Math.round((c.value / getIncomeValue()) * 100) + '%',
                     backgroundColor: getColor(categories, c.name),
                     zIndex: incomeCategories.length - index,
                   }}
