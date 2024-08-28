@@ -62,7 +62,7 @@ body {
   background-color: var(--bg-color);
   // background-color: var(--color-white);
 
-  // transition: color 0.15s ease, background-color 0.15s ease;
+  transition: color 0.3s ease, background-color 0.3s ease;
 
   &.hidden {
     overflow-y: hidden;

@@ -134,10 +134,6 @@ const Wrapper = ({ children }: Props) => {
     }
   }, [theme])
 
-  // if (isLoading) {
-  //   return <Loader />
-  // }
-
   if (!isMounted) {
     return
   }
