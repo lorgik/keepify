@@ -11,6 +11,7 @@ import { RootState } from '@/lib/store'
 import { getColor } from '@/utils/coloring'
 import { Operation } from '@/lib/features/operations/operationsSlice'
 import { formatNumber } from '@/utils/formatting'
+import Link from 'next/link'
 
 const Home = () => {
   const [activeCard, setActiveCard] = useState(0)
@@ -115,10 +116,6 @@ const Home = () => {
     return `conic-gradient(${getText()}, transparent 50% 100%)`
   }
 
-  function getRandomProcent() {
-    return Math.round(Math.random() * 100)
-  }
-
   return (
     <>
       <div className={styles.bg}>
@@ -138,7 +135,9 @@ const Home = () => {
                 <h5 className={styles.title}>Баланс</h5>
                 <h2 className={styles.check}>
                   <span className={styles.currency}>₽</span>
-                  <span className={styles.value}>{formatNumber(getIncomeValue() - getExpensesValue())}</span>
+                  <span className={styles.value}>
+                    {formatNumber(Math.round(getIncomeValue() - getExpensesValue()))}
+                  </span>
                 </h2>
               </div>
               <div className={styles.extra}>
@@ -236,7 +235,7 @@ const Home = () => {
           </button>
         </div>
         <div className={styles.signs}>
-          <div className={`${styles.sign} ${styles.expenses} ${styles.big}`}>
+          <Link href={'/operations/expenses'} className={`${styles.sign} ${styles.expenses} ${styles.big}`}>
             <div className={styles.top}>
               <h5 className={styles.title}>Расходы:</h5>
               <h3 className={styles.check}>
@@ -254,10 +253,10 @@ const Home = () => {
             <div
               className={styles.pie}
               style={{
-                background: conicGradient && conicGradient,
+                background: conicGradient,
               }}
             ></div>
-          </div>
+          </Link>
           <div className={`${styles.sign} ${styles.perDay}`}>
             <Image src="/analytics-sign-blue-bg.png" alt="coins" width={143} height={88} priority />
             <div className={styles.top}>

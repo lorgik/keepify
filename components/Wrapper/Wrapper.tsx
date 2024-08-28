@@ -53,6 +53,8 @@ const Wrapper = ({ children }: Props) => {
     setIsMounted(true)
   }, [])
 
+  useEffect
+
   function closePopup() {
     if (isCategorySelect) {
       setIsPopupOpen(false)
@@ -99,6 +101,10 @@ const Wrapper = ({ children }: Props) => {
     }
 
     if (getNumberDecimalPlaces(value) > 1) {
+      return
+    }
+
+    if (value.length > 11) {
       return
     }
 

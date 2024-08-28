@@ -134,7 +134,7 @@ function Operations() {
                   </div>
                   <h5 className={styles.check}>
                     <span className={styles.value}>{formatNumberWithSign(o.value)}</span>
-                    <span className={styles.currenct}>₽</span>
+                    <span className={styles.currency}>₽</span>
                   </h5>
                 </div>
               ))}
