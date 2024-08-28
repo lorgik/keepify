@@ -317,7 +317,7 @@ function Profile() {
               </svg>
               <h4>+ {formatNumber(2500)}</h4>
             </span>
-            <button className={styles.btn}>
+            <button className={styles.btn} onClick={closeTask}>
               <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M18.847 3.00256C18.847 3.00256 20.7085 2.27663 20.5528 4.03948C20.5015 4.76542 20.0363 7.30644 19.674 10.0545L18.433 18.1955C18.433 18.1955 18.3295 19.3881 17.3985 19.5956C16.4679 19.8026 15.0716 18.8697 14.8129 18.6622C14.6059 18.5065 10.9345 16.1729 9.64171 15.0325C9.27946 14.7211 8.86546 14.0991 9.69346 13.3732L15.1234 8.18762C15.7439 7.56471 16.3644 6.11283 13.7788 7.87617L6.53863 12.802C6.53863 12.802 5.7111 13.3209 4.16004 12.8542L0.798209 11.8168C0.798209 11.8168 -0.442832 11.0391 1.67748 10.2615C6.84913 7.82442 13.2105 5.3361 18.847 3.00256Z"
@@ -326,7 +326,7 @@ function Profile() {
               </svg>
               <h4>Подписаться</h4>
             </button>
-            <button className={styles.btn}>
+            <button className={styles.btn} onClick={closeTask}>
               <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   fillRule="evenodd"

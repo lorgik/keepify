@@ -27,6 +27,16 @@ function Expenses() {
     setConicGradient(getConicGradient())
   }, [operations])
 
+  function getRandomPrecent() {
+    return Math.round(Math.random() * 100)
+  }
+
+  const days = Array(new Date(new Date().getFullYear(), new Date().getMonth(), 0).getDate()).fill(getRandomPrecent())
+
+  // for (let i = 0; i < days.length; i++) {
+  //   days.push(getRandomPrecent())
+  // }
+
   const expensesOperations = operations.filter((o) => o.value < 0)
 
   const expensesCategories = expensesOperations.reduce((acc: any, curr: Operation) => {
@@ -152,6 +162,16 @@ function Expenses() {
                 <h5 className={styles.percent}>{Math.abs(Math.round((c.value / getExpensesValue()) * 100))}%</h5>
               </div>
             ))}
+          </div>
+        </div>
+        <div className={`${styles.sign} ${styles.dynamic}`}>
+          <h5 className={styles.name}>Динамика расходов</h5>
+          <div className={styles.columns}>
+            {/* {days.map((d, index) => (
+              <div className={styles.column} key={index}>
+                {d}
+              </div>
+            ))} */}
           </div>
         </div>
       </div>
