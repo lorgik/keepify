@@ -5,26 +5,21 @@ import { useContext, useEffect, useState } from 'react'
 import styles from './page.module.scss'
 import Image from 'next/image'
 import Switch from '@/components/Switch/Switch'
-import { useTheme } from '@/components/Theme/Theme'
 
 function Settings() {
   const [isShowBanner, setIsShowBanner] = useState(true)
-  const { setIsPopupOpen } = useContext(WrapperContext)
-
-  const { theme, setTheme } = useTheme()
-  const [darkMode, setDarkMode] = useState(theme === 'dark')
+  const { setIsPopupOpen, setTheme, theme } = useContext(WrapperContext)
 
   useEffect(() => {
     setIsPopupOpen(false)
   }, [])
 
-  function toggleDarkMode() {
+  function switchTheme() {
     if (theme === 'light') {
       setTheme('dark')
     } else {
       setTheme('light')
     }
-    setDarkMode((prev) => !prev)
   }
 
   return (
@@ -218,7 +213,7 @@ function Settings() {
               </svg>
               <h5 className={styles.name}>Внешний вид</h5>
             </div>
-            <Switch isChecked={darkMode} handleToggle={toggleDarkMode} />
+            <Switch isChecked={theme === 'dark'} handleToggle={switchTheme} />
 
             {/* <div className={styles.arrow}>
               <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
