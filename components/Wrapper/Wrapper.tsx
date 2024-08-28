@@ -110,10 +110,15 @@ const Wrapper = ({ children }: Props) => {
 
   return (
     <>
-      <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive"></Script>
       <Script id="tg-script" strategy="beforeInteractive">
-        Telegram.WebApp.expand(); Telegram.WebApp.setBackgroundColor(&quot;#efeff4&quot;);
-        Telegram.WebApp.setHeaderColor(&quot;#efeff4&quot;); Telegram.WebApp.disableVerticalSwipes();
+        Telegram.WebApp.expand() Telegram.WebApp.disableVerticalSwipes()
+        {/* if (document.documentElement.getAttribute('data-theme') === 'dark') {
+    Telegram.WebApp.setBackgroundColor('#1D1D25')
+    Telegram.WebApp.setHeaderColor('#1D1D25')
+  } else {
+    Telegram.WebApp.setBackgroundColor('#efeff4')
+    Telegram.WebApp.setHeaderColor('#efeff4')
+  } */}
       </Script>
 
       <div className={styles.wrapper}>

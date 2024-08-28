@@ -159,7 +159,7 @@ const Home = () => {
                 <h2 className={styles.check}>
                   <span className={styles.currency}>
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <g clip-path="url(#clip0_202_2097)">
+                      <g clipPath="url(#clip0_202_2097)">
                         <path
                           fillRule="evenodd"
                           clipRule="evenodd"
@@ -179,7 +179,7 @@ const Home = () => {
               </div>
               <div className={styles.extra}>
                 <svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clip-path="url(#clip0_202_2091)">
+                  <g clipPath="url(#clip0_202_2091)">
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
