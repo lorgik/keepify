@@ -76,7 +76,7 @@ function Expenses() {
         {
           name: curr.name,
           value: curr.value,
-          percent: Math.round(Math.abs((curr.value / maxValue) * 50)),
+          percent: Math.round(Math.abs((curr.value / maxValue) * 100)),
         },
       ]
     }, [])
