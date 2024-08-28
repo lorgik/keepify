@@ -54,6 +54,7 @@ const friends = [
 
 function Profile() {
   const [isShowBanner, setIsShowBanner] = useState(true)
+  const [isShowBannerClosing, setIsShowBannerClosing] = useState(false)
   const [isTaskOpen, setIsTaskOpen] = useState(false)
   const [isTaskOpenClosing, setIsTaskOpenClosing] = useState(false)
   const { setIsPopupOpen } = useContext(WrapperContext)
@@ -160,7 +161,7 @@ function Profile() {
 
       <div className={styles.content}>
         {isShowBanner && (
-          <div className={styles.banner}>
+          <div className={`${styles.banner} ${isShowBannerClosing && styles.closing}`}>
             <div className={styles.back}>
               <Image
                 className={styles.coin}
@@ -184,7 +185,16 @@ function Profile() {
               Обменивай свои коины на полезные материалы и скидки на курсы по финансовой грамотности от топовых
               экспертов индустрии
             </h5>
-            <button className={styles.btn} onClick={() => setIsShowBanner(false)}>
+            <button
+              className={styles.btn}
+              onClick={() => {
+                setIsShowBannerClosing(true)
+                setTimeout(() => {
+                  setIsShowBanner(false)
+                  setIsShowBannerClosing(false)
+                }, 250)
+              }}
+            >
               <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   fillRule="evenodd"

@@ -168,6 +168,13 @@
   border-radius: 20px;
   overflow: hidden;
 
+  transition: all 0.25s ease;
+
+  &.closing {
+    height: 0%;
+    opacity: 0;
+  }
+
   > *:not(.bg) {
     position: relative;
   }

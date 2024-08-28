@@ -3,18 +3,28 @@
 }
 
 .banner {
-  position: relative;
-  padding: 30px 15px 20px 15px;
-  color: var(--color-white);
-
-  border-radius: 20px;
-  overflow: hidden;
-
+  display: grid;
+  grid-template-rows: 1fr;
   --color-white: #ffffff;
   --color-bledny-blue: #dae7fa;
 
-  > *:not(.bg) {
+  transition: grid-template-rows 0.25s linear, opacity 0.25s ease;
+
+  &.closing {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+
+  .inner {
     position: relative;
+    padding: 30px 15px 20px 15px;
+    overflow: hidden;
+    border-radius: 20px;
+    color: var(--color-white);
+
+    > *:not(.bg) {
+      position: relative;
+    }
   }
 
   .bg {
