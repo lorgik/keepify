@@ -20,12 +20,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive"></Script>
-        <Script id="tg-script" strategy="beforeInteractive">
-          Telegram.WebApp.expand(); Telegram.WebApp.setBackgroundColor(&quot;#efeff4&quot;);
-          Telegram.WebApp.setHeaderColor(&quot;#efeff4&quot;); Telegram.WebApp.disableVerticalSwipes();
-        </Script>
-
         <StoreProvider>
           <Wrapper>{children}</Wrapper>
         </StoreProvider>
