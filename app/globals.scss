@@ -12,18 +12,8 @@
   --color-bledny-orange: #ffeee4;
   --color-red: #ea2124;
   --color-bledny-red: #ffe7e8;
-
-  // [data-theme='light'] {
-  //   --color-dark: var(--bg-color);
-  //   --bg-color: #1d1d25;
-  //   --color-white: #343440;
-  // }
-
-  // @media (prefers-color-scheme: dark) {
-  //   --color-dark: var(--bg-color);
-  //   --bg-color: #1d1d25;
-  //   --color-white: #343440;
-  // }
+  --color-category-border: #efeff4;
+  --color-nickname: #9797a2;
 
   --spacing-bottom: 116px;
 }
@@ -52,6 +42,8 @@ html {
     --color-bledny-red: #460a0b;
     --color-bledny-grey: #7a7a87;
     --color-bledny-green: #103d1b;
+    --color-category-border: #7a7a87;
+    --color-nickname: #7a7a87;
   }
 }
 

@@ -111,7 +111,7 @@
     }
 
     .nickname {
-      color: var(--color-grey);
+      color: var(--color-nickname);
     }
   }
 }
@@ -168,10 +168,9 @@
   border-radius: 20px;
   overflow: hidden;
 
-  transition: all 0.25s ease;
+  transition: opacity 0.25s ease;
 
   &.closing {
-    height: 0%;
     opacity: 0;
   }
 
