@@ -121,23 +121,25 @@ const Wrapper = ({ children }: Props) => {
   }
 
   useEffect(() => {
-    if (window.Telegram) {
-      const tg = window.Telegram.WebApp
-      tg.expand()
-      tg.disableVerticalSwipes()
+    const tg = window.Telegram.WebApp
+    tg.expand()
+    tg.disableVerticalSwipes()
 
-      const data = tg.initDataUnsafe.user
+    async function addData() {
+      const data = await tg.initDataUnsafe.user
       dispatch(addInfo({ firstName: data?.first_name, lastName: data?.last_name, username: data?.username }))
 
       console.log(data)
+    }
 
-      if (document.documentElement.getAttribute('data-theme') === 'dark') {
-        tg.setBackgroundColor('#1D1D25')
-        tg.setHeaderColor('#1D1D25')
-      } else {
-        tg.setBackgroundColor('#efeff4')
-        tg.setHeaderColor('#efeff4')
-      }
+    addData()
+
+    if (document.documentElement.getAttribute('data-theme') === 'dark') {
+      tg.setBackgroundColor('#1D1D25')
+      tg.setHeaderColor('#1D1D25')
+    } else {
+      tg.setBackgroundColor('#efeff4')
+      tg.setHeaderColor('#efeff4')
     }
   }, [])
 
