@@ -83,7 +83,11 @@ function Income() {
 
           <div className={styles.circles}>
             {incomeCategories.map((c: any) => (
-              <div className={styles.circle} style={{ backgroundColor: getColor(categories, c.name) }}></div>
+              <div
+                className={styles.circle}
+                style={{ backgroundColor: getColor(categories, c.name) }}
+                key={c.name}
+              ></div>
             ))}
           </div>
           <div className={styles.list}>
