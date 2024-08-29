@@ -84,10 +84,28 @@ function Income() {
           <div className={styles.circles}>
             {incomeCategories.map((c: any) => (
               <div
-                className={styles.circle}
-                style={{ backgroundColor: getColor(categories, c.name) }}
+                className={styles.category}
+                style={{
+                  backgroundColor: getColor(categories, c.name),
+                  width: `${(c.value / getIncomeValue()) * 74.838709677}%`,
+                  height: `${(c.value / getIncomeValue()) * 100}%`,
+                }}
                 key={c.name}
-              ></div>
+              >
+                <div className={styles.icon}>
+                  <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M12.3564 14H13.4127C13.9473 14 14.3864 13.5864 14.45 13.0645L15.5 2.57727H12.3182V0H11.0645V2.57727H7.90182L8.09273 4.06636C9.18091 4.36545 10.1991 4.90636 10.81 5.50455C11.7264 6.40818 12.3564 7.34364 12.3564 8.87091V14ZM1.5 13.3636V12.7273H11.0645V13.3636C11.0645 13.7073 10.7782 14 10.4091 14H2.13636C1.78636 14 1.5 13.7073 1.5 13.3636ZM11.0645 8.90909C11.0645 3.81818 1.5 3.81818 1.5 8.90909H11.0645ZM1.5 10.1818H11.0455V11.4545H1.5V10.1818Z"
+                      fill="white"
+                    />
+                  </svg>
+                </div>
+                <h4 className={styles.check}>
+                  <span className={styles.value}>{formatNumberWithSign(c.value)} </span>
+                  <span className={styles.currency}>₽</span>
+                </h4>
+                <h6 className={styles.name}>{c.name}</h6>
+              </div>
             ))}
           </div>
           <div className={styles.list}>
