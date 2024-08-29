@@ -11,7 +11,7 @@ import { useOutsideClick } from '@/hooks/useOutsideClick'
 import Loader from '../Loader/Loader'
 import { useTheme } from '@/hooks/useTheme'
 import Script from 'next/script'
-import { usePopupOpen } from '@/hooks/useScrollBlock'
+import { useScrollBlock } from '@/hooks/useScrollBlock'
 
 type Props = {
   children: React.ReactNode
@@ -27,7 +27,7 @@ export const WrapperContext = createContext<any>(null)
 
 const Wrapper = ({ children }: Props) => {
   const [isLoading, setIsLoading] = useState(true)
-  const { isPopupOpen, setIsPopupOpen } = usePopupOpen(false)
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [isPopupClosing, setIsPopupClosing] = useState(false)
   const [isCategorySelect, setIsCategorySelect] = useState(false)
   const [isCategorySelectClosing, setIsCategorySelectClosing] = useState(false)
@@ -36,6 +36,7 @@ const Wrapper = ({ children }: Props) => {
   const [currentCategory, setCurrentCategory] = useState('')
   const { theme, setTheme } = useTheme()
   const [isMounted, setIsMounted] = useState(false)
+  const { isScrollBlock, setIsScrollBlock } = useScrollBlock(false)
 
   const categories = useSelector((state: RootState) => state.categories)
   const dispatch = useDispatch()
@@ -53,11 +54,10 @@ const Wrapper = ({ children }: Props) => {
     setIsMounted(true)
   }, [])
 
-  useEffect
-
   function closePopup() {
     if (isCategorySelect) {
       setIsPopupOpen(false)
+      setIsScrollBlock(false)
     }
   }
 
@@ -67,10 +67,12 @@ const Wrapper = ({ children }: Props) => {
 
       setTimeout(() => {
         setIsPopupOpen(false)
+        setIsScrollBlock(false)
         setIsPopupClosing(false)
       }, 150)
     } else {
       setIsPopupOpen(true)
+      setIsScrollBlock(true)
     }
   }
 
@@ -122,6 +124,7 @@ const Wrapper = ({ children }: Props) => {
       const tg = window.Telegram.WebApp
       tg.expand()
       tg.disableVerticalSwipes()
+      console.log(tg.initData)
 
       if (document.documentElement.getAttribute('data-theme') === 'dark') {
         tg.setBackgroundColor('#1D1D25')

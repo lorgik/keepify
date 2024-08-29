@@ -91,7 +91,7 @@ const Home = () => {
         {
           name: curr.name,
           value: curr.value,
-          percent: Math.round(Math.abs((curr.value / maxValue) * 50)),
+          percent: Number(Math.abs((curr.value / maxValue) * 50).toFixed(1)),
         },
       ]
     }, [])
@@ -104,9 +104,9 @@ const Home = () => {
         if (index === expensesCategoriesWithPercent.length - 1) {
           text = `${getColor(categories, c.name)} ${currPercent}% 50%`
         } else {
-          text = `${getColor(categories, c.name)} ${currPercent}% ${c.percent + currPercent}%`
+          text = `${getColor(categories, c.name)} ${currPercent}% ${(c.percent + currPercent).toFixed(1)}%`
         }
-        currPercent = currPercent + c.percent
+        currPercent = Number((currPercent + c.percent).toFixed(1))
         return text
       })
 
@@ -115,6 +115,8 @@ const Home = () => {
 
     return `conic-gradient(${getText()}, transparent 50% 100%)`
   }
+
+  console.log(getConicGradient())
 
   return (
     <>

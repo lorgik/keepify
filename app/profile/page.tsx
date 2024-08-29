@@ -1,12 +1,13 @@
 'use client'
 
 import Logo from '@/components/Logo/Logo'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styles from './page.module.scss'
 import Image from 'next/image'
 import { formatNumber } from '@/utils/formatting'
 import { useOutsideClick } from '@/hooks/useOutsideClick'
-import { usePopupOpen } from '@/hooks/useScrollBlock'
+import { useScrollBlock } from '@/hooks/useScrollBlock'
+import { WrapperContext } from '@/components/Wrapper/Wrapper'
 
 const tasks = [
   {
@@ -55,21 +56,24 @@ const friends = [
 function Profile() {
   const [isShowBanner, setIsShowBanner] = useState(true)
   const [isShowBannerClosing, setIsShowBannerClosing] = useState(false)
-  const { isPopupOpen, setIsPopupOpen } = usePopupOpen(false)
+  const [isTaskOpen, setIsTaskOpen] = useState(false)
+  const { isScrollBlock, setIsScrollBlock } = useScrollBlock(false)
   const [isTaskOpenClosing, setIsTaskOpenClosing] = useState(false)
+  const { setIsPopupOpen } = useContext(WrapperContext)
 
   const taskRef = useOutsideClick(closeTask)
 
   useEffect(() => {
     setIsPopupOpen(false)
+    setIsScrollBlock(false)
   }, [])
 
   function closeTask() {
     setIsTaskOpenClosing(true)
 
     setTimeout(() => {
-      // setIsTaskOpen(false)
-      setIsPopupOpen(false)
+      setIsTaskOpen(false)
+      setIsScrollBlock(false)
       setIsTaskOpenClosing(false)
     }, 150)
   }
@@ -191,6 +195,7 @@ function Profile() {
                 setIsShowBannerClosing(true)
                 setTimeout(() => {
                   setIsShowBanner(false)
+                  setIsScrollBlock(false)
                   setIsShowBannerClosing(false)
                 }, 250)
               }}
@@ -214,7 +219,14 @@ function Profile() {
           </div>
           <div className={styles.list}>
             {tasks.map((t) => (
-              <div className={styles.task} key={t.title} onClick={() => setIsPopupOpen(true)}>
+              <div
+                className={styles.task}
+                key={t.title}
+                onClick={() => {
+                  setIsTaskOpen(true)
+                  setIsScrollBlock(true)
+                }}
+              >
                 <div className={styles.basic}>
                   <Image src={`/tasks-${t.imageName}-icon.png`} alt={'icon'} width={44} height={44} priority />
                   <h5>
@@ -294,7 +306,7 @@ function Profile() {
         </div>
       </div>
 
-      {isPopupOpen && (
+      {isTaskOpen && (
         <div className={`${styles.popup} ${isTaskOpenClosing && styles.closing}`}>
           <div className={`${styles.inner} ${styles.categories}`} ref={taskRef}>
             <Image src={'/tasks-tg-icon.png'} alt={'tg'} width={104} height={104} />

@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react'
 
-const usePopupOpen = (initialState: boolean) => {
-  const [isPopupOpen, setIsPopupOpen] = useState(initialState)
+const useScrollBlock = (initialState: boolean) => {
+  const [isScrollBlock, setIsScrollBlock] = useState(initialState)
 
   useEffect(() => {
-    if (isPopupOpen) {
+    if (isScrollBlock) {
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = 'auto'
     }
-  }, [isPopupOpen])
+  }, [isScrollBlock])
 
-  return { isPopupOpen, setIsPopupOpen }
+  return { isScrollBlock, setIsScrollBlock }
 }
 
-export { usePopupOpen }
+export { useScrollBlock }

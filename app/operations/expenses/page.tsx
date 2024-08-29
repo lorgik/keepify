@@ -34,10 +34,6 @@ function Expenses() {
 
   const days = Array(new Date(new Date().getFullYear(), new Date().getMonth(), 0).getDate()).fill(getRandomPrecent())
 
-  // for (let i = 0; i < days.length; i++) {
-  //   days.push(getRandomPrecent())
-  // }
-
   const expensesOperations = operations.filter((o) => o.value < 0)
 
   const expensesCategories = expensesOperations.reduce((acc: any, curr: Operation) => {
@@ -76,7 +72,7 @@ function Expenses() {
         {
           name: curr.name,
           value: curr.value,
-          percent: Math.round(Math.abs((curr.value / maxValue) * 100)),
+          percent: Number(Math.abs((curr.value / maxValue) * 100).toFixed(1)),
         },
       ]
     }, [])
@@ -89,9 +85,9 @@ function Expenses() {
         if (index === expensesCategoriesWithPercent.length - 1) {
           text = `${getColor(categories, c.name)} ${currPercent}% 100%`
         } else {
-          text = `${getColor(categories, c.name)} ${currPercent}% ${c.percent + currPercent}%`
+          text = `${getColor(categories, c.name)} ${currPercent}% ${(c.percent + currPercent).toFixed(1)}%`
         }
-        currPercent = currPercent + c.percent
+        currPercent = Number((currPercent + c.percent).toFixed(1))
         return text
       })
 
@@ -141,6 +137,14 @@ function Expenses() {
               <span className={styles.value}>{formatNumber(getExpensesValue())} </span>
               <span className={styles.currency}>₽</span>
             </h3>
+            {!bounded && (
+              <span className={`${styles.change} ${true && styles.lesion}`}>
+                <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3.5 0.5L6.53109 4.25H0.468911L3.5 0.5Z" fill="#35CC5A" />
+                </svg>
+                <span>20 %</span>
+              </span>
+            )}
           </div>
           <div className={styles.list}>
             {expensesCategories.map((c: any) => (
@@ -160,7 +164,7 @@ function Expenses() {
                     <span className={styles.currency}>₽</span>
                   </h5>
                 </div>
-                <h5 className={styles.percent}>{Math.abs(Math.round((c.value / getExpensesValue()) * 100))}%</h5>
+                <h5 className={styles.percent}>{Math.abs((c.value / getExpensesValue()) * 100).toFixed(1)}%</h5>
               </div>
             ))}
           </div>
@@ -179,18 +183,18 @@ function Expenses() {
           <h5 className={styles.name}>Динамика расходов</h5>
           <div className={styles.columns}>
             {days.map((d, index) => (
-              <div
-                className={styles.column}
-                key={index}
-                style={{ height: `${Math.round(Math.random() * 100)}%` }}
-              ></div>
+              <div className={styles.column} key={index} style={{ height: `${Math.round(Math.random() * 100)}%` }}>
+                <h5>{index % 7 === 0 && index + 1}</h5>
+              </div>
             ))}
           </div>
           <div className={styles.bottom}>
             <div className={styles.average}>
               <h5>Средние траты в день</h5>
               <h3 className={styles.check}>
-                <span className={styles.value}>{formatNumber(getExpensesValue())} </span>
+                <span className={styles.value}>
+                  {formatNumber(Number((getExpensesValue() / days.length).toFixed(2)))}{' '}
+                </span>
                 <span className={styles.currency}>₽</span>
               </h3>
             </div>

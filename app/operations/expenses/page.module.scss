@@ -80,8 +80,10 @@
   position: relative;
   margin-top: 30px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 7px;
   background: var(--bg-color);
   border-radius: 50%;
   width: 310px;
@@ -102,6 +104,38 @@
 
   .check {
     position: relative;
+  }
+
+  .change {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    color: var(--color-green);
+    background-color: var(--color-bledny-green);
+    border-radius: 5px;
+    width: max-content;
+    padding: 2px 4px;
+
+    svg {
+      transform: rotate(180deg);
+    }
+
+    &.lesion {
+      color: var(--color-red);
+      background-color: var(--color-bledny-red);
+      font-weight: 700;
+
+      svg {
+        margin-right: 5px;
+        margin-left: 3px;
+        transform: rotate(0);
+
+        path {
+          fill: var(--color-red);
+        }
+      }
+    }
   }
 }
 
@@ -175,9 +209,19 @@
     height: 289px;
 
     .column {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       background-color: var(--color-orange);
       width: 8px;
       border-radius: 17px;
+
+      h5 {
+        position: absolute;
+        bottom: -24px;
+        color: var(--color-grey);
+      }
     }
   }
 
