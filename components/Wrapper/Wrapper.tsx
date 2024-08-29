@@ -12,6 +12,7 @@ import Loader from '../Loader/Loader'
 import { useTheme } from '@/hooks/useTheme'
 import Script from 'next/script'
 import { useScrollBlock } from '@/hooks/useScrollBlock'
+import { addInfo } from '@/lib/features/user/userSlice'
 
 type Props = {
   children: React.ReactNode
@@ -125,10 +126,8 @@ const Wrapper = ({ children }: Props) => {
       tg.expand()
       tg.disableVerticalSwipes()
 
-      console.log('ДАННЫЕ:')
-      console.log(tg.initDataUnsafe.user.first_name)
-      console.log(tg.initDataUnsafe.user.last_name)
-      console.log(tg.initDataUnsafe.user.username)
+      const data = tg.initDataUnsafe.user
+      dispatch(addInfo({ firstName: data?.first_name, lastName: data?.last_name, username: data?.username }))
 
       if (document.documentElement.getAttribute('data-theme') === 'dark') {
         tg.setBackgroundColor('#1D1D25')

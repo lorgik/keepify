@@ -8,6 +8,9 @@ import { formatNumber } from '@/utils/formatting'
 import { useOutsideClick } from '@/hooks/useOutsideClick'
 import { useScrollBlock } from '@/hooks/useScrollBlock'
 import { WrapperContext } from '@/components/Wrapper/Wrapper'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/lib/store'
+import { User } from '@/lib/features/user/userSlice'
 
 const tasks = [
   {
@@ -61,6 +64,8 @@ function Profile() {
   const [isTaskOpenClosing, setIsTaskOpenClosing] = useState(false)
   const { setIsPopupOpen } = useContext(WrapperContext)
 
+  const user: User = useSelector((state: RootState) => state.user)
+
   const taskRef = useOutsideClick(closeTask)
 
   useEffect(() => {
@@ -90,7 +95,7 @@ function Profile() {
         <Image src={'/avatar.png'} alt={'avatar'} width={105} height={105} priority />
         <div className={styles.bio}>
           <h3 className={styles.name}>
-            Роберт Шамсиев
+            {user.firstName} {user.lastName}
             <div className={styles.icon}>
               <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -102,7 +107,7 @@ function Profile() {
               </svg>
             </div>
           </h3>
-          <h5 className={styles.nickname}>@rsbvgz</h5>
+          <h5 className={styles.nickname}>@{user.username}</h5>
         </div>
       </div>
       <div className={styles.features}>
