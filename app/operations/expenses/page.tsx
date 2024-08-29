@@ -180,11 +180,22 @@ function Expenses() {
         <div className={`${styles.sign} ${styles.dynamic}`}>
           <h5 className={styles.name}>Динамика расходов</h5>
           <div className={styles.columns}>
-            {days.map((d, index) => (
-              <div className={styles.column} key={index} style={{ height: `${Math.round(Math.random() * 100)}%` }}>
-                <h5>{index % 7 === 0 && index + 1}</h5>
-              </div>
-            ))}
+            {days.map((d, index) => {
+              const date = new Date().getDate()
+              if (index + 1 < date) {
+                return (
+                  <div className={styles.column} key={index} style={{ height: `${Math.round(Math.random() * 100)}%` }}>
+                    <h5>{index % 7 === 0 && index + 1}</h5>
+                  </div>
+                )
+              } else {
+                return (
+                  <div className={styles.column} key={index}>
+                    <h5>{index % 7 === 0 && index + 1}</h5>
+                  </div>
+                )
+              }
+            })}
           </div>
           <div className={styles.bottom}>
             <div className={styles.average}>

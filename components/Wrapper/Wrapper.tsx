@@ -13,6 +13,8 @@ import { useTheme } from '@/hooks/useTheme'
 import Script from 'next/script'
 import { useScrollBlock } from '@/hooks/useScrollBlock'
 import { addInfo } from '@/lib/features/user/userSlice'
+import { usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   children: React.ReactNode
@@ -47,6 +49,9 @@ const Wrapper = ({ children }: Props) => {
 
   const ref = useOutsideClick(closePopup)
   const categoriesRef = useOutsideClick(closeCategories)
+
+  const pathname = usePathname()
+  const router = useRouter()
 
   useEffect(() => {
     setTimeout(() => {
@@ -138,6 +143,17 @@ const Wrapper = ({ children }: Props) => {
       tg.setBackgroundColor('#efeff4')
       tg.setHeaderColor('#efeff4')
     }
+
+    const backButton = tg.BackButton
+
+    if (pathname !== '/') {
+      backButton.show()
+    } else {
+      backButton.hide()
+    }
+    backButton.onClick(() => {
+      router.back()
+    })
   }, [])
 
   useEffect(() => {

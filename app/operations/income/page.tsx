@@ -2,7 +2,7 @@
 import { useSelector } from 'react-redux'
 import styles from './page.module.scss'
 import { RootState } from '@/lib/store'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { WrapperContext } from '@/components/Wrapper/Wrapper'
 import { Operation } from '@/lib/features/operations/operationsSlice'
 import { getColor } from '@/utils/coloring'
@@ -14,6 +14,10 @@ function Income() {
 
   const { setIsPopupOpen } = useContext(WrapperContext)
   const incomeOperations = operations.filter((o) => o.value > 0)
+
+  useEffect(() => {
+    setIsPopupOpen(false)
+  }, [])
 
   const incomeCategories = incomeOperations.reduce((acc: any, curr: Operation) => {
     if (
@@ -37,6 +41,12 @@ function Income() {
     const value = incomeCategories.reduce((acc: number, curr: any) => acc + curr.value, 0)
     return value
   }
+
+  function getRandomPrecent() {
+    return Math.round(Math.random() * 100)
+  }
+
+  const days = Array(new Date(new Date().getFullYear(), new Date().getMonth(), 0).getDate()).fill(getRandomPrecent())
 
   return (
     <>
@@ -133,7 +143,17 @@ function Income() {
         </div>
         <div className={`${styles.sign} ${styles.dynamic}`}>
           <h5 className={styles.name}>Динамика доходов</h5>
+          {/* <div className={styles.diagram}>
 
+          </div> */}
+          <div className={styles.columns}>
+            {days.map((d, index) => (
+              <div className={styles.column} key={index} style={{ maxHeight: `${Math.round(Math.random() * 100)}%` }}>
+                <div className={styles.line}></div>
+                <h5>{index % 7 === 0 && index + 1}</h5>
+              </div>
+            ))}
+          </div>
           <div className={styles.bottom}>
             <div className={styles.comparison}>
               <h5>В сравнении с прошлым мес.</h5>
