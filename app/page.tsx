@@ -37,9 +37,15 @@ const Home = () => {
 
   function toggleCards() {
     if (activeCard) {
-      cardsRef.current?.scrollBy(230 * 2 + 10 * 3 - clientWidth, 0)
+      cardsRef.current?.scrollBy({
+        left: 230 * 2 + 10 * 3 - clientWidth,
+        behavior: 'smooth',
+      })
     } else {
-      cardsRef.current?.scrollBy(-(230 * 2 + 10 * 3 - clientWidth), 0)
+      cardsRef.current?.scrollBy({
+        left: -(230 * 2 + 10 * 3 - clientWidth),
+        behavior: 'smooth',
+      })
     }
   }
 
