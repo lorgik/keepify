@@ -84,10 +84,14 @@
       background-color: var(--color-bledny-grey);
       border-radius: 50%;
 
-      transition: all 0.1s ease;
+      transition: all 0.2s ease;
 
       &.active {
         background-color: var(--color-blue);
+
+        &:nth-of-type(2) {
+          background-color: var(--color-orange);
+        }
       }
     }
   }
@@ -111,8 +115,11 @@
     padding-top: 22px;
     padding-bottom: 12px;
     gap: 10px;
+    right: 0;
 
     width: max-content;
+
+    transition: right 0.2s ease;
   }
 
   .card {

@@ -14,10 +14,17 @@ import { formatNumber } from '@/utils/formatting'
 import Link from 'next/link'
 
 const Home = () => {
-  const [activeCard, setActiveCard] = useState(0)
+  const [activeCard, setActiveCard] = useState(1)
   const [conicGradient, setConicGradient] = useState('')
   const operations = useSelector((state: RootState) => state.operations)
   const categories = useSelector((state: RootState) => state.categories)
+  const [clientWidth, setClientWidth] = useState(0)
+
+  useEffect(() => {
+    const width = document.documentElement.clientWidth
+    setClientWidth(width)
+    console.log(width)
+  }, [])
 
   useEffect(() => {
     setConicGradient(getConicGradient())
@@ -120,8 +127,11 @@ const Home = () => {
       <Logo width={84} height={43} />
       <div className={styles.slider}>
         <div className={styles.cards}>
-          <div className={styles.inner}>
-            <div className={`${styles.card} ${styles.card1} ${activeCard === 0 && styles.active}`}>
+          <div
+            className={styles.inner}
+            style={activeCard === 1 ? { right: `${230 * 2 + 10 * 3 - clientWidth}px` } : {}}
+          >
+            <div className={`${styles.card} ${styles.card1}`} onClick={() => setActiveCard(0)}>
               <div className={styles.circle1}></div>
               <div className={styles.circle2}></div>
               <div className={styles.circle3}></div>
@@ -142,7 +152,7 @@ const Home = () => {
                 <h5 className={styles.text}>3 143</h5>
               </div>
             </div>
-            <div className={`${styles.card} ${styles.card2} ${activeCard === 1 && styles.active}`}>
+            <div className={`${styles.card} ${styles.card2}`} onClick={() => setActiveCard(1)}>
               <div className={styles.circle1}></div>
               <div className={styles.circle2}></div>
               <div className={styles.circle3}></div>
