@@ -4,12 +4,14 @@ export type User = {
   firstName: string
   lastName: string
   username: string
+  imageUrl: string
 }
 
 const initialState: User = {
   firstName: 'Имя',
   lastName: 'Фамилия',
   username: 'username',
+  imageUrl: '',
 }
 
 const userSlice = createSlice({
@@ -21,6 +23,7 @@ const userSlice = createSlice({
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
         username: action.payload.username,
+        imageUrl: '',
       }
     },
   },

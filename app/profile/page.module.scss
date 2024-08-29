@@ -79,9 +79,13 @@
   flex-direction: column;
   align-items: center;
 
-  img {
+  .avatar {
     border-radius: 50%;
     box-shadow: 0 0 0 5px var(--bg-color);
+    background-color: var(--color-bledny-grey);
+    overflow: hidden;
+    width: 105px;
+    height: 105px;
   }
 
   .bio {

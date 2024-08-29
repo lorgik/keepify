@@ -126,7 +126,10 @@ const Wrapper = ({ children }: Props) => {
     tg.disableVerticalSwipes()
 
     const data = tg.initDataUnsafe.user
-    dispatch(addInfo({ firstName: data?.first_name, lastName: data?.last_name, username: data?.username }))
+
+    if (data) {
+      dispatch(addInfo({ firstName: data.first_name, lastName: data.last_name, username: data.username }))
+    }
 
     if (document.documentElement.getAttribute('data-theme') === 'dark') {
       tg.setBackgroundColor('#1D1D25')
