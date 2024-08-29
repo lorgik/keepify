@@ -143,7 +143,10 @@ const Wrapper = ({ children }: Props) => {
       tg.setBackgroundColor('#efeff4')
       tg.setHeaderColor('#efeff4')
     }
+  }, [])
 
+  useEffect(() => {
+    const tg = window.Telegram.WebApp
     const backButton = tg.BackButton
 
     if (pathname !== '/') {
@@ -154,7 +157,7 @@ const Wrapper = ({ children }: Props) => {
     backButton.onClick(() => {
       router.back()
     })
-  }, [])
+  }, [pathname])
 
   useEffect(() => {
     const tg = window.Telegram.WebApp
