@@ -18,11 +18,9 @@ function Expenses() {
 
   const { setIsPopupOpen } = useContext(WrapperContext)
 
-  // useEffect(() => {
-  //   setIsPopupOpen(false)
-  // }, [])
-
-  console.log(conicGradient)
+  useEffect(() => {
+    setIsPopupOpen(false)
+  }, [])
 
   useEffect(() => {
     setConicGradient(getConicGradient())

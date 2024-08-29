@@ -116,8 +116,6 @@ const Home = () => {
     return `conic-gradient(${getText()}, transparent 50% 100%)`
   }
 
-  console.log(getConicGradient())
-
   return (
     <>
       <div className={styles.bg}>

@@ -124,7 +124,11 @@ const Wrapper = ({ children }: Props) => {
       const tg = window.Telegram.WebApp
       tg.expand()
       tg.disableVerticalSwipes()
-      console.log(tg.initData)
+
+      console.log('ДАННЫЕ:')
+      console.log(tg.initDataUnsafe.user.first_name)
+      console.log(tg.initDataUnsafe.user.last_name)
+      console.log(tg.initDataUnsafe.user.username)
 
       if (document.documentElement.getAttribute('data-theme') === 'dark') {
         tg.setBackgroundColor('#1D1D25')
