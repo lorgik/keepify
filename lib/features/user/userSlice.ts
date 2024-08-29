@@ -17,10 +17,10 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     addInfo(state, action) {
-      state = {
+      return {
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
-        username: action.payload.userName,
+        username: action.payload.username,
       }
     },
   },

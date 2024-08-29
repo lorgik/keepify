@@ -125,14 +125,8 @@ const Wrapper = ({ children }: Props) => {
     tg.expand()
     tg.disableVerticalSwipes()
 
-    async function addData() {
-      const data = await tg.initDataUnsafe.user
-      dispatch(addInfo({ firstName: data?.first_name, lastName: data?.last_name, username: data?.username }))
-
-      console.log(data)
-    }
-
-    addData()
+    const data = tg.initDataUnsafe.user
+    dispatch(addInfo({ firstName: data?.first_name, lastName: data?.last_name, username: data?.username }))
 
     if (document.documentElement.getAttribute('data-theme') === 'dark') {
       tg.setBackgroundColor('#1D1D25')
