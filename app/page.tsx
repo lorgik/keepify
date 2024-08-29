@@ -19,12 +19,6 @@ const Home = () => {
   const operations = useSelector((state: RootState) => state.operations)
   const categories = useSelector((state: RootState) => state.categories)
 
-  const { setIsPopupOpen } = useContext(WrapperContext)
-
-  useEffect(() => {
-    setIsPopupOpen(false)
-  }, [])
-
   useEffect(() => {
     setConicGradient(getConicGradient())
   }, [operations])

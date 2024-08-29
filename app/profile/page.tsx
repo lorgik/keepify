@@ -62,16 +62,10 @@ function Profile() {
   const [isTaskOpen, setIsTaskOpen] = useState(false)
   const { isScrollBlock, setIsScrollBlock } = useScrollBlock(false)
   const [isTaskOpenClosing, setIsTaskOpenClosing] = useState(false)
-  const { setIsPopupOpen } = useContext(WrapperContext)
 
   const user: User = useSelector((state: RootState) => state.user)
 
   const taskRef = useOutsideClick(closeTask)
-
-  useEffect(() => {
-    setIsPopupOpen(false)
-    setIsScrollBlock(false)
-  }, [])
 
   function closeTask() {
     setIsTaskOpenClosing(true)

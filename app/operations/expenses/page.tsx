@@ -8,6 +8,7 @@ import { WrapperContext } from '@/components/Wrapper/Wrapper'
 import { Operation } from '@/lib/features/operations/operationsSlice'
 import { getColor } from '@/utils/coloring'
 import { formatNumber, formatNumberWithSign } from '@/utils/formatting'
+import { useScrollBlock } from '@/hooks/useScrollBlock'
 
 function Expenses() {
   const [conicGradient, setConicGradient] = useState('')
@@ -15,12 +16,6 @@ function Expenses() {
 
   const operations = useSelector((state: RootState) => state.operations)
   const categories = useSelector((state: RootState) => state.categories)
-
-  const { setIsPopupOpen } = useContext(WrapperContext)
-
-  useEffect(() => {
-    setIsPopupOpen(false)
-  }, [])
 
   useEffect(() => {
     setConicGradient(getConicGradient())

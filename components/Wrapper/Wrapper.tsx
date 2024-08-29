@@ -39,7 +39,7 @@ const Wrapper = ({ children }: Props) => {
   const [currentCategory, setCurrentCategory] = useState('')
   const { theme, setTheme } = useTheme()
   const [isMounted, setIsMounted] = useState(false)
-  const { isScrollBlock, setIsScrollBlock } = useScrollBlock(false)
+  const { setIsScrollBlock } = useScrollBlock(false)
 
   const categories = useSelector((state: RootState) => state.categories)
   const dispatch = useDispatch()
@@ -157,6 +157,9 @@ const Wrapper = ({ children }: Props) => {
     backButton.onClick(() => {
       router.back()
     })
+
+    setIsScrollBlock(false)
+    setIsPopupOpen(false)
   }, [pathname])
 
   useEffect(() => {

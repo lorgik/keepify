@@ -7,17 +7,13 @@ import { WrapperContext } from '@/components/Wrapper/Wrapper'
 import { Operation } from '@/lib/features/operations/operationsSlice'
 import { getColor } from '@/utils/coloring'
 import { formatNumber, formatNumberWithSign } from '@/utils/formatting'
+import { useScrollBlock } from '@/hooks/useScrollBlock'
 
 function Income() {
   const operations = useSelector((state: RootState) => state.operations)
   const categories = useSelector((state: RootState) => state.categories)
 
-  const { setIsPopupOpen } = useContext(WrapperContext)
   const incomeOperations = operations.filter((o) => o.value > 0)
-
-  useEffect(() => {
-    setIsPopupOpen(false)
-  }, [])
 
   const incomeCategories = incomeOperations.reduce((acc: any, curr: Operation) => {
     if (
@@ -148,8 +144,8 @@ function Income() {
           </div> */}
           <div className={styles.columns}>
             {days.map((d, index) => (
-              <div className={styles.column} key={index} style={{ maxHeight: `${Math.round(Math.random() * 100)}%` }}>
-                <div className={styles.line}></div>
+              <div className={styles.column} key={index}>
+                <div className={styles.line} style={{ height: `${100 - Math.round(Math.random() * 100)}%` }}></div>
                 <h5>{index % 7 === 0 && index + 1}</h5>
               </div>
             ))}

@@ -8,9 +8,9 @@ import { useSelector } from 'react-redux'
 import { RootState } from '@/lib/store'
 import { Operation } from '@/lib/features/operations/operationsSlice'
 import { Category } from '@/lib/features/categories/categoriesSlice'
+import { useScrollBlock } from '@/hooks/useScrollBlock'
 
 function Operations() {
-  const { setIsPopupOpen } = useContext(WrapperContext)
   const operations: Operation[] = useSelector((state: RootState) => state.operations)
   const categories: Category[] = useSelector((state: RootState) => state.categories)
 
@@ -40,10 +40,6 @@ function Operations() {
       date.toLocaleString('default', { month: 'long' }) + getEnding(date.getMonth())
     }`
   }
-
-  useEffect(() => {
-    setIsPopupOpen(false)
-  }, [])
 
   return (
     <>
@@ -93,7 +89,7 @@ function Operations() {
               <div className={styles.result}>
                 <div className={styles.icon}>
                   <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_24_915)">
+                    <g clipPath="url(#clip0_24_915)">
                       <rect y="0.5" width="14" height="14.9999" rx="6.99998" fill="#FF8400" />
                       <path
                         fillRule="evenodd"
