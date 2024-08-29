@@ -20,7 +20,7 @@ const Home = () => {
   const categories = useSelector((state: RootState) => state.categories)
   const [clientWidth, setClientWidth] = useState(0)
 
-  const cardsRef = useRef(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const width = document.documentElement.clientWidth
