@@ -93,7 +93,11 @@ function Profile() {
       <Logo width={84} height={43} />
       <div className={styles.info}>
         <div className={styles.avatar}>
-          {user.imageUrl && <Image src={user.imageUrl} alt={'avatar'} width={105} height={105} priority />}
+          {user.imageUrl ? (
+            <Image src={user.imageUrl} alt={'avatar'} width={105} height={105} priority />
+          ) : (
+            <Image src={'/avatar.jpg'} alt={'avatar'} width={105} height={105} priority />
+          )}
         </div>
         <div className={styles.bio}>
           <h3 className={styles.name}>

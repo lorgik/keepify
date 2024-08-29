@@ -281,7 +281,7 @@ const Home = () => {
               </h3>
             </div>
           </div>
-          <div className={`${styles.sign} ${styles.income} ${styles.big}`}>
+          <Link href={'/operations/income'} className={`${styles.sign} ${styles.income} ${styles.big}`}>
             <div className={styles.top}>
               <h5 className={styles.title}>Доходы:</h5>
               <h3 className={styles.check}>
@@ -309,7 +309,7 @@ const Home = () => {
                 ></div>
               ))}
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </>

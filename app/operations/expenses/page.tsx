@@ -140,7 +140,7 @@ function Expenses() {
                 <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3.5 0.5L6.53109 4.25H0.468911L3.5 0.5Z" fill="#35CC5A" />
                 </svg>
-                <span>20 %</span>
+                <span>20%</span>
               </span>
             )}
           </div>
