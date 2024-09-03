@@ -1,31 +1,21 @@
 'use client'
 
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import styles from './page.module.scss'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/lib/store'
-import { WrapperContext } from '@/components/Wrapper/Wrapper'
 import { Operation } from '@/lib/features/operations/operationsSlice'
 import { getColor } from '@/utils/coloring'
 import { formatNumber, formatNumberWithSign } from '@/utils/formatting'
-import { useScrollBlock } from '@/hooks/useScrollBlock'
 
 function Expenses() {
-  const [conicGradient, setConicGradient] = useState('')
   const [bounded, setBounded] = useState(true)
+  const [currentCategory, setCurrentCategory] = useState<any>()
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
+  const canvasRef = useRef<HTMLDivElement>(null)
 
   const operations = useSelector((state: RootState) => state.operations)
   const categories = useSelector((state: RootState) => state.categories)
-
-  useEffect(() => {
-    setConicGradient(getConicGradient())
-  }, [operations])
-
-  function getRandomPrecent() {
-    return Math.round(Math.random() * 100)
-  }
-
-  const days = Array(new Date(new Date().getFullYear(), new Date().getMonth(), 0).getDate()).fill(getRandomPrecent())
 
   const expensesOperations = operations.filter((o) => o.value < 0)
 
@@ -47,48 +37,37 @@ function Expenses() {
     return acc
   }, [])
 
+  const expensesCategoriesWithColor = expensesCategories.reduce((acc: any, curr: any) => {
+    return [
+      ...acc,
+      {
+        name: curr.name,
+        value: curr.value,
+        color: getColor(categories, curr.name),
+      },
+    ]
+  }, [])
+
+  const days = Array(new Date(new Date().getFullYear(), new Date().getMonth(), 0).getDate()).fill(getRandomPrecent())
+
+  useEffect(() => {
+    // setConicGradient(getConicGradient())
+  }, [operations])
+
+  useEffect(() => {
+    canvasRef.current?.addEventListener('click', (e) => {})
+  }, [])
+
+  function getRandomPrecent() {
+    return Math.round(Math.random() * 100)
+  }
+
   function getExpensesValue() {
     const value = expensesCategories.reduce((acc: number, curr: any) => acc + curr.value, 0)
     return Math.abs(value)
   }
 
-  function getConicGradient() {
-    const maxValue = Math.abs(
-      expensesCategories.reduce((acc: number, curr: any) => {
-        return acc + curr.value
-      }, 0)
-    )
-
-    const expensesCategoriesWithPercent = expensesCategories.reduce((acc: any, curr: any) => {
-      return [
-        ...acc,
-        {
-          name: curr.name,
-          value: curr.value,
-          percent: Number(Math.abs((curr.value / maxValue) * 100).toFixed(1)),
-        },
-      ]
-    }, [])
-
-    function getText() {
-      let currPercent = 0
-
-      const text = expensesCategoriesWithPercent.map((c: any, index: number) => {
-        let text
-        if (index === expensesCategoriesWithPercent.length - 1) {
-          text = `${getColor(categories, c.name)} ${currPercent}% 100%`
-        } else {
-          text = `${getColor(categories, c.name)} ${currPercent}% ${(c.percent + currPercent).toFixed(1)}%`
-        }
-        currPercent = Number((currPercent + c.percent).toFixed(1))
-        return text
-      })
-
-      return text
-    }
-
-    return `conic-gradient(${getText()}, transparent 50% 100%)`
-  }
+  let offset = 0
 
   return (
     <>
@@ -120,25 +99,73 @@ function Expenses() {
       <div className={styles.signs}>
         <div className={`${styles.sign} ${styles.expenses} ${bounded && styles.bounded}`}>
           <h5 className={styles.name}>Ваши траты</h5>
-          <div
-            className={styles.pie}
-            style={{
-              background: conicGradient,
-            }}
-          >
-            <h3 className={styles.check}>
-              <span className={styles.value}>{formatNumber(getExpensesValue())} </span>
-              <span className={styles.currency}>₽</span>
-            </h3>
-            {!bounded && (
+
+          <div className={styles.canvas} ref={canvasRef}>
+            <svg className={styles.doughnut} width="350" height="350" viewBox="0 0 50 50">
+              {expensesCategoriesWithColor.map((c: any, index: number) => {
+                let percent = Math.round(Math.abs((c.value / getExpensesValue()) * 100))
+
+                const circle = (
+                  <circle
+                    className={styles.unit}
+                    r="15.9"
+                    cx="50%"
+                    cy="50%"
+                    key={c.value}
+                    stroke={c.color}
+                    strokeDasharray={`${percent !== 0 ? percent : 1} 100`}
+                    strokeDashoffset={-offset}
+                    onClick={(e) => {
+                      setCurrentCategory(c)
+                      setTooltipPosition({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY })
+                    }}
+                  ></circle>
+                )
+
+                if (percent === 0) {
+                  offset = Number(offset + 1)
+                } else {
+                  offset = Number(offset + percent)
+                }
+
+                return circle
+              })}
+            </svg>
+            <div className={styles.info}>
+              <h3 className={styles.check}>
+                <span className={styles.value}>{formatNumber(getExpensesValue())} </span>
+                <span className={styles.currency}>₽</span>
+              </h3>
               <span className={`${styles.change} ${true && styles.lesion}`}>
                 <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3.5 0.5L6.53109 4.25H0.468911L3.5 0.5Z" fill="#35CC5A" />
                 </svg>
                 <span>20%</span>
               </span>
+            </div>
+            {currentCategory && (
+              <div className={styles.tooltip} style={{ left: tooltipPosition.x, top: tooltipPosition.y }}>
+                <div className={styles.icon} style={{ backgroundColor: currentCategory?.color }}>
+                  <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M12.3564 14H13.4127C13.9473 14 14.3864 13.5864 14.45 13.0645L15.5 2.57727H12.3182V0H11.0645V2.57727H7.90182L8.09273 4.06636C9.18091 4.36545 10.1991 4.90636 10.81 5.50455C11.7264 6.40818 12.3564 7.34364 12.3564 8.87091V14ZM1.5 13.3636V12.7273H11.0645V13.3636C11.0645 13.7073 10.7782 14 10.4091 14H2.13636C1.78636 14 1.5 13.7073 1.5 13.3636ZM11.0645 8.90909C11.0645 3.81818 1.5 3.81818 1.5 8.90909H11.0645ZM1.5 10.1818H11.0455V11.4545H1.5V10.1818Z"
+                      fill="white"
+                    />
+                  </svg>
+                </div>
+                <h4 className={styles.check}>
+                  <span className={styles.value}>{formatNumberWithSign(currentCategory?.value)}</span>
+                  <span className={styles.currency}> ₽</span>
+                </h4>
+                <h6 className={styles.name}>{currentCategory?.name}</h6>
+              </div>
             )}
           </div>
+
+          {/* {!bounded && (
+              
+            )}
+          </div> */}
           <div className={styles.list}>
             {expensesCategories.map((c: any) => (
               <div className={styles.item} key={c.id}>
@@ -174,7 +201,7 @@ function Expenses() {
         </div>
         <div className={`${styles.sign} ${styles.dynamic}`}>
           <h5 className={styles.name}>Динамика расходов</h5>
-          <div className={styles.columns}>
+          {/* <div className={styles.columns}>
             {days.map((d, index) => {
               const date = new Date().getDate()
               if (index + 1 < date) {
@@ -191,7 +218,7 @@ function Expenses() {
                 )
               }
             })}
-          </div>
+          </div> */}
           <div className={styles.bottom}>
             <div className={styles.average}>
               <h5>Средние траты в день</h5>

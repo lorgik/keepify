@@ -1,11 +1,10 @@
 'use client'
 
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './page.module.scss'
 import Logo from '@/components/Logo/Logo'
 import Image from 'next/image'
 import Tag from '@/entities/Tag/Tag'
-import { WrapperContext } from '@/components/Wrapper/Wrapper'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/lib/store'
 import { getColor } from '@/utils/coloring'
@@ -37,15 +36,9 @@ const Home = () => {
 
   function toggleCards() {
     if (activeCard) {
-      cardsRef.current?.scrollBy({
-        left: 230 * 2 + 10 * 3 - clientWidth,
-        behavior: 'smooth',
-      })
+      cardsRef.current?.scrollBy(0, 230 * 2 + 10 * 3 - clientWidth)
     } else {
-      cardsRef.current?.scrollBy({
-        left: -(230 * 2 + 10 * 3 - clientWidth),
-        behavior: 'smooth',
-      })
+      cardsRef.current?.scrollBy(0, -(230 * 2 + 10 * 3 - clientWidth))
     }
   }
 

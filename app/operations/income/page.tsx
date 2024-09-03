@@ -87,7 +87,7 @@ function Income() {
             </span>
           </div>
 
-          <div className={styles.circles}>
+          {/* <div className={styles.circles}>
             {incomeCategories.map((c: any) => (
               <div
                 className={styles.category}
@@ -113,7 +113,7 @@ function Income() {
                 <h6 className={styles.name}>{c.name}</h6>
               </div>
             ))}
-          </div>
+          </div> */}
           <div className={styles.list}>
             {incomeCategories.map((c: any) => (
               <div className={styles.item} key={c.id}>
@@ -142,14 +142,14 @@ function Income() {
           {/* <div className={styles.diagram}>
 
           </div> */}
-          <div className={styles.columns}>
+          {/* <div className={styles.columns}>
             {days.map((d, index) => (
               <div className={styles.column} key={index}>
                 <div className={styles.line} style={{ height: `${100 - Math.round(Math.random() * 100)}%` }}></div>
                 <h5>{index % 7 === 0 && index + 1}</h5>
               </div>
             ))}
-          </div>
+          </div> */}
           <div className={styles.bottom}>
             <div className={styles.comparison}>
               <h5>В сравнении с прошлым мес.</h5>

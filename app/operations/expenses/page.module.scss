@@ -76,34 +76,25 @@
   }
 }
 
-.pie {
+.canvas {
+  // margin-top: -19px;
+
   position: relative;
-  margin-top: 30px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 7px;
-  background: var(--bg-color);
-  border-radius: 50%;
-  width: 310px;
-  height: 310px;
+  justify-content: center;
 
-  flex-shrink: 0;
-
-  // transform: rotate(-90deg);
-
-  &::before {
+  .info {
     position: absolute;
-    content: '';
     background-color: var(--color-white);
-    width: 60%;
-    height: 60%;
+    width: 53%;
+    height: 53%;
     border-radius: 50%;
-  }
-
-  .check {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
   }
 
   .change {
@@ -137,10 +128,45 @@
       }
     }
   }
+
+  .tooltip {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    background-color: var(--bg-color);
+    padding: 6px 9px;
+    border-radius: 15px;
+    width: max-content;
+
+    .icon {
+      padding: 7px;
+      background-color: var(--color-blue);
+      border-radius: 50%;
+    }
+  }
+}
+
+.doughnut {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  .unit {
+    fill: none;
+    stroke-width: 10;
+    cursor: pointer;
+
+    animation-name: render;
+    animation-duration: 1.5s;
+    transition-property: all;
+    transition-duration: 1.5s;
+  }
 }
 
 .list {
-  margin-top: 30px;
+  // margin-top: 30px;
   display: flex;
   flex-direction: column;
   gap: 30px;
