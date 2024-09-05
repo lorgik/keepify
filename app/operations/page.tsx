@@ -33,7 +33,7 @@ function Operations() {
   }, [])
 
   const operationsDays: OperationsDays[] = days.map((d: number) => {
-    const op = operations.toReversed().reduce<any>((acc, curr) => {
+    const op = [...operations.reverse()].reduce<any>((acc, curr) => {
       if (curr.date.setHours(0, 0, 0, 0) === d) {
         acc.push({ category: curr.category, value: curr.value })
       }
