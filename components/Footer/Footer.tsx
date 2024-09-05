@@ -34,10 +34,7 @@ const Footer = ({ isPopupOpen, togglePopup }: Props) => {
               </svg>
               <h6 className={styles.name}>Dashboard</h6>
             </Link>
-            <Link
-              className={`${styles.link} ${pathname.startsWith('/operations') ? styles.active : ''}`}
-              href={'/operations'}
-            >
+            <Link className={`${styles.link} ${pathname === '/operations' ? styles.active : ''}`} href={'/operations'}>
               <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   fillRule="evenodd"

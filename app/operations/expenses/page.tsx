@@ -163,10 +163,6 @@ function Expenses() {
             )}
           </div>
 
-          {/* {!bounded && (
-              
-            )}
-          </div> */}
           <div className={styles.list}>
             {expensesCategories.map((c: any) => (
               <div className={styles.item} key={c.id}>
