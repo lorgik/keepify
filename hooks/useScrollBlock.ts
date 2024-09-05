@@ -11,7 +11,7 @@ const useScrollBlock = (initialState: boolean) => {
     }
   }, [isScrollBlock])
 
-  return { isScrollBlock, setIsScrollBlock }
+  return { setIsScrollBlock }
 }
 
 export { useScrollBlock }

@@ -1,76 +1,3 @@
-.bg {
-  position: absolute;
-  z-index: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  background: radial-gradient(57.12% 57.12% at 50% 50%, #00c4ff 0%, #007aff 100%);
-  overflow: hidden;
-
-  .bottom {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    aspect-ratio: 3.9 / 2.6;
-
-    &::before {
-      position: absolute;
-      content: '';
-      background-color: var(--bg-color);
-      border-radius: 40px 0 0 0;
-      width: 100%;
-      height: 105px;
-      bottom: -1px;
-      left: 0;
-      right: 0;
-    }
-  }
-
-  .circle1,
-  .circle2 {
-    position: absolute;
-    border-radius: 50%;
-  }
-
-  .circle1 {
-    width: 191px;
-    height: 191px;
-
-    left: 25px;
-    top: -137px;
-
-    background: radial-gradient(
-        108.51% 108.51% at 41.67% 2.54%,
-        rgba(140, 0, 255, 0) 0%,
-        rgba(140, 0, 255, 0.732414) 51.92%,
-        #0048ff 78.38%,
-        #00fffb 100%
-      ),
-      #007aff;
-
-    transform: matrix(-0.97, -0.26, -0.26, 0.97, 0, 0);
-  }
-
-  .circle2 {
-    width: 197px;
-    height: 197px;
-
-    right: -34px;
-    top: 53px;
-
-    background: radial-gradient(
-        108.51% 108.51% at 41.67% 2.54%,
-        rgba(140, 0, 255, 0) 0%,
-        rgba(140, 0, 255, 0.732414) 51.92%,
-        #007aff 78.38%,
-        #00fffb 100%
-      ),
-      #007aff;
-    transform: rotate(135deg);
-  }
-}
-
 .info {
   margin-top: 22px;
   position: relative;
@@ -370,83 +297,60 @@
   }
 }
 
-.popup {
-  position: fixed;
+.inner {
+  padding: 0 10px;
+  padding-top: 47px;
+  padding-bottom: 30px;
+  position: relative;
   top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100;
-  max-width: inherit;
-  background: rgba(61, 61, 81, 0.4);
-  margin: 0 auto;
+  background-color: var(--bg-color);
+  border-radius: 20px 20px 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
+  width: 100%;
 
-  &.closing {
-    background: transparent;
-    .inner {
-      animation: hideDown 0.25s ease;
-    }
+  animation: inherit;
+
+  h3,
+  h5 {
+    max-width: 270px;
+    text-align: center;
   }
 
-  .inner {
-    padding: 0 10px;
-    padding-top: 47px;
-    padding-bottom: 30px;
-    position: relative;
-    top: 0;
-    background-color: var(--bg-color);
-    border-radius: 20px 20px 0 0;
+  h3 {
+    margin-top: 30px;
+  }
+
+  h5 {
+    margin-top: 10px;
+    color: var(--color-grey);
+  }
+
+  .reward {
+    margin-top: 30px;
+  }
+
+  .btn {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    width: 100%;
+    justify-content: center;
+    gap: 10px;
+    width: 180px;
+    height: 62px;
+    border-radius: 20px;
 
-    animation: showUp 0.25s ease;
-
-    h3,
-    h5 {
-      max-width: 270px;
-      text-align: center;
+    &:first-of-type {
+      margin-top: 15px;
+      color: var(--color-blue);
+      background-color: var(--color-bledny-blue);
     }
 
-    h3 {
+    &:last-of-type {
+      --color-white: #ffffff;
       margin-top: 30px;
-    }
-
-    h5 {
-      margin-top: 10px;
-      color: var(--color-grey);
-    }
-
-    .reward {
-      margin-top: 30px;
-    }
-
-    .btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 180px;
-      height: 62px;
-      border-radius: 20px;
-
-      &:first-of-type {
-        margin-top: 15px;
-        color: var(--color-blue);
-        background-color: var(--color-bledny-blue);
-      }
-
-      &:last-of-type {
-        --color-white: #ffffff;
-        margin-top: 30px;
-        color: var(--color-white);
-        background-color: var(--color-blue);
-      }
+      color: var(--color-white);
+      background-color: var(--color-blue);
     }
   }
 }
@@ -466,35 +370,5 @@
   }
   to {
     top: 100%;
-  }
-}
-
-html[data-theme='dark'] {
-  .bg {
-    background: radial-gradient(57.12% 57.12% at 50% 50%, #7b00ff 0%, #061d37 100%);
-
-    .circle1 {
-      background: radial-gradient(
-            118.81% 118.81% at 8.48% 84.53%,
-            rgba(140, 0, 255, 0) 0%,
-            rgba(140, 0, 255, 0.732414) 51.92%,
-            #ff2f00 78.38%,
-            #ffae00 100%
-          )
-          /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
-        #061d37;
-    }
-
-    .circle2 {
-      background: radial-gradient(
-            108.51% 108.51% at 41.82% 97.49%,
-            rgba(140, 0, 255, 0) 0%,
-            rgba(140, 0, 255, 0.732414) 51.92%,
-            #ff2f00 78.38%,
-            #ffae00 100%
-          )
-          /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
-        #061d37;
-    }
   }
 }

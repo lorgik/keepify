@@ -1,0 +1,50 @@
+.popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  max-width: inherit;
+  background: rgba(61, 61, 81, 0.4);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+
+  &.over {
+    z-index: 20;
+  }
+
+  &.closing {
+    background: transparent;
+    .inner {
+      animation: hideDown 0.25s ease;
+    }
+  }
+
+  .inner {
+    width: 100%;
+
+    animation: showUp 0.25s ease;
+  }
+}
+
+@keyframes showUp {
+  from {
+    top: 100%;
+  }
+  to {
+    top: 0;
+  }
+}
+
+@keyframes hideDown {
+  from {
+    top: 0;
+  }
+  to {
+    top: 100%;
+  }
+}

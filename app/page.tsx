@@ -11,6 +11,7 @@ import { getColor } from '@/utils/coloring'
 import { Operation } from '@/lib/features/operations/operationsSlice'
 import { formatNumber } from '@/utils/formatting'
 import Link from 'next/link'
+import Carpet from '@/entities/Carpet/Carpet'
 
 const Home = () => {
   const [activeCard, setActiveCard] = useState(false)
@@ -131,11 +132,7 @@ const Home = () => {
 
   return (
     <>
-      <div className={styles.bg}>
-        <div className={styles.circle1}></div>
-        <div className={styles.circle2}></div>
-        <div className={styles.bottom}></div>
-      </div>
+      <Carpet />
       <Logo width={84} height={43} />
       <div className={styles.slider}>
         <div className={styles.cards} ref={cardsRef}>
