@@ -174,7 +174,12 @@ function Expenses() {
                     <span className={styles.currency}>₽</span>
                   </h5>
                 </div>
-                <h5 className={styles.percent}>{Math.abs((c.value / getExpensesValue()) * 100).toFixed(1)}%</h5>
+                <h5 className={styles.percent}>
+                  {Math.abs((c.value / getExpensesValue()) * 100).toFixed(1) === '0.0'
+                    ? '~0.1'
+                    : Math.abs((c.value / getExpensesValue()) * 100).toFixed(1)}
+                  %
+                </h5>
               </div>
             ))}
           </div>
