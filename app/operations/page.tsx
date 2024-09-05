@@ -101,8 +101,8 @@ function Operations() {
       </div>
       <div className={styles.transactions}>
         {operationsDays.length !== 0 &&
-          operationsDays.map((d) => (
-            <div className={styles.box}>
+          operationsDays.map((d, index) => (
+            <div className={styles.box} key={index}>
               <div className={styles.head}>
                 <div className={styles.date}>
                   <div className={styles.icon}>
