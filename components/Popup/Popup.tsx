@@ -7,15 +7,16 @@ type Props = {
   isPopupOpen: boolean
   isPopupClosing: boolean
   isOver: boolean
+  propRef: any
 }
 
-const Popup = ({ children, isPopupOpen, isPopupClosing, isOver = false }: Props) => {
+const Popup = ({ children, isPopupOpen, isPopupClosing, isOver, propRef }: Props) => {
   if (!isPopupOpen) {
     return
   }
 
   return (
-    <div className={`${styles.popup} ${isPopupClosing && styles.closing} ${isOver && styles.over}`}>
+    <div className={`${styles.popup} ${isPopupClosing && styles.closing} ${isOver && styles.over}`} ref={propRef}>
       <div className={styles.inner}>{children}</div>
     </div>
   )

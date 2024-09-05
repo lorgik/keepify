@@ -30,8 +30,6 @@ const NewOperation = ({
   const categories = useSelector((state: RootState) => state.categories)
   const dispatch = useDispatch()
 
-  const ref = useOutsideClick(closePopup)
-
   function calculate(action: number | string) {
     if (action === ',' && value.indexOf(',') === -1) {
       if (value.length) {
@@ -85,7 +83,7 @@ const NewOperation = ({
 
   return (
     <>
-      <div className={styles.newOperation} ref={ref}>
+      <div className={styles.newOperation}>
         <h2 className={styles.title}>Новая операция</h2>
         <div className={styles.tabs}>
           <button

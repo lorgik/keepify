@@ -314,8 +314,8 @@ function Profile() {
         </div>
       </div>
 
-      <Popup isPopupOpen={isTaskOpen} isPopupClosing={isTaskOpenClosing} isOver={true}>
-        <div className={styles.inner} ref={taskRef}>
+      <Popup isPopupOpen={isTaskOpen} isPopupClosing={isTaskOpenClosing} isOver={true} propRef={taskRef}>
+        <div className={styles.inner}>
           <Image
             src={`/tasks-${currentTask.imageName}-icon.png`}
             alt={currentTask.imageName}

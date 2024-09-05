@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation'
 import NewOperation from '../NewOperation/NewOperation'
 import Popup from '../Popup/Popup'
 import SelectCategory from '../SelectCategory/SelectCategory'
+import { useOutsideClick } from '@/hooks/useOutsideClick'
 
 type Props = {
   children: React.ReactNode
@@ -30,7 +31,6 @@ const Wrapper = ({ children }: Props) => {
   const [isLoading, setIsLoading] = useState(true)
   const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [isPopupClosing, setIsPopupClosing] = useState(false)
-  const [isBlockClose, setIsBlockClose] = useState(false)
 
   const [currentOperation, setCurrentOperation] = useState('Расход')
   const [currentCategory, setCurrentCategory] = useState('')
@@ -47,21 +47,24 @@ const Wrapper = ({ children }: Props) => {
   const pathname = usePathname()
   const router = useRouter()
 
+  const ref = useOutsideClick(closePopup)
+  const categoriesRef = useOutsideClick(closeCategories)
+
   function chooseOperation(operation: string) {
     setCurrentOperation(operation)
     setCurrentCategory('')
   }
 
   function closePopup() {
-    if (!isBlockClose) {
-      setIsPopupClosing(true)
+    // if (isCategoryOpen) {
+    setIsPopupClosing(true)
 
-      setTimeout(() => {
-        setIsPopupOpen(false)
-        setIsPopupClosing(false)
-        setIsScrollBlock(false)
-      }, 150)
-    }
+    setTimeout(() => {
+      setIsPopupOpen(false)
+      setIsPopupClosing(false)
+      setIsScrollBlock(false)
+    }, 150)
+    // }
   }
 
   function closeCategories() {
@@ -93,16 +96,6 @@ const Wrapper = ({ children }: Props) => {
     }, 3000)
     setIsMounted(true)
   }, [])
-
-  useEffect(() => {
-    console.log(isCategoryOpen)
-
-    if (isCategoryOpen) {
-      setIsBlockClose(true)
-    } else {
-      setIsBlockClose(false)
-    }
-  }, [isCategoryOpen])
 
   useEffect(() => {
     const tg = window.Telegram.WebApp
@@ -157,7 +150,7 @@ const Wrapper = ({ children }: Props) => {
 
   return (
     <div className={styles.wrapper}>
-      <Popup isPopupOpen={isPopupOpen} isPopupClosing={isPopupClosing} isOver={false}>
+      <Popup isPopupOpen={isPopupOpen} isPopupClosing={isPopupClosing} isOver={false} propRef={ref}>
         <NewOperation
           currentOperation={currentOperation}
           chooseOperation={chooseOperation}
@@ -174,7 +167,7 @@ const Wrapper = ({ children }: Props) => {
 
       <Footer isPopupOpen={isPopupOpen} togglePopup={togglePopup} />
 
-      <Popup isPopupOpen={isCategoryOpen} isPopupClosing={isCategoryClosing} isOver={false}>
+      <Popup isPopupOpen={isCategoryOpen} isPopupClosing={isCategoryClosing} isOver={false} propRef={categoriesRef}>
         <SelectCategory
           currentCategory={currentCategory}
           setCurrentCategory={setCurrentCategory}

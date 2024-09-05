@@ -16,15 +16,13 @@ type Props = {
 const SelectCategory = ({ currentCategory, setCurrentCategory, currentOperation, closeCategories }: Props) => {
   const categories = useSelector((state: RootState) => state.categories)
 
-  const ref = useOutsideClick(closeCategories)
-
   function chooseCategory(name: string) {
     setCurrentCategory(name)
     closeCategories()
   }
 
   return (
-    <div className={styles.categories} ref={ref}>
+    <div className={styles.categories}>
       <h3>Выберите категорию</h3>
       <div className={styles.list}>
         {categories
