@@ -1,137 +1,136 @@
 .newOperation {
-  padding: 0 10px;
-  padding-top: 47px;
-  padding-bottom: var(--spacing-bottom);
-  position: relative;
-  top: 0;
-  background-color: var(--bg-color);
-  border-radius: 20px 20px 0 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    padding: 0 10px;
+    padding-top: 47px;
+    padding-bottom: var(--spacing-bottom);
+    position: relative;
+    top: 0;
+    background-color: var(--bg-color);
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  animation: inherit;
+    animation: inherit;
 }
 
 .tabs {
-  margin-top: 10px;
-  display: flex;
-  gap: 1px;
-  background-color: var(--color-white);
-  padding: 1px;
-  border-radius: 6px;
+    margin-top: 10px;
+    display: flex;
+    gap: 1px;
+    background-color: var(--color-white);
+    padding: 1px;
+    border-radius: 6px;
 
-  .tab {
-    --color-white: #ffffff;
-    padding: 6px 17.5px;
-    transition: all 0.1s ease;
+    .tab {
+        --color-white: #ffffff;
+        padding: 6px 17.5px;
+        transition: all 0.1s ease;
 
-    &.income {
-      background-color: var(--color-blue);
-      color: var(--color-white);
-      border-radius: 5px 0 0 5px;
+        &.income {
+            background-color: var(--color-blue);
+            color: var(--color-white);
+            border-radius: 5px 0 0 5px;
+        }
+
+        &.expense {
+            background-color: var(--color-orange);
+            color: var(--color-white);
+            border-radius: 0 5px 5px 0;
+        }
     }
-
-    &.expense {
-      background-color: var(--color-orange);
-      color: var(--color-white);
-      border-radius: 0 5px 5px 0;
-    }
-  }
 }
 
 .sum {
-  margin-top: 30px;
-  display: flex;
-  gap: 5px;
+    margin-top: 30px;
+    display: flex;
+    gap: 5px;
 }
 
 .terminal {
-  margin-top: 30px;
-  width: 100%;
-  max-width: 400px;
-  padding: 20px 4px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+    margin-top: 30px;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px 4px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
 
-  background-color: var(--color-white);
-  border-radius: 20px;
+    background-color: var(--color-white);
+    border-radius: 20px;
 
-  .btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    aspect-ratio: 118 / 55;
-    border-radius: 14px;
+    .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 118 / 55;
+        border-radius: 14px;
 
-    transition: all 0.15s ease-out;
+        transition: all 0.15s ease-out;
 
-    &:active {
-      background-color: var(--bg-color);
+        &:active {
+            background-color: var(--bg-color);
+        }
+
+        svg path {
+            fill: var(--color-dark);
+        }
     }
-
-    svg path {
-      fill: var(--color-dark);
-    }
-  }
 }
 
 .btns {
-  margin-top: 10px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  max-width: 400px;
-
-  .btn {
-    display: flex;
-    align-items: center;
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
     gap: 10px;
-    flex: 1 0;
-    border-radius: 20px;
+    width: 100%;
+    max-width: 400px;
 
-    &.category {
-      background-color: var(--color-white);
-      padding: 8.5px 15px;
-      justify-content: space-between;
+    .btn {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex: 1 0;
+        border-radius: 20px;
 
-      .icon {
-        border-radius: 15px;
-        overflow: hidden;
-        border: 1px solid var(--color-category-border);
-        width: 45px;
-        height: 45px;
+        &.category {
+            background-color: var(--color-white);
+            padding: 8.5px 15px;
+            justify-content: space-between;
 
-        &.active {
-          border: none;
+            .icon {
+                border-radius: 15px;
+                overflow: hidden;
+                border: 1px solid var(--color-category-border);
+                width: 45px;
+                height: 45px;
+
+                &.active {
+                    border: none;
+                }
+            }
         }
-      }
-    }
 
-    &.add {
-      --color-white: #ffffff;
-      --color-bledny-blue: #dae7fa;
-      background-color: var(--color-orange);
-      color: var(--color-white);
-      justify-content: center;
-      height: 100%;
+        &.add {
+            --color-white: #ffffff;
+            --color-bledny-blue: #dae7fa;
+            background-color: var(--color-orange);
+            color: var(--color-white);
+            justify-content: center;
 
-      transition: all 0.1s ease;
+            transition: all 0.1s ease;
 
-      svg path {
-        transition: all 0.1s ease;
-      }
+            svg path {
+                transition: all 0.1s ease;
+            }
 
-      &.income {
-        background-color: var(--color-blue);
+            &.income {
+                background-color: var(--color-blue);
 
-        svg path {
-          fill: var(--color-bledny-blue);
+                svg path {
+                    fill: var(--color-bledny-blue);
+                }
+            }
         }
-      }
     }
-  }
 }
