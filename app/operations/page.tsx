@@ -23,7 +23,7 @@ function Operations() {
     const operations: Operation[] = useSelector((state: RootState) => state.operations)
     const categories: Category[] = useSelector((state: RootState) => state.categories)
 
-    const days = [...operations].sort().reduce<any>((acc, curr) => {
+    const days = [...operations].reverse().reduce<any>((acc, curr) => {
         if (acc.includes(curr.date.setHours(0, 0, 0, 0))) {
             return acc
         }
@@ -43,6 +43,8 @@ function Operations() {
             op,
         }
     })
+
+    console.log(operationsDays)
 
     function getColor(category: string) {
         for (let i = 0; i < categories.length; i++) {
