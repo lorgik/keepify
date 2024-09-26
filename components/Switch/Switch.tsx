@@ -2,24 +2,24 @@ import { useState } from 'react'
 import styles from './Switch.module.scss'
 
 type Props = {
-  isChecked: boolean
-  handleToggle: () => void
+    isChecked: boolean
+    handleToggle: () => void
 }
 
 const Switch = ({ isChecked, handleToggle }: Props) => {
-  const [checked, setChecked] = useState(isChecked)
+    const [checked, setChecked] = useState(isChecked)
 
-  function handleSwitch(e: React.ChangeEvent<HTMLInputElement>) {
-    setChecked(e.target.checked)
-    handleToggle()
-  }
+    function handleSwitch(e: React.ChangeEvent<HTMLInputElement>) {
+        setChecked(e.target.checked)
+        handleToggle()
+    }
 
-  return (
-    <label className={`${styles.switch} ${checked && styles.active}`}>
-      <input type="checkbox" checked={checked} onChange={handleSwitch} />
-      <div className={styles.dot} style={{ backgroundColor: '#ffffff' }}></div>
-    </label>
-  )
+    return (
+        <label className={`${styles.switch} ${checked && styles.active}`}>
+            <input type="checkbox" checked={checked} onChange={handleSwitch} />
+            <div className={styles.dot} style={{ backgroundColor: '#ffffff' }}></div>
+        </label>
+    )
 }
 
 export default Switch
