@@ -2,93 +2,90 @@
 import { useSelector } from 'react-redux'
 import styles from './page.module.scss'
 import { RootState } from '@/lib/store'
-import { useContext, useEffect } from 'react'
-import { WrapperContext } from '@/components/Wrapper/Wrapper'
 import { Operation } from '@/lib/features/operations/operationsSlice'
 import { getColor } from '@/utils/coloring'
 import { formatNumber, formatNumberWithSign } from '@/utils/formatting'
-import { useScrollBlock } from '@/hooks/useScrollBlock'
 import Icon from '@/entities/Icon/Icon'
 
 function Income() {
-  const operations = useSelector((state: RootState) => state.operations)
-  const categories = useSelector((state: RootState) => state.categories)
+    const operations = useSelector((state: RootState) => state.operations)
+    const categories = useSelector((state: RootState) => state.categories)
 
-  const incomeOperations = operations.filter((o) => o.value > 0)
+    const incomeOperations = operations.filter((o) => o.value > 0)
 
-  const incomeCategories = incomeOperations.reduce((acc: any, curr: Operation) => {
-    if (
-      acc.findIndex((o: any) => {
-        return o.name === curr.category
-      }) === -1
-    ) {
-      acc.push({ name: curr.category, value: curr.value })
-    } else {
-      let findedIndex = acc.findIndex((o: any) => o.name === curr.category)
+    const incomeCategories = incomeOperations.reduce((acc: any, curr: Operation) => {
+        if (
+            acc.findIndex((o: any) => {
+                return o.name === curr.category
+            }) === -1
+        ) {
+            acc.push({ name: curr.category, value: curr.value })
+        } else {
+            let findedIndex = acc.findIndex((o: any) => o.name === curr.category)
 
-      acc.splice(findedIndex, 1, {
-        name: curr.category,
-        value: curr.value + acc[findedIndex].value,
-      })
+            acc.splice(findedIndex, 1, {
+                name: curr.category,
+                value: curr.value + acc[findedIndex].value,
+            })
+        }
+        return acc
+    }, [])
+
+    function getIncomeValue() {
+        const value = incomeCategories.reduce((acc: number, curr: any) => acc + curr.value, 0)
+        return value
     }
-    return acc
-  }, [])
 
-  function getIncomeValue() {
-    const value = incomeCategories.reduce((acc: number, curr: any) => acc + curr.value, 0)
-    return value
-  }
+    function getRandomPrecent() {
+        return Math.round(Math.random() * 100)
+    }
 
-  function getRandomPrecent() {
-    return Math.round(Math.random() * 100)
-  }
+    const days = Array(new Date(new Date().getFullYear(), new Date().getMonth(), 0).getDate()).fill(getRandomPrecent())
 
-  const days = Array(new Date(new Date().getFullYear(), new Date().getMonth(), 0).getDate()).fill(getRandomPrecent())
+    return (
+        <>
+            <h2 className={styles.title}>Доходы</h2>
+            <div className={styles.month}>
+                <button className={`${styles.btn} ${styles.left}`}>
+                    <svg width="3" height="5" viewBox="0 0 3 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M2.85355 0.146447C3.04881 0.341709 3.04881 0.658291 2.85355 0.853553L1.20711 2.5L2.85355 4.14644C3.04881 4.3417 3.04881 4.65829 2.85355 4.85355C2.65829 5.04881 2.34171 5.04881 2.14644 4.85355L0.146447 2.85355C-0.0488155 2.65829 -0.0488155 2.34171 0.146447 2.14644L2.14644 0.146447C2.34171 -0.0488155 2.65829 -0.0488155 2.85355 0.146447Z"
+                            fill="#007AFF"
+                        />
+                    </svg>
+                </button>
+                <h4 className={styles.title}>август 2024</h4>
+                <button className={`${styles.btn} ${styles.right}`}>
+                    <svg width="3" height="5" viewBox="0 0 3 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M0.14645 0.146447C-0.0488124 0.341709 -0.0488124 0.658291 0.14645 0.853553L1.79289 2.5L0.14645 4.14644C-0.0488124 4.3417 -0.0488124 4.65829 0.14645 4.85355C0.341712 5.04881 0.658294 5.04881 0.853556 4.85355L2.85355 2.85355C3.04882 2.65829 3.04882 2.34171 2.85355 2.14644L0.853556 0.146447C0.658294 -0.0488155 0.341712 -0.0488155 0.14645 0.146447Z"
+                            fill="#007AFF"
+                        />
+                    </svg>
+                </button>
+            </div>
 
-  return (
-    <>
-      <h2 className={styles.title}>Доходы</h2>
-      <div className={styles.month}>
-        <button className={`${styles.btn} ${styles.left}`}>
-          <svg width="3" height="5" viewBox="0 0 3 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M2.85355 0.146447C3.04881 0.341709 3.04881 0.658291 2.85355 0.853553L1.20711 2.5L2.85355 4.14644C3.04881 4.3417 3.04881 4.65829 2.85355 4.85355C2.65829 5.04881 2.34171 5.04881 2.14644 4.85355L0.146447 2.85355C-0.0488155 2.65829 -0.0488155 2.34171 0.146447 2.14644L2.14644 0.146447C2.34171 -0.0488155 2.65829 -0.0488155 2.85355 0.146447Z"
-              fill="#007AFF"
-            />
-          </svg>
-        </button>
-        <h4 className={styles.title}>август 2024</h4>
-        <button className={`${styles.btn} ${styles.right}`}>
-          <svg width="3" height="5" viewBox="0 0 3 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M0.14645 0.146447C-0.0488124 0.341709 -0.0488124 0.658291 0.14645 0.853553L1.79289 2.5L0.14645 4.14644C-0.0488124 4.3417 -0.0488124 4.65829 0.14645 4.85355C0.341712 5.04881 0.658294 5.04881 0.853556 4.85355L2.85355 2.85355C3.04882 2.65829 3.04882 2.34171 2.85355 2.14644L0.853556 0.146447C0.658294 -0.0488155 0.341712 -0.0488155 0.14645 0.146447Z"
-              fill="#007AFF"
-            />
-          </svg>
-        </button>
-      </div>
+            <div className={styles.signs}>
+                <div className={`${styles.sign} ${styles.exincomepenses}`}>
+                    <div className={styles.info}>
+                        <h5 className={styles.name}>Ваши доходы</h5>
+                        <h3 className={styles.check}>
+                            <span className={styles.value}>{formatNumber(getIncomeValue())} </span>
+                            <span className={styles.currency}>₽</span>
+                        </h3>
+                        <span className={`${styles.change} ${true && styles.lesion}`}>
+                            <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.5 0.5L6.53109 4.25H0.468911L3.5 0.5Z" fill="#35CC5A" />
+                            </svg>
+                            <span>18%</span>
+                        </span>
+                    </div>
 
-      <div className={styles.signs}>
-        <div className={`${styles.sign} ${styles.exincomepenses}`}>
-          <div className={styles.info}>
-            <h5 className={styles.name}>Ваши доходы</h5>
-            <h3 className={styles.check}>
-              <span className={styles.value}>{formatNumber(getIncomeValue())} </span>
-              <span className={styles.currency}>₽</span>
-            </h3>
-            <span className={`${styles.change} ${true && styles.lesion}`}>
-              <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3.5 0.5L6.53109 4.25H0.468911L3.5 0.5Z" fill="#35CC5A" />
-              </svg>
-              <span>18%</span>
-            </span>
-          </div>
-
-          {/* <div className={styles.circles}>
+                    {/* <div className={styles.circles}>
             {incomeCategories.map((c: any) => (
               <div
                 className={styles.category}
@@ -115,28 +112,30 @@ function Income() {
               </div>
             ))}
           </div> */}
-          <div className={styles.list}>
-            {incomeCategories.map((c: any) => (
-              <div className={styles.item} key={c.id}>
-                <div className={styles.category}>
-                  <Icon color={getColor(categories, c.name)} />
-                  <h5 className={styles.name}>{c.name}</h5>
-                  <h5 className={styles.check}>
-                    <span className={styles.value}>{formatNumberWithSign(c.value)}</span>
-                    <span className={styles.currency}>₽</span>
-                  </h5>
+                    <div className={styles.list}>
+                        {incomeCategories.map((c: any) => (
+                            <div className={styles.item} key={c.id}>
+                                <div className={styles.category}>
+                                    <Icon category={categories.find((cat) => cat.name === c.name)} />
+                                    <h5 className={styles.name}>{c.name}</h5>
+                                    <h5 className={styles.check}>
+                                        <span className={styles.value}>{formatNumberWithSign(c.value)}</span>
+                                        <span className={styles.currency}>₽</span>
+                                    </h5>
+                                </div>
+                                <h5 className={styles.percent}>
+                                    {Math.abs((c.value / getIncomeValue()) * 100).toFixed(1)}%
+                                </h5>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-                <h5 className={styles.percent}>{Math.abs((c.value / getIncomeValue()) * 100).toFixed(1)}%</h5>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className={`${styles.sign} ${styles.dynamic}`}>
-          <h5 className={styles.name}>Динамика доходов</h5>
-          {/* <div className={styles.diagram}>
+                <div className={`${styles.sign} ${styles.dynamic}`}>
+                    <h5 className={styles.name}>Динамика доходов</h5>
+                    {/* <div className={styles.diagram}>
 
           </div> */}
-          {/* <div className={styles.columns}>
+                    {/* <div className={styles.columns}>
             {days.map((d, index) => (
               <div className={styles.column} key={index}>
                 <div className={styles.line} style={{ height: `${100 - Math.round(Math.random() * 100)}%` }}></div>
@@ -144,19 +143,19 @@ function Income() {
               </div>
             ))}
           </div> */}
-          <div className={styles.bottom}>
-            <div className={styles.comparison}>
-              <h5>В сравнении с прошлым мес.</h5>
-              <h3 className={styles.check}>
-                <span className={styles.value}>+18 </span>
-                <span className={styles.percent}>%</span>
-              </h3>
+                    <div className={styles.bottom}>
+                        <div className={styles.comparison}>
+                            <h5>В сравнении с прошлым мес.</h5>
+                            <h3 className={styles.check}>
+                                <span className={styles.value}>+18 </span>
+                                <span className={styles.percent}>%</span>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </>
-  )
+        </>
+    )
 }
 
 export default Income
