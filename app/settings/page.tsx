@@ -26,7 +26,7 @@ function Settings() {
 
     useEffect(() => {
         setIsPopupOpen(false)
-    }, [])
+    })
 
     function switchTheme() {
         if (theme === 'light') {

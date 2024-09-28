@@ -1,640 +1,668 @@
 .bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  background: radial-gradient(57.12% 57.12% at 50% 50%, #00c4ff 0%, #007aff 100%);
-  overflow: hidden;
-
-  .bottom {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    aspect-ratio: 3.9 / 2.6;
-
-    &::before {
-      position: absolute;
-      content: '';
-      background-color: var(--bg-color);
-      border-radius: 40px 0 0 0;
-      width: 100%;
-      height: 105px;
-      bottom: -1px;
-      left: 0;
-      right: 0;
-    }
-  }
-
-  .circle1,
-  .circle2 {
     position: absolute;
-    border-radius: 50%;
-  }
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: radial-gradient(57.12% 57.12% at 50% 50%, #00c4ff 0%, #007aff 100%);
+    overflow: hidden;
 
-  .circle1 {
-    width: 191px;
-    height: 191px;
+    .bottom {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        aspect-ratio: 3.9 / 2.6;
 
-    left: 25px;
-    top: -137px;
+        &::before {
+            position: absolute;
+            content: '';
+            background-color: var(--bg-color);
+            border-radius: 40px 0 0 0;
+            width: 100%;
+            height: 105px;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+        }
+    }
 
-    background: radial-gradient(
-        108.51% 108.51% at 41.67% 2.54%,
-        rgba(140, 0, 255, 0) 0%,
-        rgba(140, 0, 255, 0.732414) 51.92%,
-        #0048ff 78.38%,
-        #00fffb 100%
-      ),
-      #007aff;
+    .circle1,
+    .circle2 {
+        position: absolute;
+        border-radius: 50%;
+    }
 
-    transform: matrix(-0.97, -0.26, -0.26, 0.97, 0, 0);
-  }
+    .circle1 {
+        width: 191px;
+        height: 191px;
 
-  .circle2 {
-    width: 197px;
-    height: 197px;
+        left: 25px;
+        top: -137px;
 
-    right: -34px;
-    top: 53px;
+        background: radial-gradient(
+                108.51% 108.51% at 41.67% 2.54%,
+                rgba(140, 0, 255, 0) 0%,
+                rgba(140, 0, 255, 0.732414) 51.92%,
+                #0048ff 78.38%,
+                #00fffb 100%
+            ),
+            #007aff;
 
-    background: radial-gradient(
-        108.51% 108.51% at 41.67% 2.54%,
-        rgba(140, 0, 255, 0) 0%,
-        rgba(140, 0, 255, 0.732414) 51.92%,
-        #007aff 78.38%,
-        #00fffb 100%
-      ),
-      #007aff;
-    transform: rotate(135deg);
-  }
+        transform: matrix(-0.97, -0.26, -0.26, 0.97, 0, 0);
+    }
+
+    .circle2 {
+        width: 197px;
+        height: 197px;
+
+        right: -34px;
+        top: 53px;
+
+        background: radial-gradient(
+                108.51% 108.51% at 41.67% 2.54%,
+                rgba(140, 0, 255, 0) 0%,
+                rgba(140, 0, 255, 0.732414) 51.92%,
+                #007aff 78.38%,
+                #00fffb 100%
+            ),
+            #007aff;
+        transform: rotate(135deg);
+    }
 }
 
 .slider {
-  position: relative;
+    position: relative;
 
-  .dots {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+    .dots {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
 
-    .dot {
-      width: 8px;
-      height: 8px;
-      background-color: var(--color-bledny-grey);
-      border-radius: 50%;
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--color-bledny-grey);
+            border-radius: 50%;
 
-      transition: all 0.2s ease;
+            transition: all 0.2s ease;
 
-      &.active {
-        background-color: var(--color-blue);
+            &.active {
+                background-color: var(--color-blue);
 
-        &:nth-of-type(2) {
-          background-color: var(--color-orange);
+                &:nth-of-type(2) {
+                    background-color: var(--color-orange);
+                }
+            }
         }
-      }
     }
-  }
 }
 
 .cards {
-  position: relative;
-  z-index: 2;
-  overflow: auto;
-  scroll-behavior: smooth;
-
-  &::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-    display: none;
-  }
-
-  .inner {
     position: relative;
-    display: flex;
-    padding: 0 10px;
-    padding-top: 22px;
-    padding-bottom: 12px;
-    gap: 10px;
-    right: 0;
-
-    width: max-content;
-
-    transition: right 0.2s ease;
-  }
-
-  .card {
-    --color-white: #ffffff;
-    --color-bledny-blue: #dae7fa;
-
-    position: relative;
-    display: block;
-    width: 230px;
-    aspect-ratio: 2.3 / 1.5;
+    z-index: 2;
     overflow: hidden;
-    border-radius: 20px;
-    color: var(--color-white);
+    // scroll-behavior: smooth;
 
-    .circle1,
-    .circle2,
-    .circle3 {
-      position: absolute;
-      border-radius: 50%;
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+        display: none;
     }
 
-    &.card1 {
-      background: radial-gradient(93% 93% at 67.83% 64.67%, rgba(140, 0, 255, 0.7) 0%, rgba(0, 122, 255, 0) 100%),
-        #007aff;
-      // box-shadow: 0px 12px 120px rgba(0, 122, 255, 0.12);
-
-      .extra {
-        background-color: var(--color-bledny-green);
-
-        .text {
-          color: var(--color-green);
-        }
-      }
-
-      .circle1 {
-        width: 129px;
-        height: 129px;
-        left: -39px;
-        top: -86px;
-
-        background: radial-gradient(
-            100% 100% at 41.47% 100%,
-            #01ccfd 0%,
-            #0048ff 51.92%,
-            rgba(140, 0, 255, 0.73) 78.38%,
-            #8c00ff 100%
-          ),
-          #007aff;
-      }
-
-      .info {
-        .title {
-          color: var(--color-bledny-blue);
-        }
-      }
-
-      .circle2 {
-        width: 197px;
-        height: 197px;
-        left: -17px;
-        top: 88px;
-
-        background: radial-gradient(
-              70.81% 70.81% at 12.94% 84.52%,
-              rgba(140, 0, 255, 0) 0%,
-              rgba(140, 0, 255, 0.732414) 35.89%,
-              #5a3ffe 70.24%,
-              #2ba5fd 100%
-            )
-            /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
-          #007aff;
-      }
-
-      .circle3 {
-        width: 197px;
-        height: 197px;
-        left: 145px;
-        top: -52px;
-
-        background: radial-gradient(
-              71.07% 71.07% at 85.03% 13.45%,
-              rgba(140, 0, 255, 0) 0%,
-              rgba(0, 122, 255, 0.732414) 51.92%,
-              #2ab2ff 78.38%,
-              #19eafd 100%
-            )
-            /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
-          #007aff;
-      }
-    }
-
-    &.card2 {
-      background: radial-gradient(93% 93% at 67.83% 64.67%, rgba(240, 96, 0, 0.7) 0%, rgba(255, 132, 0, 0) 100%),
-        #ff8400;
-      /* box-shadow: 0px 12px 120px rgba(255, 132, 0, 0.12); */
-
-      .extra {
-        background-color: var(--color-bledny-orange);
-
-        .text {
-          color: var(--color-orange);
-        }
-      }
-
-      .circle1 {
-        width: 78px;
-        height: 78px;
-        right: 9px;
-        bottom: -46px;
-
-        background: radial-gradient(135.14% 135.14% at 37.24% -24.03%, #ff2f00 0%, #f96b27 37.5%, #ff2f00 100%)
-            /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
-          #f06000;
-      }
-
-      .info {
-        .title {
-          --color-bledny-orange: #ffeee4;
-
-          color: var(--color-bledny-orange);
-        }
-      }
-
-      .circle2 {
-        width: 136px;
-        height: 136px;
-        left: -40px;
-        bottom: -77px;
-
-        background: radial-gradient(
-              91.23% 91.23% at 90.95% 12.7%,
-              #ffdfae 1.07%,
-              #ff9c32 35.72%,
-              rgba(255, 47, 0, 0.75) 62.11%,
-              rgba(255, 47, 0, 0) 100%
-            )
-            /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
-          #ff9c32;
-      }
-
-      .circle3 {
-        width: 219px;
-        height: 219px;
-        left: 20px;
-        top: -111px;
-
-        background: radial-gradient(104.3% 104.3% at 12.42% 105.24%, #ffdfae 0%, #f06000 37.99%, #ff5900 100%)
-            /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
-          #f06000;
-      }
-    }
-
-    .info {
-      position: relative;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 15px;
-
-      .check {
-        margin-top: 5px;
+    .inner {
+        position: relative;
         display: flex;
-        align-items: center;
-        gap: 5px;
-      }
+        padding: 0 10px;
+        padding-top: 22px;
+        padding-bottom: 12px;
+        gap: 10px;
+        right: 0;
+
+        width: max-content;
+
+        transition: transform 0.2s ease;
+        transform: translate3d(0, 0, 0);
     }
 
-    .extra {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      padding: 2px 4px;
-      border-radius: 5px;
+    .card {
+        --color-white: #ffffff;
+        --color-bledny-blue: #dae7fa;
 
-      .text {
-        font-weight: 700;
-      }
+        position: relative;
+        display: block;
+        width: 230px;
+        aspect-ratio: 2.3 / 1.5;
+        overflow: hidden;
+        border-radius: 20px;
+        color: var(--color-white);
+
+        .circle1,
+        .circle2,
+        .circle3 {
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        &.card1 {
+            background: radial-gradient(93% 93% at 67.83% 64.67%, rgba(140, 0, 255, 0.7) 0%, rgba(0, 122, 255, 0) 100%),
+                #007aff;
+            // box-shadow: 0px 12px 120px rgba(0, 122, 255, 0.12);
+
+            .extra {
+                background-color: var(--color-bledny-green);
+
+                .text {
+                    color: var(--color-green);
+                }
+            }
+
+            .circle1 {
+                width: 129px;
+                height: 129px;
+                left: -39px;
+                top: -86px;
+
+                background: radial-gradient(
+                        100% 100% at 41.47% 100%,
+                        #01ccfd 0%,
+                        #0048ff 51.92%,
+                        rgba(140, 0, 255, 0.73) 78.38%,
+                        #8c00ff 100%
+                    ),
+                    #007aff;
+            }
+
+            .info {
+                .title {
+                    color: var(--color-bledny-blue);
+                }
+            }
+
+            .circle2 {
+                width: 197px;
+                height: 197px;
+                left: -17px;
+                top: 88px;
+
+                background: radial-gradient(
+                            70.81% 70.81% at 12.94% 84.52%,
+                            rgba(140, 0, 255, 0) 0%,
+                            rgba(140, 0, 255, 0.732414) 35.89%,
+                            #5a3ffe 70.24%,
+                            #2ba5fd 100%
+                        )
+                        /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+                    #007aff;
+            }
+
+            .circle3 {
+                width: 197px;
+                height: 197px;
+                left: 145px;
+                top: -52px;
+
+                background: radial-gradient(
+                            71.07% 71.07% at 85.03% 13.45%,
+                            rgba(140, 0, 255, 0) 0%,
+                            rgba(0, 122, 255, 0.732414) 51.92%,
+                            #2ab2ff 78.38%,
+                            #19eafd 100%
+                        )
+                        /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+                    #007aff;
+            }
+        }
+
+        &.card2 {
+            background: radial-gradient(93% 93% at 67.83% 64.67%, rgba(240, 96, 0, 0.7) 0%, rgba(255, 132, 0, 0) 100%),
+                #ff8400;
+            /* box-shadow: 0px 12px 120px rgba(255, 132, 0, 0.12); */
+
+            .extra {
+                background-color: var(--color-bledny-orange);
+
+                .text {
+                    color: var(--color-orange);
+                }
+            }
+
+            .circle1 {
+                width: 78px;
+                height: 78px;
+                right: 9px;
+                bottom: -46px;
+
+                background: radial-gradient(135.14% 135.14% at 37.24% -24.03%, #ff2f00 0%, #f96b27 37.5%, #ff2f00 100%)
+                        /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+                    #f06000;
+            }
+
+            .info {
+                .title {
+                    --color-bledny-orange: #ffeee4;
+
+                    color: var(--color-bledny-orange);
+                }
+            }
+
+            .circle2 {
+                width: 136px;
+                height: 136px;
+                left: -40px;
+                bottom: -77px;
+
+                background: radial-gradient(
+                            91.23% 91.23% at 90.95% 12.7%,
+                            #ffdfae 1.07%,
+                            #ff9c32 35.72%,
+                            rgba(255, 47, 0, 0.75) 62.11%,
+                            rgba(255, 47, 0, 0) 100%
+                        )
+                        /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+                    #ff9c32;
+            }
+
+            .circle3 {
+                width: 219px;
+                height: 219px;
+                left: 20px;
+                top: -111px;
+
+                background: radial-gradient(104.3% 104.3% at 12.42% 105.24%, #ffdfae 0%, #f06000 37.99%, #ff5900 100%)
+                        /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+                    #f06000;
+            }
+        }
+
+        .info {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 15px;
+
+            .check {
+                margin-top: 5px;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+        }
+
+        .extra {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 2px 4px;
+            border-radius: 5px;
+
+            .text {
+                font-weight: 700;
+            }
+        }
     }
-  }
 }
 
 .analytics {
-  padding: 0 10px;
-  padding-top: 30px;
-  padding-bottom: var(--spacing-bottom);
+    padding: 0 10px;
+    padding-top: 30px;
+    padding-bottom: var(--spacing-bottom);
 
-  position: relative;
-  z-index: 1;
-  background-color: var(--bg-color);
-
-  > .title {
-    text-align: center;
-  }
-
-  .month {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 7px;
-    padding: 6px 10px;
-
-    .title {
-      color: var(--color-blue);
-    }
-
-    .btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: var(--color-bledny-blue);
-      padding: 4.5px 5.5px;
-      border-radius: 5px;
-    }
-  }
-}
-
-.signs {
-  margin-top: 30px;
-  display: grid;
-  grid-template-columns: 2.3fr 1.3fr;
-  grid-template-rows: 1.2fr 1.5fr 1.5fr;
-  gap: 10px 10px;
-  grid-template-areas:
-    'A B'
-    'A C'
-    'D D';
-
-  .sign {
     position: relative;
-    background-color: var(--color-white);
-    padding: 21px 15px 0 15px;
-    border-radius: 20px;
+    z-index: 1;
+    background-color: var(--bg-color);
 
-    box-shadow: 0px 12px 120px rgba(132, 139, 147, 0.12);
-    overflow: hidden;
-
-    .title {
-      color: var(--color-grey);
+    > .title {
+        text-align: center;
     }
 
-    &.big {
-      .top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-    }
-
-    &:not(.big) {
-      .check {
-        margin-top: 4px;
-      }
-    }
-
-    &.expenses {
-      grid-area: A;
-
-      aspect-ratio: 2.3 / 2.8;
-
-      .tags {
-        max-height: 63px;
-        overflow: hidden;
-      }
-
-      .pie {
-        position: absolute;
-        bottom: -105px;
-        left: 0;
-        right: 0;
-        margin: 0 auto;
+    .month {
+        margin-top: 10px;
         display: flex;
         justify-content: center;
         align-items: center;
-        background: var(--bg-color);
-        border-radius: 50%;
-        width: 210px;
-        height: 210px;
+        gap: 7px;
+        padding: 6px 10px;
 
-        transform: rotate(-90deg);
-
-        &::before {
-          position: absolute;
-          content: '';
-          bottom: 42px;
-          right: 42px;
-          background-color: var(--color-white);
-          width: 126px;
-          height: 126px;
-          border-radius: 50%;
+        .title {
+            color: var(--color-blue);
         }
-      }
-    }
 
-    &.perDay {
-      --color-bledny-blue: #dae7fa;
-      grid-area: B;
-
-      background: radial-gradient(81.67% 81.67% at 40.77% 96.25%, rgba(140, 0, 255, 0.7) 0%, rgba(0, 122, 255, 0) 100%),
-        radial-gradient(130.38% 153.02% at 88.46% 60%, rgba(0, 255, 251, 0.7) 0%, rgba(0, 122, 255, 0) 100%), #007aff;
-      box-shadow: 0px 12px 120px rgba(0, 122, 255, 0.12);
-      color: var(--color-bledny-blue);
-
-      .title {
-        color: var(--color-bledny-blue);
-      }
-
-      > img {
-        position: absolute;
-        bottom: -23px;
-        right: -20px;
-
-        img {
-          position: absolute;
-          bottom: -23px;
-          right: -20px;
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--color-bledny-blue);
+            padding: 4.5px 5.5px;
+            border-radius: 5px;
         }
-      }
     }
+}
 
-    &.dynamic {
-      --color-bledny-orange: #ffeee4;
-      grid-area: C;
-      background: radial-gradient(84% 84% at 75% 50%, rgba(240, 96, 0, 0.7) 0%, rgba(255, 132, 0, 0) 100%), #ff8400;
-      box-shadow: 0px 12px 120px rgba(255, 132, 0, 0.12);
-      color: var(--color-bledny-orange);
+.signs {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 2.3fr 1.3fr;
+    grid-template-rows: 1.2fr 1.5fr 1.5fr;
+    gap: 10px 10px;
+    grid-template-areas:
+        'A B'
+        'A C'
+        'D D';
 
-      .title {
-        color: var(--color-bledny-orange);
-      }
+    .sign {
+        position: relative;
+        background-color: var(--color-white);
+        padding: 21px 15px 0 15px;
+        border-radius: 20px;
 
-      .columns {
-        position: absolute;
-        height: 100%;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: max-content;
-        margin: auto;
-        display: flex;
-        align-items: flex-end;
-        gap: 12px;
+        box-shadow: 0px 12px 120px rgba(132, 139, 147, 0.12);
+        overflow: hidden;
 
-        .column {
-          width: 16px;
-          background-color: #fc9730;
-          border-radius: 8px 8px 0 0;
-
-          &:first-of-type {
-            height: 47%;
-          }
-
-          &:nth-of-type(2) {
-            height: 23%;
-          }
-
-          &:nth-of-type(3) {
-            height: 35%;
-          }
-
-          &:last-of-type {
-            --color-white: #ffffff;
-            height: 41%;
-            background-color: var(--color-white);
-          }
+        .title {
+            color: var(--color-grey);
         }
-      }
-    }
 
-    &.income {
-      grid-area: D;
+        &.big {
+            .top {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        &:not(.big) {
+            .check {
+                margin-top: 4px;
+            }
+        }
+
+        &.expenses {
+            grid-area: A;
+
+            aspect-ratio: 2.3 / 2.8;
+
+            .tags {
+                max-height: 63px;
+                overflow: hidden;
+            }
+
+            .pie {
+                position: absolute;
+                bottom: -105px;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: var(--bg-color);
+                border-radius: 50%;
+                width: 210px;
+                height: 210px;
+
+                transform: rotate(-90deg);
+
+                &::before {
+                    position: absolute;
+                    content: '';
+                    bottom: 42px;
+                    right: 42px;
+                    background-color: var(--color-white);
+                    width: 126px;
+                    height: 126px;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        &.perDay {
+            --color-bledny-blue: #dae7fa;
+            grid-area: B;
+
+            background: radial-gradient(
+                    81.67% 81.67% at 40.77% 96.25%,
+                    rgba(140, 0, 255, 0.7) 0%,
+                    rgba(0, 122, 255, 0) 100%
+                ),
+                radial-gradient(130.38% 153.02% at 88.46% 60%, rgba(0, 255, 251, 0.7) 0%, rgba(0, 122, 255, 0) 100%),
+                #007aff;
+            box-shadow: 0px 12px 120px rgba(0, 122, 255, 0.12);
+            color: var(--color-bledny-blue);
+
+            .title {
+                color: var(--color-bledny-blue);
+            }
+
+            > img {
+                position: absolute;
+                bottom: -23px;
+                right: -20px;
+
+                img {
+                    position: absolute;
+                    bottom: -23px;
+                    right: -20px;
+                }
+            }
+        }
+
+        &.dynamic {
+            --color-bledny-orange: #ffeee4;
+            grid-area: C;
+            background: radial-gradient(84% 84% at 75% 50%, rgba(240, 96, 0, 0.7) 0%, rgba(255, 132, 0, 0) 100%),
+                #ff8400;
+            box-shadow: 0px 12px 120px rgba(255, 132, 0, 0.12);
+            color: var(--color-bledny-orange);
+
+            .title {
+                color: var(--color-bledny-orange);
+            }
+
+            .columns {
+                position: absolute;
+                height: 100%;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                width: max-content;
+                margin: auto;
+                display: flex;
+                align-items: flex-end;
+                gap: 12px;
+
+                .column {
+                    width: 16px;
+                    background-color: #fc9730;
+                    border-radius: 8px 8px 0 0;
+
+                    &:first-of-type {
+                        height: 47%;
+                    }
+
+                    &:nth-of-type(2) {
+                        height: 23%;
+                    }
+
+                    &:nth-of-type(3) {
+                        height: 35%;
+                    }
+
+                    &:last-of-type {
+                        --color-white: #ffffff;
+                        height: 41%;
+                        background-color: var(--color-white);
+                    }
+                }
+            }
+        }
+
+        &.income {
+            grid-area: D;
+        }
     }
-  }
 }
 
 .tags {
-  margin-top: 20px;
-  display: flex;
-  gap: 3px;
-  flex-wrap: wrap;
+    margin-top: 20px;
+    display: flex;
+    gap: 3px;
+    flex-wrap: wrap;
 }
 
 .bar {
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  border-radius: 8px;
-  overflow: hidden;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    overflow: hidden;
 
-  .scale {
-    position: relative;
-    height: 16px;
-    border-radius: 0 8px 8px 0;
-
-    &:not(:last-of-type) {
-      &:before {
-        position: absolute;
-        content: '';
-        right: -8px;
-        background-color: inherit;
-        width: 16px;
+    .scale {
+        position: relative;
         height: 16px;
         border-radius: 0 8px 8px 0;
-      }
-    }
 
-    &:first-of-type {
-      flex-grow: 1;
+        &:not(:last-of-type) {
+            &:before {
+                position: absolute;
+                content: '';
+                right: -8px;
+                background-color: inherit;
+                width: 16px;
+                height: 16px;
+                border-radius: 0 8px 8px 0;
+            }
+        }
+
+        &:first-of-type {
+            flex-grow: 1;
+        }
     }
-  }
 }
 
 html[data-theme='dark'] {
-  .bg {
-    background: radial-gradient(57.12% 57.12% at 50% 50%, #7b00ff 0%, #061d37 100%);
+    .bg {
+        background: radial-gradient(57.12% 57.12% at 50% 50%, #7b00ff 0%, #061d37 100%);
 
-    .circle1 {
-      background: radial-gradient(
-            118.81% 118.81% at 8.48% 84.53%,
-            rgba(140, 0, 255, 0) 0%,
-            rgba(140, 0, 255, 0.732414) 51.92%,
-            #ff2f00 78.38%,
-            #ffae00 100%
-          )
-          /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
-        #061d37;
+        .circle1 {
+            background: radial-gradient(
+                        118.81% 118.81% at 8.48% 84.53%,
+                        rgba(140, 0, 255, 0) 0%,
+                        rgba(140, 0, 255, 0.732414) 51.92%,
+                        #ff2f00 78.38%,
+                        #ffae00 100%
+                    )
+                    /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+                #061d37;
+        }
+
+        .circle2 {
+            background: radial-gradient(
+                        108.51% 108.51% at 41.82% 97.49%,
+                        rgba(140, 0, 255, 0) 0%,
+                        rgba(140, 0, 255, 0.732414) 51.92%,
+                        #ff2f00 78.38%,
+                        #ffae00 100%
+                    )
+                    /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+                #061d37;
+        }
     }
 
-    .circle2 {
-      background: radial-gradient(
-            108.51% 108.51% at 41.82% 97.49%,
-            rgba(140, 0, 255, 0) 0%,
-            rgba(140, 0, 255, 0.732414) 51.92%,
-            #ff2f00 78.38%,
-            #ffae00 100%
-          )
-          /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
-        #061d37;
-    }
-  }
+    .card.card1 {
+        background: radial-gradient(93% 93% at 67.83% 64.67%, rgba(140, 0, 255, 0.7) 0%, rgba(6, 29, 55, 0) 100%),
+            #061d37;
 
-  .card.card1 {
-    background: radial-gradient(93% 93% at 67.83% 64.67%, rgba(140, 0, 255, 0.7) 0%, rgba(6, 29, 55, 0) 100%), #061d37;
+        .circle1 {
+            background: radial-gradient(
+                    100% 100% at 41.47% 100%,
+                    rgba(140, 0, 255, 0) 0%,
+                    rgba(140, 0, 255, 0.732414) 51.92%,
+                    #ff2f00 85.96%,
+                    #f87209 100%
+                ),
+                #061d37;
+        }
 
-    .circle1 {
-      background: radial-gradient(
-          100% 100% at 41.47% 100%,
-          rgba(140, 0, 255, 0) 0%,
-          rgba(140, 0, 255, 0.732414) 51.92%,
-          #ff2f00 85.96%,
-          #f87209 100%
-        ),
-        #061d37;
-    }
+        .circle2 {
+            background: radial-gradient(
+                        70.56% 70.56% at 14.72% 84.26%,
+                        rgba(140, 0, 255, 0) 0%,
+                        rgba(140, 0, 255, 0.732414) 69.65%,
+                        #c82050 100%
+                    )
+                    /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+                #061d37;
+        }
 
-    .circle2 {
-      background: radial-gradient(
-            70.56% 70.56% at 14.72% 84.26%,
-            rgba(140, 0, 255, 0) 0%,
-            rgba(140, 0, 255, 0.732414) 69.65%,
-            #c82050 100%
-          )
-          /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
-        #061d37;
-    }
-
-    .circle3 {
-      background: radial-gradient(
-            70.3% 70.3% at 82.23% 11.17%,
-            rgba(140, 0, 255, 0) 0%,
-            rgba(140, 0, 255, 0.732414) 51.92%,
-            #ee2b1a 78.38%,
-            #ff7a01 100%
-          )
-          /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
-        #061d37;
-    }
-  }
-
-  .card.card2 {
-    background: radial-gradient(93% 93% at 67.83% 64.67%, rgba(125, 50, 0, 0.7) 0%, rgba(89, 46, 0, 0) 100%), #592e00;
-
-    .circle1 {
-      background: radial-gradient(100% 100% at 50% 0%, #fe6531 0%, #e64415 37.5%, #5e0031 100%), #f06000;
+        .circle3 {
+            background: radial-gradient(
+                        70.3% 70.3% at 82.23% 11.17%,
+                        rgba(140, 0, 255, 0) 0%,
+                        rgba(140, 0, 255, 0.732414) 51.92%,
+                        #ee2b1a 78.38%,
+                        #ff7a01 100%
+                    )
+                    /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+                #061d37;
+        }
     }
 
-    .circle2 {
-      background: radial-gradient(
-            71.32% 71.32% at 84.56% 12.5%,
-            #f16d3c 1.07%,
-            rgba(214, 70, 33, 0.8) 35.72%,
-            rgba(50, 1, 69, 0.75) 76.03%
-          )
-          /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
-        #3a1700;
+    .card.card2 {
+        background: radial-gradient(93% 93% at 67.83% 64.67%, rgba(125, 50, 0, 0.7) 0%, rgba(89, 46, 0, 0) 100%),
+            #592e00;
+
+        .circle1 {
+            background: radial-gradient(100% 100% at 50% 0%, #fe6531 0%, #e64415 37.5%, #5e0031 100%), #f06000;
+        }
+
+        .circle2 {
+            background: radial-gradient(
+                        71.32% 71.32% at 84.56% 12.5%,
+                        #f16d3c 1.07%,
+                        rgba(214, 70, 33, 0.8) 35.72%,
+                        rgba(50, 1, 69, 0.75) 76.03%
+                    )
+                    /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+                #3a1700;
+        }
+
+        .circle3 {
+            background: radial-gradient(71.46% 71.46% at 14.16% 85.39%, #f5af80 0%, #cc4a2d 37.99%, #390047 100%)
+                    /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+                #3a1700;
+        }
     }
 
-    .circle3 {
-      background: radial-gradient(71.46% 71.46% at 14.16% 85.39%, #f5af80 0%, #cc4a2d 37.99%, #390047 100%)
-          /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
-        #3a1700;
+    .sign.perDay {
+        background: radial-gradient(81.67% 81.67% at 40.77% 96.25%, rgba(123, 0, 255, 0.7) 0%, rgba(6, 29, 55, 0) 100%),
+            radial-gradient(130.38% 153.02% at 88.46% 60%, rgba(123, 0, 255, 0.7) 0%, rgba(6, 29, 55, 0) 100%), #061d37;
     }
-  }
 
-  .sign.perDay {
-    background: radial-gradient(81.67% 81.67% at 40.77% 96.25%, rgba(123, 0, 255, 0.7) 0%, rgba(6, 29, 55, 0) 100%),
-      radial-gradient(130.38% 153.02% at 88.46% 60%, rgba(123, 0, 255, 0.7) 0%, rgba(6, 29, 55, 0) 100%), #061d37;
-  }
+    .sign.dynamic {
+        background: radial-gradient(84% 84% at 75% 50%, rgba(125, 50, 0, 0.7) 0%, rgba(89, 46, 0, 0) 100%), #592e00;
+    }
+}
 
-  .sign.dynamic {
-    background: radial-gradient(84% 84% at 75% 50%, rgba(125, 50, 0, 0.7) 0%, rgba(89, 46, 0, 0) 100%), #592e00;
-  }
+.doughnut {
+    position: absolute;
+    bottom: -105px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    .unit {
+        fill: none;
+        stroke-width: 10;
+        cursor: pointer;
+
+        animation-name: render;
+        animation-duration: 1.5s;
+        transition-property: all;
+        transition-duration: 1.5s;
+    }
 }

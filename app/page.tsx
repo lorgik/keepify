@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '@/lib/store'
 import { getColor } from '@/utils/coloring'
 import { Operation } from '@/lib/features/operations/operationsSlice'
-import { formatNumber } from '@/utils/formatting'
+import { formatNumber, operationsUnification } from '@/utils/formatting'
 import Link from 'next/link'
 import Carpet from '@/entities/Carpet/Carpet'
 import ArrowUp from '@/assets/img/svg/ArrowUp'
@@ -20,119 +20,74 @@ import ArrowRight from '@/assets/img/svg/ArrowRight'
 
 const Home = () => {
     const [activeCard, setActiveCard] = useState(false)
-    const [conicGradient, setConicGradient] = useState('')
     const operations = useSelector((state: RootState) => state.operations)
     const categories = useSelector((state: RootState) => state.categories)
     const [clientWidth, setClientWidth] = useState(0)
+    const [cardsWidth, setCardsWidth] = useState(0)
+    const [translateWidth, setTranslateWidth] = useState(0)
 
     const cardsRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         const width = document.documentElement.clientWidth
         setClientWidth(width)
+        setCardsWidth(Number(cardsRef.current?.offsetWidth))
     }, [])
 
     useEffect(() => {
         toggleCards()
     }, [activeCard])
 
-    useEffect(() => {
-        setConicGradient(getConicGradient())
-    }, [operations])
-
     function toggleCards() {
         if (activeCard) {
-            cardsRef.current?.scrollBy(0, 230 * 2 + 10 * 3 - clientWidth)
+            if (clientWidth < cardsWidth) {
+                setTranslateWidth(Math.abs(clientWidth - cardsWidth))
+            }
         } else {
-            cardsRef.current?.scrollBy(0, -(230 * 2 + 10 * 3 - clientWidth))
+            setTranslateWidth(0)
         }
     }
+
+    console.log(translateWidth)
 
     const expensesOperations = operations.filter((o) => o.value < 0)
     const incomeOperations = operations.filter((o) => o.value > 0)
 
-    const expensesCategories = expensesOperations.reduce((acc: any, curr: Operation) => {
-        if (
-            acc.findIndex((o: any) => {
-                return o.name === curr.category
-            }) === -1
-        ) {
-            acc.push({ name: curr.category, value: curr.value })
-        } else {
-            let findedIndex = acc.findIndex((o: any) => o.name === curr.category)
+    const expensesOperationsUnification = operationsUnification(expensesOperations)
+    const incomeOperationsUnification = operationsUnification(incomeOperations)
 
-            acc.splice(findedIndex, 1, {
-                name: curr.category,
-                value: curr.value + acc[findedIndex].value,
-            })
-        }
-        return acc
-    }, [])
-
-    const incomeCategories = incomeOperations.reduce((acc: any, curr: Operation) => {
-        if (
-            acc.findIndex((o: any) => {
-                return o.name === curr.category
-            }) === -1
-        ) {
-            acc.push({ name: curr.category, value: curr.value })
-        } else {
-            let findedIndex = acc.findIndex((o: any) => o.name === curr.category)
-
-            acc.splice(findedIndex, 1, {
-                name: curr.category,
-                value: curr.value + acc[findedIndex].value,
-            })
-        }
-        return acc
-    }, [])
-
-    function getExpensesValue() {
-        const value = expensesCategories.reduce((acc: number, curr: any) => acc + curr.value, 0)
+    function getTotalValue(operations: Operation[]) {
+        const value = operations.reduce((acc: number, curr: Operation) => acc + curr.value, 0)
         return Math.abs(value)
     }
 
-    function getIncomeValue() {
-        const value = incomeCategories.reduce((acc: number, curr: any) => acc + curr.value, 0)
-        return value
-    }
+    function getHalfDoghnutChart() {
+        let offset = 0
 
-    function getConicGradient() {
-        const maxValue = Math.abs(
-            expensesCategories.reduce((acc: number, curr: any) => {
-                return acc + curr.value
-            }, 0)
-        )
+        return expensesOperationsUnification.map((o: Operation, index: number) => {
+            let percent = Math.round(Math.abs((o.value / getTotalValue(expensesOperationsUnification)) * 100))
 
-        const expensesCategoriesWithPercent = expensesCategories.reduce((acc: any, curr: any) => {
-            return [
-                ...acc,
-                {
-                    name: curr.name,
-                    value: curr.value,
-                    percent: Number(Math.abs((curr.value / maxValue) * 50).toFixed(1)),
-                },
-            ]
-        }, [])
+            const circle = (
+                <circle
+                    className={styles.unit}
+                    r="15.9"
+                    cx="50%"
+                    cy="50%"
+                    key={o.category}
+                    stroke={categories.find((c) => c.name === o.category)?.color}
+                    strokeDasharray={`${percent !== 0 ? percent : 1} 100`}
+                    strokeDashoffset={-offset}
+                />
+            )
 
-        function getText() {
-            let currPercent = 0
+            if (percent === 0) {
+                offset = Number(offset + 1)
+            } else {
+                offset = Number(offset + percent)
+            }
 
-            const text = expensesCategoriesWithPercent.map((c: any, index: number) => {
-                let text
-                if (index === expensesCategoriesWithPercent.length - 1) {
-                    text = `${getColor(categories, c.name)} ${currPercent}% 50%`
-                } else {
-                    text = `${getColor(categories, c.name)} ${currPercent}% ${(c.percent + currPercent).toFixed(1)}%`
-                }
-                currPercent = Number((currPercent + c.percent).toFixed(1))
-                return text
-            })
-
-            return text
-        }
-
-        return `conic-gradient(${getText()}, transparent 50% 100%)`
+            return circle
+        })
     }
 
     return (
@@ -140,8 +95,12 @@ const Home = () => {
             <Carpet />
             <Logo width={84} height={43} />
             <div className={styles.slider}>
-                <div className={styles.cards} ref={cardsRef}>
-                    <div className={styles.inner}>
+                <div className={styles.cards}>
+                    <div
+                        className={styles.inner}
+                        ref={cardsRef}
+                        style={{ transform: `translate3d(-${translateWidth}px, 0, 0)` }}
+                    >
                         <div className={`${styles.card} ${styles.card1}`} onClick={() => setActiveCard(false)}>
                             <div className={styles.circle1}></div>
                             <div className={styles.circle2}></div>
@@ -151,7 +110,12 @@ const Home = () => {
                                 <h2 className={styles.check}>
                                     <span className={styles.currency}>₽</span>
                                     <span className={styles.value}>
-                                        {formatNumber(Math.round(getIncomeValue() - getExpensesValue()))}
+                                        {formatNumber(
+                                            Math.round(
+                                                getTotalValue(incomeOperationsUnification) -
+                                                    getTotalValue(expensesOperationsUnification)
+                                            )
+                                        )}
                                     </span>
                                 </h2>
                             </div>
@@ -208,30 +172,31 @@ const Home = () => {
                         <div className={styles.top}>
                             <h5 className={styles.title}>Расходы:</h5>
                             <h3 className={styles.check}>
-                                <span className={styles.value}>{formatNumber(Math.round(getExpensesValue()))} </span>
+                                <span className={styles.value}>
+                                    {formatNumber(Math.round(getTotalValue(expensesOperationsUnification)))}{' '}
+                                </span>
                                 <span className={styles.currency}>₽</span>
                             </h3>
                         </div>
                         <div className={styles.tags}>
-                            {expensesCategories.map((c: any) => (
-                                <Tag key={c.name} color={getColor(categories, c.name)}>
-                                    {c.name}
+                            {expensesOperationsUnification.map((o: Operation) => (
+                                <Tag key={o.category} color={categories.find((c) => c.name === o.category)?.color}>
+                                    {o.category}
                                 </Tag>
                             ))}
                         </div>
-                        <div
-                            className={styles.pie}
-                            style={{
-                                background: conicGradient,
-                            }}
-                        ></div>
+                        {/* <svg className={styles.doughnut} width="210" height="210" viewBox="0 0 50 50">
+                            {getHalfDoghnutChart()}
+                        </svg> */}
                     </Link>
                     <div className={`${styles.sign} ${styles.perDay}`}>
                         <Image src="/analytics-sign-blue-bg.png" alt="coins" width={143} height={88} priority />
                         <div className={styles.top}>
                             <h5 className={styles.title}>~В день</h5>
                             <h3 className={styles.check}>
-                                <span className={styles.value}>{Math.round(getExpensesValue() / 30)} </span>
+                                <span className={styles.value}>
+                                    {Math.round(getTotalValue(expensesOperationsUnification) / 30)}{' '}
+                                </span>
                                 <span className={styles.currency}>₽</span>
                             </h3>
                         </div>
@@ -254,27 +219,31 @@ const Home = () => {
                         <div className={styles.top}>
                             <h5 className={styles.title}>Доходы:</h5>
                             <h3 className={styles.check}>
-                                <span className={styles.value}>{formatNumber(Math.round(getIncomeValue()))} </span>
-                                <span className={styles.currency}>₽</span>
+                                <span className={styles.value}>
+                                    {formatNumber(Math.round(getTotalValue(incomeOperationsUnification)))}
+                                </span>
+                                <span className={styles.currency}> ₽</span>
                             </h3>
                         </div>
                         <div className={styles.tags}>
-                            {incomeCategories.map((c: any) => (
-                                <Tag key={c.name} color={getColor(categories, c.name)}>
-                                    {c.name}
+                            {incomeOperationsUnification.map((o: Operation) => (
+                                <Tag key={o.category} color={categories.find((c) => c.name === o.category)?.color}>
+                                    {o.category}
                                 </Tag>
                             ))}
                         </div>
                         <div className={styles.bar}>
-                            {incomeCategories.map((c: any, index: number) => (
+                            {incomeOperationsUnification.map((o: Operation, index: number) => (
                                 <div
                                     className={styles.scale}
                                     style={{
-                                        width: Math.round((c.value / getIncomeValue()) * 100) + '%',
-                                        backgroundColor: getColor(categories, c.name),
-                                        zIndex: incomeCategories.length - index,
+                                        width:
+                                            Math.round((o.value / getTotalValue(incomeOperationsUnification)) * 100) +
+                                            '%',
+                                        backgroundColor: getColor(categories, o.category),
+                                        zIndex: incomeOperationsUnification.length - index,
                                     }}
-                                    key={c.name}
+                                    key={o.category}
                                 ></div>
                             ))}
                         </div>
