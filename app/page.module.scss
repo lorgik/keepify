@@ -119,9 +119,12 @@
         right: 0;
 
         width: max-content;
-
-        transition: all 0.2s ease;
         transform: translate3d(0, 0, 0);
+
+        transition: transform 0.2s ease;
+        -webkit-transition: -webkit-transform 0.2s ease;
+        -moz-transition: transform 0.2s ease;
+        -o-transition: transform 0.2s ease;
     }
 
     .card {
