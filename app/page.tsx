@@ -25,6 +25,7 @@ const Home = () => {
     const [clientWidth, setClientWidth] = useState(0)
     const [cardsWidth, setCardsWidth] = useState(0)
     const [translateWidth, setTranslateWidth] = useState(0)
+    const [isEvent, setIsEvent] = useState(false)
 
     const cardsRef = useRef<HTMLDivElement>(null)
 
@@ -35,8 +36,21 @@ const Home = () => {
     }, [])
 
     useEffect(() => {
+        console.log('activeCard changed')
+
         toggleCards()
     }, [activeCard])
+
+    function scrollCards(e: any) {
+        e.preventDefault()
+        if (!isEvent) {
+            setIsEvent(true)
+            setActiveCard((prev) => !prev)
+        }
+        setTimeout(() => {
+            setIsEvent(false)
+        }, 1000)
+    }
 
     function toggleCards() {
         if (activeCard) {
@@ -47,8 +61,6 @@ const Home = () => {
             setTranslateWidth(0)
         }
     }
-
-    console.log(translateWidth)
 
     const expensesOperations = operations.filter((o) => o.value < 0)
     const incomeOperations = operations.filter((o) => o.value > 0)
@@ -95,7 +107,7 @@ const Home = () => {
             <Carpet />
             <Logo width={84} height={43} />
             <div className={styles.slider}>
-                <div className={styles.cards}>
+                <div className={styles.cards} onWheel={scrollCards}>
                     <div
                         className={styles.inner}
                         ref={cardsRef}
@@ -144,16 +156,18 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-                <div className={styles.dots}>
-                    <button
-                        className={`${styles.dot} ${!activeCard && styles.active}`}
-                        onClick={() => setActiveCard(false)}
-                    ></button>
-                    <button
-                        className={`${styles.dot} ${activeCard && styles.active}`}
-                        onClick={() => setActiveCard(true)}
-                    ></button>
-                </div>
+                {clientWidth < cardsWidth && (
+                    <div className={styles.dots}>
+                        <button
+                            className={`${styles.dot} ${!activeCard && styles.active}`}
+                            onClick={() => setActiveCard(false)}
+                        ></button>
+                        <button
+                            className={`${styles.dot} ${activeCard && styles.active}`}
+                            onClick={() => setActiveCard(true)}
+                        ></button>
+                    </div>
+                )}
             </div>
 
             <div className={styles.analytics}>
