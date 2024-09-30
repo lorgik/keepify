@@ -24,7 +24,10 @@
     .tab {
         --color-white: #ffffff;
         padding: 6px 17.5px;
-        transition: all 0.1s ease;
+        transition: background-color 0.1s ease, color 0.1s ease;
+        -webkit-transition: background-color 0.1s ease, color 0.1s ease;
+        -moz-transition: background-color 0.1s ease, color 0.1s ease;
+        -o-transition: background-color 0.1s ease, color 0.1s ease;
 
         &.income {
             background-color: var(--color-blue);
@@ -65,7 +68,10 @@
         aspect-ratio: 118 / 55;
         border-radius: 14px;
 
-        transition: all 0.15s ease-out;
+        transition: background-color 0.15s ease-out;
+        -webkit-transition: background-color 0.15s ease-out;
+        -moz-transition: background-color 0.15s ease-out;
+        -o-transition: background-color 0.15s ease-out;
 
         &:active {
             background-color: var(--bg-color);
@@ -120,12 +126,6 @@
             background-color: var(--color-orange);
             color: var(--color-white);
             justify-content: center;
-
-            transition: all 0.1s ease;
-
-            svg path {
-                transition: all 0.1s ease;
-            }
 
             &.income {
                 background-color: var(--color-blue);

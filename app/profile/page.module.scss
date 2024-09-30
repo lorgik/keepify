@@ -100,6 +100,9 @@
     overflow: hidden;
 
     transition: opacity 0.25s ease;
+    -webkit-transition: opacity 0.25s ease;
+    -moz-transition: opacity 0.25s ease;
+    -o-transition: opacity 0.25s ease;
 
     &.closing {
         opacity: 0;

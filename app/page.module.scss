@@ -84,7 +84,10 @@
             background-color: var(--color-bledny-grey);
             border-radius: 50%;
 
-            transition: all 0.2s ease;
+            transition: background-color 0.2s ease;
+            -webkit-transition: background-color 0.2s ease;
+            -moz-transition: background-color 0.2s ease;
+            -o-transition: background-color 0.2s ease;
 
             &.active {
                 background-color: var(--color-blue);
