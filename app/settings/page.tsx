@@ -1,7 +1,7 @@
 'use client'
 
 import { WrapperContext } from '@/components/Wrapper/Wrapper'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import styles from './page.module.scss'
 import Image from 'next/image'
 import Switch from '@/components/Switch/Switch'
@@ -18,15 +18,12 @@ import SoundIcon from '@/assets/img/svg/SoundIcon'
 import VibrationIcon from '@/assets/img/svg/VibrationIcon'
 import HeartIcon from '@/assets/img/svg/HeartIcon'
 import MessageIcon from '@/assets/img/svg/MessageIcon'
+import Link from 'next/link'
 
 function Settings() {
     const [isShowBanner, setIsShowBanner] = useState(true)
     const [isShowBannerClosing, setIsShowBannerClosing] = useState(false)
     const { setIsPopupOpen, theme, setTheme } = useContext(WrapperContext)
-
-    useEffect(() => {
-        setIsPopupOpen(false)
-    })
 
     function switchTheme() {
         if (theme === 'light') {
@@ -117,9 +114,9 @@ function Settings() {
                             <CurrenciesIcon />
                             <h5 className={styles.name}>Валюта</h5>
                         </div>
-                        <div className={styles.arrow}>
+                        <Link className={styles.arrow} href={'/settings/currency'}>
                             <ArrowRightIcon />
-                        </div>
+                        </Link>
                     </div>
                 </div>
 
@@ -131,9 +128,9 @@ function Settings() {
                             </div>
                             <h5 className={styles.name}>Язык</h5>
                         </div>
-                        <div className={styles.arrow}>
+                        <Link className={styles.arrow} href={'/settings/language'}>
                             <ArrowRightIcon />
-                        </div>
+                        </Link>
                     </div>
                     <div className={styles.item}>
                         <div className={styles.info}>
