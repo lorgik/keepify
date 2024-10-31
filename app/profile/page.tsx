@@ -20,6 +20,7 @@ import TasksArrowRight from '@/assets/img/svg/TasksArrowRight'
 import ArrowUp from '@/assets/img/svg/ArrowUp'
 import TelegramIcon from '@/assets/img/svg/TelegramIcon'
 import TasksCheckIcon from '@/assets/img/svg/TasksCheckIcon'
+import Banner from '@/components/Banner/Banner'
 
 const tasks = [
     {
@@ -130,45 +131,52 @@ function Profile() {
 
             <div className={styles.content}>
                 {isShowBanner && (
-                    <div className={`${styles.banner} ${isShowBannerClosing && styles.closing}`}>
-                        <div className={styles.back}>
-                            <Image
-                                className={styles.coin}
-                                src={'/keepy-coin-bg.png'}
-                                alt="keepy coin"
-                                width={126}
-                                height={143}
-                                priority
-                            />
-                            <Image
-                                className={styles.coins}
-                                src={'/keepy-coins-bg.png'}
-                                alt="keepy coins"
-                                width={209}
-                                height={263}
-                                priority
-                            />
-                        </div>
-                        <h3 className={styles.title}>Keepify School</h3>
-                        <h5 className={styles.text}>
-                            Обменивай свои коины на полезные материалы и скидки на курсы по финансовой грамотности от
-                            топовых экспертов индустрии
-                        </h5>
-                        <button
-                            className={styles.btn}
-                            onClick={() => {
-                                setIsShowBannerClosing(true)
-                                setTimeout(() => {
-                                    setIsShowBanner(false)
-                                    setIsScrollBlock(false)
-                                    setIsShowBannerClosing(false)
-                                }, 250)
-                            }}
-                        >
-                            <WaitingIcon />
-                            <h4>Будет позже</h4>
-                        </button>
-                    </div>
+                    <Banner
+                        title="Keepify School"
+                        description="Обменивай свои коины на полезные материалы и скидки на курсы по финансовой грамотности от топовых экспертов индустрии"
+                        btnIcon="WaitingIcon"
+                        btnText="Будет позже"
+                        setIsShowBanner={setIsShowBanner}
+                    />
+                    // <div className={`${styles.banner} ${isShowBannerClosing && styles.closing}`}>
+                    //     <div className={styles.back}>
+                    //         <Image
+                    //             className={styles.coin}
+                    //             src={'/keepy-coin-bg.png'}
+                    //             alt="keepy coin"
+                    //             width={126}
+                    //             height={143}
+                    //             priority
+                    //         />
+                    //         <Image
+                    //             className={styles.coins}
+                    //             src={'/keepy-coins-bg.png'}
+                    //             alt="keepy coins"
+                    //             width={209}
+                    //             height={263}
+                    //             priority
+                    //         />
+                    //     </div>
+                    //     <h3 className={styles.title}>Keepify School</h3>
+                    //     <h5 className={styles.text}>
+                    //         Обменивай свои коины на полезные материалы и скидки на курсы по финансовой грамотности от
+                    //         топовых экспертов индустрии
+                    //     </h5>
+                    //     <button
+                    //         className={styles.btn}
+                    //         onClick={() => {
+                    //             setIsShowBannerClosing(true)
+                    //             setTimeout(() => {
+                    //                 setIsShowBanner(false)
+                    //                 setIsScrollBlock(false)
+                    //                 setIsShowBannerClosing(false)
+                    //             }, 250)
+                    //         }}
+                    //     >
+                    //         <WaitingIcon />
+                    //         <h4>Будет позже</h4>
+                    //     </button>
+                    // </div>
                 )}
                 <div className={styles.tasks}>
                     <div className={styles.top}>

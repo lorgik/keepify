@@ -36,8 +36,6 @@ const Home = () => {
     }, [])
 
     useEffect(() => {
-        console.log('activeCard changed')
-
         toggleCards()
     }, [activeCard])
 
@@ -46,10 +44,12 @@ const Home = () => {
         if (!isEvent) {
             setIsEvent(true)
             setActiveCard((prev) => !prev)
+            console.log('scroll')
+        } else {
+            setTimeout(() => {
+                setIsEvent(false)
+            }, 1000)
         }
-        setTimeout(() => {
-            setIsEvent(false)
-        }, 1000)
     }
 
     function toggleCards() {
@@ -71,35 +71,6 @@ const Home = () => {
     function getTotalValue(operations: Operation[]) {
         const value = operations.reduce((acc: number, curr: Operation) => acc + curr.value, 0)
         return Math.abs(value)
-    }
-
-    function getHalfDoghnutChart() {
-        let offset = 0
-
-        return expensesOperationsUnification.map((o: Operation, index: number) => {
-            let percent = Math.round(Math.abs((o.value / getTotalValue(expensesOperationsUnification)) * 100))
-
-            const circle = (
-                <circle
-                    className={styles.unit}
-                    r="15.9"
-                    cx="50%"
-                    cy="50%"
-                    key={o.category}
-                    stroke={categories.find((c) => c.name === o.category)?.color}
-                    strokeDasharray={`${percent !== 0 ? percent : 1} 100`}
-                    strokeDashoffset={-offset}
-                />
-            )
-
-            if (percent === 0) {
-                offset = Number(offset + 1)
-            } else {
-                offset = Number(offset + percent)
-            }
-
-            return circle
-        })
     }
 
     return (

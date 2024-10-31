@@ -81,7 +81,7 @@
 }
 
 .canvas {
-    // margin-top: -19px;
+    margin-top: 30px;
 
     position: relative;
     display: flex;
@@ -91,8 +91,8 @@
     .info {
         position: absolute;
         background-color: var(--color-white);
-        width: 53%;
-        height: 53%;
+        width: 60%;
+        height: 60%;
         border-radius: 50%;
         display: flex;
         flex-direction: column;
@@ -156,10 +156,13 @@
     display: flex;
     flex-direction: column;
     gap: 7px;
+    width: 310px;
+    background-color: var(--color-blue);
+    border-radius: 50%;
 
     .unit {
         fill: none;
-        stroke-width: 10;
+        stroke-width: 32;
         cursor: pointer;
 
         animation-name: render;
@@ -170,7 +173,7 @@
 }
 
 .list {
-    // margin-top: 30px;
+    margin-top: 35px;
     display: flex;
     flex-direction: column;
     gap: 30px;

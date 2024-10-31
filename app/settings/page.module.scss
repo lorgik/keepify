@@ -2,81 +2,6 @@
     text-align: center;
 }
 
-.banner {
-    --color-white: #ffffff;
-    --color-bledny-blue: #dae7fa;
-
-    position: relative;
-    padding: 30px 15px 20px 15px;
-    overflow: hidden;
-    border-radius: 20px;
-    color: var(--color-white);
-
-    transition: opacity 0.25s ease;
-    -webkit-transition: -webkit-opacity 0.25s ease;
-    -moz-transition: opacity 0.25s ease;
-    -o-transition: opacity 0.25s ease;
-
-    &.closing {
-        opacity: 0;
-    }
-
-    > *:not(.bg) {
-        position: relative;
-    }
-
-    .bg {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        top: 0;
-
-        background: radial-gradient(
-                34.86% 107.21% at 97.7% 54.03%,
-                rgba(0, 255, 251, 0.7) 0%,
-                rgba(0, 122, 255, 0) 100%
-            ),
-            radial-gradient(61.37% 61.37% at 45.14% 100%, rgba(140, 0, 255, 0.7) 0%, rgba(0, 122, 255, 0) 100%), #007aff;
-
-        .logo {
-            position: absolute;
-            top: -59px;
-            right: -82px;
-        }
-
-        .tg {
-            position: absolute;
-            top: -53px;
-            right: -109px;
-        }
-    }
-
-    .title {
-        text-align: left;
-        color: var(--color-white);
-        max-width: 65%;
-    }
-
-    .text {
-        margin-top: 10px;
-        color: var(--color-bledny-blue);
-        text-wrap: balance;
-        max-width: 70%;
-    }
-
-    .btn {
-        margin-top: 15px;
-        background-color: var(--color-bledny-blue);
-        color: var(--color-blue);
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 16px 32.5px;
-        border-radius: 20px;
-    }
-}
-
 .settings {
     margin: 0 10px;
     margin-top: 30px;
@@ -115,8 +40,6 @@
             }
 
             .info {
-                position: relative;
-                z-index: 1;
                 display: flex;
                 align-items: center;
                 gap: 10px;

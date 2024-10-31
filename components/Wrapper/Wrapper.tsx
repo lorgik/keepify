@@ -4,7 +4,6 @@ import { createContext, useEffect, useState } from 'react'
 import Footer from '../Footer/Footer'
 import styles from './Wrapper.module.scss'
 import { useDispatch } from 'react-redux'
-import Loader from '../Loader/Loader'
 import { useTheme } from '@/hooks/useTheme'
 import { useScrollBlock } from '@/hooks/useScrollBlock'
 import { addInfo } from '@/lib/features/user/userSlice'
@@ -56,7 +55,6 @@ const Wrapper = ({ children }: Props) => {
     }
 
     function closePopup() {
-        // if (isCategoryOpen) {
         setIsPopupClosing(true)
 
         setTimeout(() => {
@@ -64,7 +62,6 @@ const Wrapper = ({ children }: Props) => {
             setIsPopupClosing(false)
             setIsScrollBlock(false)
         }, 150)
-        // }
     }
 
     function closeCategories() {

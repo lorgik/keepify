@@ -1,0 +1,106 @@
+.banner {
+    --color-white: #ffffff;
+    --color-bledny-blue: #dae7fa;
+    --color-bledny-orange: #ffeee4;
+
+    position: relative;
+    padding: 30px 15px 20px 15px;
+    overflow: hidden;
+    border-radius: 20px;
+    color: var(--color-white);
+
+    transition: opacity 0.25s ease;
+    -webkit-transition: -webkit-opacity 0.25s ease;
+    -moz-transition: opacity 0.25s ease;
+    -o-transition: opacity 0.25s ease;
+
+    &.closing {
+        opacity: 0;
+    }
+
+    > *:not(.bg) {
+        position: relative;
+    }
+
+    .bg {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+
+        background: radial-gradient(
+                34.86% 107.21% at 97.7% 54.03%,
+                rgba(0, 255, 251, 0.7) 0%,
+                rgba(0, 122, 255, 0) 100%
+            ),
+            radial-gradient(61.37% 61.37% at 45.14% 100%, rgba(140, 0, 255, 0.7) 0%, rgba(0, 122, 255, 0) 100%), #007aff;
+
+        .logo {
+            position: absolute;
+            top: -59px;
+            right: -82px;
+        }
+
+        .tg {
+            position: absolute;
+            top: -53px;
+            right: -109px;
+        }
+    }
+
+    .back {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        background: radial-gradient(67.82% 67.82% at 69.19% 41.44%, rgba(240, 96, 0, 0.7) 0%, rgba(255, 132, 0, 0) 100%),
+            #ff8400;
+
+        .coin {
+            position: absolute;
+            top: -35px;
+            right: 27px;
+        }
+
+        .coins {
+            position: absolute;
+            top: 19px;
+            right: -24px;
+        }
+    }
+
+    .title {
+        text-align: left;
+        color: var(--color-white);
+        max-width: 65%;
+    }
+
+    .text {
+        margin-top: 10px;
+        color: var(--color-bledny-blue);
+        text-wrap: balance;
+        max-width: 70%;
+
+        &.orange {
+            color: var(--color-bledny-orange);
+        }
+    }
+
+    .btn {
+        margin-top: 15px;
+        background-color: var(--color-bledny-blue);
+        color: var(--color-blue);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 16px 32.5px;
+        border-radius: 20px;
+
+        &.orange {
+            background-color: var(--color-bledny-orange);
+            color: var(--color-orange);
+        }
+    }
+}

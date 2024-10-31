@@ -58,34 +58,38 @@ function Expenses() {
     function getDoghnutChart() {
         let offset = 0
 
-        return expensesOperationsUnification.map((o: Operation, index: number) => {
-            let percent = Math.round(Math.abs((o.value / getExpensesValue()) * 100))
+        return (
+            <svg className={styles.doughnut} viewBox="0 0 64 64">
+                {expensesOperationsUnification.map((o: Operation, index: number) => {
+                    let percent = Math.round(Math.abs((o.value / getExpensesValue()) * 100))
 
-            const circle = (
-                <circle
-                    className={styles.unit}
-                    r="15.9"
-                    cx="50%"
-                    cy="50%"
-                    key={o.value}
-                    stroke={categories.find((c) => c.name === o.category)?.color}
-                    strokeDasharray={`${percent !== 0 ? percent : 1} 100`}
-                    strokeDashoffset={-offset}
-                    onClick={(e) => {
-                        setCurrentCategory(categories.find((c) => c.name === o.category))
-                        setTooltipPosition({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY })
-                    }}
-                />
-            )
+                    const circle = (
+                        <circle
+                            className={styles.unit}
+                            r="25%"
+                            cx="50%"
+                            cy="50%"
+                            key={o.value}
+                            stroke={categories.find((c) => c.name === o.category)?.color}
+                            strokeDasharray={`${percent !== 0 ? percent : 1} 100`}
+                            strokeDashoffset={-offset}
+                            onClick={(e) => {
+                                setCurrentCategory(categories.find((c) => c.name === o.category))
+                                setTooltipPosition({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY })
+                            }}
+                        />
+                    )
 
-            if (percent === 0) {
-                offset = Number(offset + 1)
-            } else {
-                offset = Number(offset + percent)
-            }
+                    if (percent === 0) {
+                        offset = Number(offset + 1)
+                    } else {
+                        offset = Number(offset + percent)
+                    }
 
-            return circle
-        })
+                    return circle
+                })}
+            </svg>
+        )
     }
 
     const CurrentIcon = categories.find((c) => c?.name === currentCategory?.name)?.image
@@ -108,9 +112,8 @@ function Expenses() {
                     <h5 className={styles.name}>Ваши траты</h5>
 
                     <div className={styles.canvas}>
-                        <svg className={styles.doughnut} width="350" height="350" viewBox="0 0 50 50">
-                            {getDoghnutChart()}
-                        </svg>
+                        {getDoghnutChart()}
+
                         <div className={styles.info}>
                             <h3 className={styles.check}>
                                 <span className={styles.value}>{formatNumber(getExpensesValue())} </span>

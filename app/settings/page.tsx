@@ -3,10 +3,8 @@
 import { WrapperContext } from '@/components/Wrapper/Wrapper'
 import { useContext, useState } from 'react'
 import styles from './page.module.scss'
-import Image from 'next/image'
 import Switch from '@/components/Switch/Switch'
 import CategoriesIcon from '@/assets/img/svg/CategoriesIcon'
-import TelegramIcon from '@/assets/img/svg/TelegramIcon'
 import ArrowRightIcon from '@/assets/img/svg/ArrowRightIcon'
 import CurrenciesIcon from '@/assets/img/svg/CurrenciesIcon'
 import CommunityIcon from '@/assets/img/svg/CommunityIcon'
@@ -19,11 +17,11 @@ import VibrationIcon from '@/assets/img/svg/VibrationIcon'
 import HeartIcon from '@/assets/img/svg/HeartIcon'
 import MessageIcon from '@/assets/img/svg/MessageIcon'
 import Link from 'next/link'
+import Banner from '@/components/Banner/Banner'
 
 function Settings() {
     const [isShowBanner, setIsShowBanner] = useState(true)
-    const [isShowBannerClosing, setIsShowBannerClosing] = useState(false)
-    const { setIsPopupOpen, theme, setTheme } = useContext(WrapperContext)
+    const { theme, setTheme } = useContext(WrapperContext)
 
     function switchTheme() {
         if (theme === 'light') {
@@ -39,41 +37,13 @@ function Settings() {
 
             <div className={styles.settings}>
                 {isShowBanner ? (
-                    <div className={`${styles.banner} ${isShowBannerClosing && styles.closing}`}>
-                        <div className={styles.bg}>
-                            <Image
-                                className={styles.logo}
-                                src={'/keepy-logo-bg.png'}
-                                alt="keepy logo"
-                                width={290}
-                                height={303}
-                                priority
-                            />
-                            <Image
-                                className={styles.tg}
-                                src={'/keepy-tg-bg.png'}
-                                alt="keepy tg"
-                                width={416}
-                                height={416}
-                                priority
-                            />
-                        </div>
-                        <h3 className={styles.title}>Подпишись на Keepify в Telegram</h3>
-                        <h5 className={styles.text}>И разблокируй премиум функции приложения</h5>
-                        <button
-                            className={styles.btn}
-                            onClick={() => {
-                                setIsShowBannerClosing(true)
-                                setTimeout(() => {
-                                    setIsShowBanner(false)
-                                    setIsShowBannerClosing(false)
-                                }, 250)
-                            }}
-                        >
-                            <TelegramIcon />
-                            <h4>Подписаться</h4>
-                        </button>
-                    </div>
+                    <Banner
+                        title="Подпишись на Keepify в Telegram"
+                        description="И разблокируй премиум функции приложения"
+                        btnIcon="TelegramIcon"
+                        btnText="Подписаться"
+                        setIsShowBanner={setIsShowBanner}
+                    />
                 ) : (
                     <div className={styles.list}>
                         <div className={styles.item}>
